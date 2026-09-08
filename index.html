@@ -5,195 +5,137 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="현대케미칼(주) - 선박 선용품 및 산업용 화학제품 전문 공급" />
   <title>현대케미칼(주) | HYUNDAI CHEMICAL</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=0.6" />
 </head>
 <body>
   <header class="site-header" id="top">
     <div class="container nav-wrap">
-      <a class="brand" href="#top" aria-label="현대케미칼 홈">
+      <a class="brand" href="index.html" aria-label="현대케미칼 홈">
         <img src="assets/hyundai-chemical-logo.svg" alt="HYUNDAI CHEMICAL" />
       </a>
       <button class="menu-toggle" aria-label="메뉴 열기" aria-expanded="false">☰</button>
       <nav class="nav" aria-label="주요 메뉴">
-        <a href="#company">회사소개</a>
-        <a href="#business">사업분야</a>
-        <a href="#products">제품소개</a>
-        <a href="#marine">선용품</a>
-        <a href="#contact" class="nav-cta">견적문의</a>
+        <a href="company.html">회사소개</a>
+        <a href="business.html">사업분야</a>
+        <a href="products.html">제품소개</a>
+        <a href="marine.html">선용품</a>
+        <a href="contact.html" class="nav-cta">견적문의</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="hero">
+    <section class="hero home-hero" data-hero>
+      <div class="hero-ambient" aria-hidden="true">
+        <span class="ambient-glow"></span>
+        <span class="ambient-grid"></span>
+        <span class="flow-line flow-line-one"></span>
+        <span class="flow-line flow-line-two"></span>
+        <span class="flow-line flow-line-three"></span>
+      </div>
+
       <div class="hero-grid container">
-        <div class="hero-copy reveal">
-          <span class="eyebrow">MARINE & INDUSTRIAL CHEMICAL SOLUTIONS</span>
-          <h1>산업과 선박 현장을 위한<br><strong>신뢰할 수 있는 공급 파트너</strong></h1>
-          <p>
+        <div class="hero-copy">
+          <div class="hero-kicker hero-enter"><span></span> MARINE & INDUSTRIAL SUPPLY</div>
+          <h1>
+            <span class="hero-line hero-enter">산업과 선박 현장을 잇는</span>
+            <strong class="hero-line hero-enter">신뢰의 공급 파트너</strong>
+          </h1>
+          <p class="hero-enter">
             현대케미칼(주)은 선박 선용품 납품과 신나·용제 소분 판매를 비롯해
             다양한 유기·무기 화합물을 안정적으로 공급합니다.
           </p>
-          <div class="hero-actions">
-            <a class="btn primary" href="#products">제품 보기</a>
-            <a class="btn ghost" href="#contact">견적 문의</a>
+          <div class="hero-actions hero-enter">
+            <a class="btn hero-primary" href="products.html"><span>제품 검색</span><b aria-hidden="true">→</b></a>
+            <a class="btn hero-ghost" href="company.html">회사소개</a>
           </div>
-          <div class="hero-tags" aria-label="주요 사업 키워드">
-            <span>Marine Supply</span><span>Solvent</span><span>Industrial Chemicals</span>
+          <div class="hero-tags hero-enter" aria-label="주요 사업 키워드">
+            <span>Marine</span><span>Chemical</span><span>Lab Equipment</span>
           </div>
         </div>
 
-        <div class="hero-visual reveal">
-          <div class="orb orb-one"></div>
-          <div class="orb orb-two"></div>
-          <div class="hero-panel">
-            <small>HYUNDAI CHEMICAL</small>
-            <h2>Reliable Supply.<br>Professional Service.</h2>
-            <div class="line"></div>
-            <p>Marine · Solvent · Organic · Inorganic</p>
+        <div class="supply-visual hero-enter" data-tilt aria-hidden="true">
+          <div class="supply-stage">
+            <span class="stage-halo"></span>
+            <span class="orbit orbit-outer"><i></i><i></i><i></i></span>
+            <span class="orbit orbit-inner"><i></i><i></i></span>
+            <div class="supply-core">
+              <span>HYUNDAI CHEMICAL</span>
+              <strong>Reliable<br>Supply</strong>
+              <small>ULSAN · KOREA</small>
+            </div>
+            <span class="stage-label label-one">01&nbsp;&nbsp;MARINE</span>
+            <span class="stage-label label-two">02&nbsp;&nbsp;CHEMICAL</span>
+            <span class="stage-label label-three">03&nbsp;&nbsp;LAB EQUIPMENT</span>
           </div>
+        </div>
+      </div>
+
+      <div class="hero-rail" aria-label="공급 분야">
+        <div class="container hero-rail-inner">
+          <span>PRODUCT DISTRIBUTION</span><i></i>
+          <span>MARINE SUPPLY</span><i></i>
+          <span>CHEMICAL DISTRIBUTION</span><i></i>
+          <span>LAB EQUIPMENT</span>
         </div>
       </div>
     </section>
 
-    <section class="trust-strip">
-      <div class="container trust-grid">
-        <div><strong>Marine</strong><span>선박 선용품 공급</span></div>
-        <div><strong>Solvent</strong><span>신나·용제 소분 판매</span></div>
-        <div><strong>Chemical</strong><span>유기·무기 화합물</span></div>
-        <div><strong>Supply</strong><span>산업현장 맞춤 공급</span></div>
-      </div>
-    </section>
-
-    <section class="section" id="company">
-      <div class="container split">
-        <div class="section-heading reveal">
-          <span class="eyebrow blue">ABOUT US</span>
+    <section class="home-links section">
+      <div class="container">
+        <div class="home-section-head reveal">
+          <span class="eyebrow blue">EXPLORE HYUNDAI CHEMICAL</span>
           <h2>현장을 이해하는<br>화학제품 공급 전문기업</h2>
+          <p>원하는 정보를 선택해 바로 확인할 수 있습니다.</p>
         </div>
-        <div class="about-copy reveal">
-          <p>
-            현대케미칼(주)은 선박 및 산업현장에서 요구되는 다양한 제품을 취급하며,
-            고객의 사용 목적과 납품 환경에 맞춰 안정적인 공급을 지향합니다.
-          </p>
-          <p>
-            톨루엔, 자일렌, 메탄올을 포함한 유기용제부터 신나류, 차아염소산나트륨,
-            가성소다 등 무기화학제품까지 폭넓은 품목을 취급합니다.
-          </p>
-          <div class="mini-note">※ 회사 연혁, 소재지, 주요 거래처/인증 정보는 추후 확정 정보로 추가 예정</div>
+        <div class="home-portal-grid">
+          <a class="portal-card portal-card-wide reveal" href="company.html">
+            <span class="portal-index">01 / ABOUT</span>
+            <div><h3>회사소개</h3><p>현대케미칼(주)의 회사 정보와 공급 방향</p></div>
+            <b aria-hidden="true">↗</b>
+          </a>
+          <a class="portal-card portal-card-accent reveal" href="products.html">
+            <span class="portal-index">02 / PRODUCTS</span>
+            <div><h3>제품소개</h3><p>취급 제품 검색 및 MSDS 확인</p></div>
+            <b aria-hidden="true">↗</b>
+          </a>
+          <a class="portal-card reveal" href="business.html">
+            <span class="portal-index">03 / BUSINESS</span>
+            <div><h3>사업분야</h3><p>주요 제품 유통 및 공급 분야</p></div>
+            <b aria-hidden="true">↗</b>
+          </a>
+          <a class="portal-card reveal" href="marine.html">
+            <span class="portal-index">04 / MARINE</span>
+            <div><h3>선용품</h3><p>선박 선용품 및 납품 안내</p></div>
+            <b aria-hidden="true">↗</b>
+          </a>
+          <a class="portal-card reveal" href="contact.html">
+            <span class="portal-index">05 / CONTACT</span>
+            <div><h3>견적문의</h3><p>제품 및 납품 관련 문의</p></div>
+            <b aria-hidden="true">↗</b>
+          </a>
         </div>
-      </div>
-    </section>
-
-    <section class="section soft" id="business">
-      <div class="container">
-        <div class="section-heading center reveal">
-          <span class="eyebrow blue">BUSINESS</span>
-          <h2>현대케미칼의 주요 사업분야</h2>
-          <p>선박부터 산업현장까지 필요한 제품을 폭넓게 공급합니다.</p>
-        </div>
-        <div class="cards three">
-          <article class="card reveal">
-            <span class="card-num">01</span>
-            <h3>선박 선용품 공급</h3>
-            <p>선박 운항 및 유지보수 현장에 필요한 다양한 선용품과 소모성 자재를 공급합니다.</p>
-          </article>
-          <article class="card reveal">
-            <span class="card-num">02</span>
-            <h3>신나·용제 소분 판매</h3>
-            <p>에폭시, 락카, 우레탄 신나와 각종 솔벤트를 산업현장 용도에 맞춰 취급합니다.</p>
-          </article>
-          <article class="card reveal">
-            <span class="card-num">03</span>
-            <h3>산업용 화학제품</h3>
-            <p>유기·무기 화합물을 포함한 다양한 산업용 화학제품을 폭넓게 공급합니다.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section dark" id="products">
-      <div class="container">
-        <div class="section-heading reveal">
-          <span class="eyebrow">PRODUCTS</span>
-          <h2>주요 취급제품</h2>
-          <p>대표 취급품목이며, 기타 유기·무기 화합물도 다양하게 취급합니다.</p>
-        </div>
-
-        <div class="product-layout">
-          <div class="featured-products reveal">
-            <span class="kicker">KEY PRODUCTS</span>
-            <h3>HC-2700 · MC · HC-2750</h3>
-            <p>현대케미칼의 주요 공급 제품입니다. 세부 용도·사양·포장단위는 확정 자료 반영 후 제품 상세 페이지로 확장합니다.</p>
-          </div>
-
-          <div class="product-grid">
-            <article class="product-card reveal"><span>유기용제</span><h3>톨루엔</h3></article>
-            <article class="product-card reveal"><span>유기용제</span><h3>자일렌</h3></article>
-            <article class="product-card reveal"><span>알코올계 용제</span><h3>메탄올</h3></article>
-            <article class="product-card reveal"><span>솔벤트</span><h3>에나멜(솔벤트)</h3></article>
-            <article class="product-card reveal"><span>신나</span><h3>에폭시 신나</h3></article>
-            <article class="product-card reveal"><span>신나</span><h3>락카 신나</h3></article>
-            <article class="product-card reveal"><span>신나</span><h3>우레탄 신나</h3></article>
-            <article class="product-card reveal"><span>무기화학</span><h3>차아염소산나트륨</h3></article>
-            <article class="product-card reveal"><span>무기화학</span><h3>가성소다</h3></article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="marine">
-      <div class="container marine-banner reveal">
-        <div>
-          <span class="eyebrow blue">MARINE SUPPLY</span>
-          <h2>선박 현장에 필요한 제품을<br>신속하고 안정적으로</h2>
-          <p>선박 선용품 품목과 납품 범위는 실제 취급 리스트를 기준으로 별도 카테고리화할 예정입니다.</p>
-        </div>
-        <a class="btn primary" href="#contact">납품 문의</a>
-      </div>
-    </section>
-
-    <section class="section contact-section" id="contact">
-      <div class="container contact-grid">
-        <div class="section-heading reveal">
-          <span class="eyebrow blue">CONTACT</span>
-          <h2>제품 및 납품<br>견적 문의</h2>
-          <p>필요 제품과 수량을 남겨주시면 확인 후 연락드릴 수 있도록 견적문의 시스템을 연결할 예정입니다.</p>
-          <ul class="contact-placeholder">
-            <li><span>전화</span>추후 입력</li>
-            <li><span>이메일</span>추후 입력</li>
-            <li><span>주소</span>추후 입력</li>
-          </ul>
-        </div>
-
-        <form class="quote-form reveal" onsubmit="return false;">
-          <div class="form-row">
-            <label>회사명<input type="text" placeholder="회사명" /></label>
-            <label>담당자<input type="text" placeholder="담당자명" /></label>
-          </div>
-          <div class="form-row">
-            <label>연락처<input type="tel" placeholder="010-0000-0000" /></label>
-            <label>이메일<input type="email" placeholder="name@company.com" /></label>
-          </div>
-          <label>필요 제품<input type="text" placeholder="예: 톨루엔, HC-2700" /></label>
-          <label>문의 내용<textarea rows="5" placeholder="수량, 납품 희망일 등 문의내용을 입력해주세요."></textarea></label>
-          <button class="btn primary wide" type="submit">견적문의 기능 준비중</button>
-          <small>v0.1에서는 UI만 구현되어 있으며 실제 메일 발송 기능은 다음 단계에서 연결합니다.</small>
-        </form>
       </div>
     </section>
   </main>
 
   <footer class="footer">
     <div class="container footer-inner">
-      <div>
-        <strong>현대케미칼(주)</strong>
-        <span>HYUNDAI CHEMICAL CO., LTD.</span>
+      <div class="footer-company">
+        <div class="footer-brand">
+          <strong>현대케미칼(주)</strong>
+          <span>HYUNDAI CHEMICAL CO.,LTD.</span>
+        </div>
+        <p class="footer-meta">
+          대표자 이상익 · 울산광역시 남구 장생포로 19번길 29<br>
+          대표전화 <a href="tel:0527005888">052) 700-5888</a> · 팩스 052) 700-5880 ·
+          <a href="mailto:hdchem0718@naver.com">hdchem0718@naver.com</a>
+        </p>
       </div>
-      <p>© <span id="year"></span> HYUNDAI CHEMICAL. All rights reserved.</p>
+      <p class="footer-copy">© <span data-current-year></span> HYUNDAI CHEMICAL. All rights reserved.</p>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=0.5"></script>
 </body>
 </html>

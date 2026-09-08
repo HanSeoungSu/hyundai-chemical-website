@@ -1,9 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="230" viewBox="0 0 760 230" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="540" height="230" viewBox="0 0 540 230" role="img" aria-labelledby="title desc">
   <title id="title">HYUNDAI CHEMICAL</title>
-  <desc id="desc">현대케미칼 로고의 웹용 벡터 버전</desc>
-  <rect width="760" height="230" fill="white"/>
+  <desc id="desc">현대케미칼 로고의 웹용 투명 벡터 버전</desc>
   <path d="M408 28a92 92 0 1 0 0 184a92 92 0 0 0 81-48" fill="none" stroke="#4f8dce" stroke-width="18" stroke-linecap="butt"/>
   <path d="M486 70a92 92 0 0 0-78-42" fill="none" stroke="#4f8dce" stroke-width="18" stroke-linecap="butt"/>
-  <rect x="477" y="92" width="42" height="48" fill="white"/>
   <text x="30" y="132" font-family="Arial, Helvetica, sans-serif" font-size="45" font-weight="700" letter-spacing="1" fill="#17385c">HYUNDAI CHEMICAL</text>
 </svg>
