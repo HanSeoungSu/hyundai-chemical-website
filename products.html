@@ -3,9 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="현대케미칼(주) 취급 제품 검색 및 MSDS" />
+  <meta name="description" content="현대케미칼(주)의 유·무기 화합물, 실험실 기자재, 선용품기자재 및 신나류 취급품목을 검색합니다." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#061827" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="현대케미칼(주)" />
+  <meta property="og:title" content="제품소개 | 현대케미칼(주)" />
+  <meta property="og:description" content="유·무기 화합물, 실험실 기자재, 선용품기자재 및 신나류 취급품목을 검색합니다." />
+  <meta property="og:url" content="https://www.hdchem.co.kr/products" />
+  <meta name="twitter:card" content="summary" />
   <title>제품소개 | 현대케미칼(주)</title>
-  <link rel="stylesheet" href="styles.css?v=0.6" />
+  <link rel="canonical" href="https://www.hdchem.co.kr/products" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css?v=20260914-3" />
 </head>
 <body class="premium-shell">
   <header class="site-header" id="top">
@@ -13,9 +24,10 @@
       <a class="brand" href="index.html" aria-label="현대케미칼 홈"><img src="assets/hyundai-chemical-logo.svg" alt="HYUNDAI CHEMICAL" /></a>
       <button class="menu-toggle" aria-label="메뉴 열기" aria-expanded="false">☰</button>
       <nav class="nav" aria-label="주요 메뉴">
+        <a href="index.html">홈</a>
         <a href="company.html">회사소개</a>
-        <a href="business.html">사업분야</a>
         <a href="products.html" aria-current="page">제품소개</a>
+        <a href="business.html">사업분야</a>
         <a href="marine.html">선용품</a>
         <a href="contact.html" class="nav-cta">견적문의</a>
       </nav>
@@ -51,21 +63,55 @@
               <span>제품명 검색</span>
               <input id="product-search" type="search" placeholder="예: 톨루엔, 메탄올, GLASS BEAKER" autocomplete="off" />
             </label>
+            <div class="catalog-stage-heading">
+              <span>STEP 01</span>
+              <div><strong>대분류 선택</strong><small>찾으시는 제품군을 먼저 선택해 주세요.</small></div>
+            </div>
             <div class="catalog-filters" role="group" aria-label="제품군 선택">
-              <button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true">전체</button>
               <button class="filter-button" type="button" data-filter="laboratory" aria-pressed="false">실험실 기자재</button>
               <button class="filter-button" type="button" data-filter="chemical" aria-pressed="false">유·무기 화합물</button>
               <button class="filter-button" type="button" data-filter="marine" aria-pressed="false">선용품기자재</button>
+              <button class="filter-button" type="button" data-filter="thinner" aria-pressed="false">신나류</button>
             </div>
             <div class="catalog-summary">
-              <strong id="product-count" aria-live="polite">94개 품목</strong>
+              <strong id="product-count" aria-live="polite">제품군을 선택해 주세요</strong>
               <span>공식 MSDS 파일이 확보된 제품부터 다운로드 기능을 제공합니다.</span>
             </div>
           </div>
 
-          <p class="catalog-price-note reveal">제품 가격은 표시하지 않습니다. 공급처 및 거래 조건에 따라 단가가 달라질 수 있어 견적 문의로 안내합니다.</p>
+          <section class="catalog-subcategories reveal" id="catalog-subcategories" aria-labelledby="subcategory-title" hidden>
+            <div class="catalog-subcategory-head">
+              <div><span>STEP 02</span><strong id="subcategory-title">중분류 선택</strong></div>
+              <p>공급 형태 또는 품목 종류를 선택하면 해당 제품만 펼쳐집니다.</p>
+            </div>
+            <div class="catalog-subcategory-list" id="subcategory-list" role="group" aria-label="제품 중분류 선택"></div>
+          </section>
 
-          <div class="product-grid" id="product-list">
+          <section class="catalog-subcategories catalog-details reveal" id="catalog-details" aria-labelledby="detail-title" hidden>
+            <div class="catalog-subcategory-head">
+              <div><span>STEP 03</span><strong id="detail-title">소분류 선택</strong></div>
+              <p>용도별 소분류를 선택하면 관련 제품군이 펼쳐집니다.</p>
+            </div>
+            <div class="catalog-subcategory-list" id="detail-list" role="group" aria-label="제품 소분류 선택"></div>
+          </section>
+
+          <section class="catalog-subcategories catalog-families reveal" id="catalog-families" aria-labelledby="family-title" hidden>
+            <div class="catalog-subcategory-head">
+              <div><span>STEP 04</span><strong id="family-title">제품 종류 선택</strong></div>
+              <p>여러 규격의 제품은 선택하고, 단일 제품은 이 단계에서 바로 확인합니다.</p>
+            </div>
+            <div class="catalog-subcategory-list" id="family-list" role="group" aria-label="규격별 제품 종류 선택"></div>
+            <div class="product-grid catalog-family-products" id="family-single-list" aria-label="단일 제품 목록" hidden></div>
+          </section>
+
+          <p class="catalog-price-note reveal">제품 요청 및 공급가는 견적 문의로 안내해 드리겠습니다.</p>
+
+          <div class="catalog-results-head" id="catalog-results-head" hidden>
+            <span id="catalog-results-step">STEP 03</span>
+            <strong id="catalog-results-title">제품 목록</strong>
+          </div>
+
+          <div class="product-grid is-awaiting-filter" id="product-list" aria-live="polite">
             <article class="product-card reveal" data-category="chemical" data-search="MC 유·무기 화합물 드럼">
               <div class="product-card-top"><span>유·무기 화합물</span><small>드럼</small></div>
               <h3>MC</h3>
@@ -91,9 +137,34 @@
               <h3>DINP</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="chemical" data-search="HC-2700N 유·무기 화합물 드럼">
+            <article class="product-card reveal" data-category="chemical" data-search="HC-2750 유·무기 화합물 드럼">
               <div class="product-card-top"><span>유·무기 화합물</span><small>드럼</small></div>
-              <h3>HC-2700N</h3>
+              <h3>HC-2750</h3>
+              <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
+            </article>
+            <article class="product-card reveal" data-category="chemical" data-search="MEK 유·무기 화합물 드럼">
+              <div class="product-card-top"><span>유·무기 화합물</span><small>드럼</small></div>
+              <h3>MEK</h3>
+              <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
+            </article>
+            <article class="product-card reveal" data-category="chemical" data-search="암모니아 유·무기 화합물 드럼">
+              <div class="product-card-top"><span>유·무기 화합물</span><small>드럼</small></div>
+              <h3>암모니아</h3>
+              <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
+            </article>
+            <article class="product-card reveal" data-category="chemical" data-search="EA 유·무기 화합물 드럼">
+              <div class="product-card-top"><span>유·무기 화합물</span><small>드럼</small></div>
+              <h3>EA</h3>
+              <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
+            </article>
+            <article class="product-card reveal" data-category="chemical" data-search="DOP 유·무기 화합물 드럼">
+              <div class="product-card-top"><span>유·무기 화합물</span><small>드럼</small></div>
+              <h3>DOP</h3>
+              <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
+            </article>
+            <article class="product-card reveal" data-category="chemical" data-search="클로로포롬 유·무기 화합물 드럼">
+              <div class="product-card-top"><span>유·무기 화합물</span><small>드럼</small></div>
+              <h3>클로로포롬</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
             <article class="product-card reveal" data-category="chemical" data-search="아세톤 유·무기 화합물 드럼">
@@ -101,19 +172,9 @@
               <h3>아세톤</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="chemical" data-search="글리세린(식첨) 유·무기 화합물 드럼">
+            <article class="product-card reveal" data-category="chemical" data-search="글리세린 공업 식첨 유·무기 화합물 드럼">
               <div class="product-card-top"><span>유·무기 화합물</span><small>드럼</small></div>
-              <h3>글리세린(식첨)</h3>
-              <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
-            </article>
-            <article class="product-card reveal" data-category="chemical" data-search="글리세린(공업) 유·무기 화합물 드럼">
-              <div class="product-card-top"><span>유·무기 화합물</span><small>드럼</small></div>
-              <h3>글리세린(공업)</h3>
-              <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
-            </article>
-            <article class="product-card reveal" data-category="chemical" data-search="에탄올 유·무기 화합물 드럼">
-              <div class="product-card-top"><span>유·무기 화합물</span><small>드럼</small></div>
-              <h3>에탄올</h3>
+              <h3>글리세린</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
             <article class="product-card reveal" data-category="chemical" data-search="BC 유·무기 화합물 드럼">
@@ -131,19 +192,14 @@
               <h3>염산</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="chemical" data-search="염산(실입) 유·무기 화합물 드럼">
-              <div class="product-card-top"><span>유·무기 화합물</span><small>드럼</small></div>
-              <h3>염산(실입)</h3>
-              <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
-            </article>
             <article class="product-card reveal" data-category="chemical" data-search="YK-D40 유·무기 화합물 드럼">
               <div class="product-card-top"><span>유·무기 화합물</span><small>드럼</small></div>
               <h3>YK-D40</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="chemical" data-search="증류수(신) 유·무기 화합물 드럼">
+            <article class="product-card reveal" data-category="chemical" data-search="증류수 유·무기 화합물 드럼">
               <div class="product-card-top"><span>유·무기 화합물</span><small>드럼</small></div>
-              <h3>증류수(신)</h3>
+              <h3>증류수</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
             <article class="product-card reveal" data-category="chemical" data-search="NEO-T 유·무기 화합물 드럼">
@@ -151,8 +207,18 @@
               <h3>NEO-T</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="chemical" data-search="우레탄 신나 유·무기 화합물 탱크 용제">
-              <div class="product-card-top"><span>유·무기 화합물</span><small>탱크 용제</small></div>
+            <article class="product-card reveal" data-category="chemical" data-search="차아염소산나트륨 유·무기 화합물 드럼">
+              <div class="product-card-top"><span>유·무기 화합물</span><small>드럼</small></div>
+              <h3>차아염소산나트륨</h3>
+              <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
+            </article>
+            <article class="product-card reveal" data-category="chemical" data-search="가성소다 유·무기 화합물 드럼">
+              <div class="product-card-top"><span>유·무기 화합물</span><small>드럼</small></div>
+              <h3>가성소다</h3>
+              <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
+            </article>
+            <article class="product-card reveal" data-category="thinner" data-search="우레탄 신나 신나류 탱크 용제">
+              <div class="product-card-top"><span>신나류</span><small>탱크 용제</small></div>
               <h3>우레탄 신나</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
@@ -161,14 +227,14 @@
               <h3>메탄올</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="chemical" data-search="락카 신나 유·무기 화합물 탱크 용제">
-              <div class="product-card-top"><span>유·무기 화합물</span><small>탱크 용제</small></div>
+            <article class="product-card reveal" data-category="thinner" data-search="락카 신나 신나류 탱크 용제">
+              <div class="product-card-top"><span>신나류</span><small>탱크 용제</small></div>
               <h3>락카 신나</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="chemical" data-search="에나멜 유·무기 화합물 탱크 용제">
-              <div class="product-card-top"><span>유·무기 화합물</span><small>탱크 용제</small></div>
-              <h3>에나멜</h3>
+            <article class="product-card reveal" data-category="thinner" data-search="에나멜신나 솔벤트 신나류 탱크 용제">
+              <div class="product-card-top"><span>신나류</span><small>탱크 용제</small></div>
+              <h3>에나멜신나(솔벤트)</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
             <article class="product-card reveal" data-category="chemical" data-search="톨루엔 유·무기 화합물 탱크 용제">
@@ -181,19 +247,19 @@
               <h3>자일렌</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="chemical" data-search="에폭시 신나 유·무기 화합물 탱크 용제">
-              <div class="product-card-top"><span>유·무기 화합물</span><small>탱크 용제</small></div>
+            <article class="product-card reveal" data-category="thinner" data-search="에폭시 신나 신나류 탱크 용제">
+              <div class="product-card-top"><span>신나류</span><small>탱크 용제</small></div>
               <h3>에폭시 신나</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="chemical" data-search="라바 신나 유·무기 화합물 탱크 용제">
-              <div class="product-card-top"><span>유·무기 화합물</span><small>탱크 용제</small></div>
+            <article class="product-card reveal" data-category="thinner" data-search="라바 신나 신나류 탱크 용제">
+              <div class="product-card-top"><span>신나류</span><small>탱크 용제</small></div>
               <h3>라바 신나</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="chemical" data-search="(세척제) 퐁퐁 유·무기 화합물 말통">
+            <article class="product-card reveal" data-category="chemical" data-search="퐁퐁 유·무기 화합물 말통">
               <div class="product-card-top"><span>유·무기 화합물</span><small>말통</small></div>
-              <h3>(세척제) 퐁퐁</h3>
+              <h3>퐁퐁</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
             <article class="product-card reveal" data-category="chemical" data-search="TCS-3 유·무기 화합물 말통">
@@ -231,14 +297,19 @@
               <h3>TEEPOL</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="chemical" data-search="차염소산나트륨 유·무기 화합물 IBC">
-              <div class="product-card-top"><span>유·무기 화합물</span><small>IBC</small></div>
-              <h3>차염소산나트륨</h3>
+            <article class="product-card reveal" data-category="chemical" data-search="차아염소산나트륨 유·무기 화합물 말통">
+              <div class="product-card-top"><span>유·무기 화합물</span><small>말통</small></div>
+              <h3>차아염소산나트륨</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="chemical" data-search="가성소다 고체 액체 유·무기 화합물">
-              <div class="product-card-top"><span>유·무기 화합물</span><small>고체·액체</small></div>
-              <h3>가성소다(고체,액체)</h3>
+            <article class="product-card reveal" data-category="chemical" data-search="가성소다 유·무기 화합물 말통">
+              <div class="product-card-top"><span>유·무기 화합물</span><small>말통</small></div>
+              <h3>가성소다</h3>
+              <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
+            </article>
+            <article class="product-card reveal" data-category="chemical" data-search="가성소다 유·무기 화합물 고체">
+              <div class="product-card-top"><span>유·무기 화합물</span><small>고체</small></div>
+              <h3>가성소다</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
             <article class="product-card reveal" data-category="chemical" data-search="METABISULPHITE 유·무기 화합물 고체">
@@ -281,44 +352,39 @@
               <h3>SODIUM TIOSULFATE</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="샘플병 500ml 실험실 기자재 시약">
-              <div class="product-card-top"><span>실험실 기자재</span><small>시약</small></div>
+            <article class="product-card reveal" data-category="laboratory" data-detail="용기·보관용품" data-family="샘플병" data-search="샘플병 500ml 실험실 기자재 기구 소모품 용기 보관용품">
+              <div class="product-card-top"><span>실험실 기자재</span><small>기구·소모품</small></div>
               <h3>샘플병 500ml</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="샘플병 200ml 실험실 기자재 시약">
-              <div class="product-card-top"><span>실험실 기자재</span><small>시약</small></div>
+            <article class="product-card reveal" data-category="laboratory" data-detail="용기·보관용품" data-family="샘플병" data-search="샘플병 200ml 실험실 기자재 기구 소모품 용기 보관용품">
+              <div class="product-card-top"><span>실험실 기자재</span><small>기구·소모품</small></div>
               <h3>샘플병 200ml</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="증류수 4L 실험실 기자재 시약">
+            <article class="product-card reveal" data-category="laboratory" data-detail="증류수" data-search="증류수4L 덕산 실험실 기자재 시약">
               <div class="product-card-top"><span>실험실 기자재</span><small>시약</small></div>
-              <h3>증류수 4L</h3>
+              <h3>증류수4L(덕산)</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="메탄올 500ml (MATH) 실험실 기자재 시약">
+            <article class="product-card reveal" data-category="laboratory" data-detail="메탄올" data-search="메탄올500ML Matsunoen 실험실 기자재 시약">
               <div class="product-card-top"><span>실험실 기자재</span><small>시약</small></div>
-              <h3>메탄올 500ml (MATH)</h3>
+              <h3>메탄올500ML(Matsunoen)</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="메탄올 4L 실험실 기자재 시약">
+            <article class="product-card reveal" data-category="laboratory" data-detail="메탄올" data-search="메탄올4L 덕산 실험실 기자재 시약">
               <div class="product-card-top"><span>실험실 기자재</span><small>시약</small></div>
-              <h3>메탄올 4L</h3>
+              <h3>메탄올4L(덕산)</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="메탄올 500ML 실험실 기자재 시약">
+            <article class="product-card reveal" data-category="laboratory" data-detail="메탄올" data-search="메탄올500ML 덕산 실험실 기자재 시약">
               <div class="product-card-top"><span>실험실 기자재</span><small>시약</small></div>
-              <h3>메탄올 500ML</h3>
+              <h3>메탄올500ML(덕산)</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="JUNSEI 메탄올 1L 실험실 기자재 시약">
+            <article class="product-card reveal" data-category="laboratory" data-detail="메탄올" data-search="메탄올1L JUNSEI 실험실 기자재 시약">
               <div class="product-card-top"><span>실험실 기자재</span><small>시약</small></div>
-              <h3>JUNSEI 메탄올 1L</h3>
-              <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
-            </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="질산 20% HNO3 실험실 기자재 제조 시약">
-              <div class="product-card-top"><span>실험실 기자재</span><small>제조 시약</small></div>
-              <h3>질산 20%</h3>
+              <h3>메탄올1L(JUNSEI)</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
             <article class="product-card reveal" data-category="laboratory" data-search="2% AGNO3 실험실 기자재 제조 시약">
@@ -336,167 +402,167 @@
               <h3>CL</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="LATEX GLOVES 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-search="질산 20% 실험실 기자재 제조 시약">
+              <div class="product-card-top"><span>실험실 기자재</span><small>제조 시약</small></div>
+              <h3>질산 20%</h3>
+              <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
+            </article>
+            <article class="product-card reveal" data-category="laboratory" data-detail="기타" data-search="LATEX GLOVES 실험실 기자재 기구 소모품 기타">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>LATEX GLOVES</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="VOLUMETRIC FLASK 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="측정·분석기구" data-family="VOLUMETRIC FLASK" data-search="VOLUMETRIC FLASK 실험실 기자재 기구 소모품 측정 분석기구">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>VOLUMETRIC FLASK</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="SQUEEZE BOTTLE (1L) 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="용기·보관용품" data-family="SQUEEZE BOTTLE" data-search="SQUEEZE BOTTLE (1L) 실험실 기자재 기구 소모품 용기 보관용품">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>SQUEEZE BOTTLE (1L)</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="SQUEEZE BOTTLE (500ML) 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="용기·보관용품" data-family="SQUEEZE BOTTLE" data-search="SQUEEZE BOTTLE (500ML) 실험실 기자재 기구 소모품 용기 보관용품">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>SQUEEZE BOTTLE (500ML)</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="SPONGE 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="기타" data-search="SPONGE 실험실 기자재 기구 소모품 기타">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>SPONGE</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="TUBE BRUSH 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="측정·분석기구" data-family="TUBE BRUSH" data-search="TUBE BRUSH 실험실 기자재 기구 소모품 측정 분석기구">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>TUBE BRUSH</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="ICE BOX 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="기타" data-search="ICE BOX 실험실 기자재 기구 소모품 기타">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>ICE BOX</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="THERMOMETER 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="측정·분석기구" data-family="THERMOMETER" data-search="THERMOMETER 실험실 기자재 기구 소모품 측정 분석기구">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>THERMOMETER</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="PEN RIGHT 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="기타" data-search="PEN RIGHT 실험실 기자재 기구 소모품 기타">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>PEN RIGHT</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="NESSLER TUBE (100ML) 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="측정·분석기구" data-family="NESSLER TUBE" data-search="NESSLER TUBE (100ML) 실험실 기자재 기구 소모품 측정 분석기구">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>NESSLER TUBE (100ML)</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="NESSLER TUBE (50ML) 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="측정·분석기구" data-family="NESSLER TUBE" data-search="NESSLER TUBE (50ML) 실험실 기자재 기구 소모품 측정 분석기구">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>NESSLER TUBE (50ML)</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="FILTER PAPER 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="측정·분석기구" data-family="FILTER PAPER" data-search="FILTER PAPER 실험실 기자재 기구 소모품 측정 분석기구">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>FILTER PAPER</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="GLASS BEAKER (150ML) 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="측정·분석기구" data-family="GLASS BEAKER" data-search="GLASS BEAKER (150ML) 실험실 기자재 기구 소모품 측정 분석기구">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>GLASS BEAKER (150ML)</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="GLASS BEAKER (400ML) 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="측정·분석기구" data-family="GLASS BEAKER" data-search="GLASS BEAKER (400ML) 실험실 기자재 기구 소모품 측정 분석기구">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>GLASS BEAKER (400ML)</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="TEST PAPER 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="측정·분석기구" data-family="TEST PAPER" data-search="TEST PAPER 실험실 기자재 기구 소모품 측정 분석기구">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>TEST PAPER</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="MEASURING PIPETTE(2ML) 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="측정·분석기구" data-family="MEASURING PIPETTE" data-search="MEASURING PIPETTE(2ML) 실험실 기자재 기구 소모품 측정 분석기구">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>MEASURING PIPETTE(2ML)</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="MEASURING PIPETTE(5ML) 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="측정·분석기구" data-family="MEASURING PIPETTE" data-search="MEASURING PIPETTE(5ML) 실험실 기자재 기구 소모품 측정 분석기구">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>MEASURING PIPETTE(5ML)</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="MEASURING PIPETTE(10ML) 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="측정·분석기구" data-family="MEASURING PIPETTE" data-search="MEASURING PIPETTE(10ML) 실험실 기자재 기구 소모품 측정 분석기구">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>MEASURING PIPETTE(10ML)</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="PIPETTE FILLER 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="기타" data-search="PIPETTE FILLER 실험실 기자재 기구 소모품 기타">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>PIPETTE FILLER</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="DROPPING BOTTLE 50CC 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="용기·보관용품" data-family="DROPPING BOTTLE" data-search="DROPPING BOTTLE 50CC 실험실 기자재 기구 소모품 용기 보관용품">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>DROPPING BOTTLE 50CC</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="DROPPING BOTTLE 40CC 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="용기·보관용품" data-family="DROPPING BOTTLE" data-search="DROPPING BOTTLE 40CC 실험실 기자재 기구 소모품 용기 보관용품">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>DROPPING BOTTLE 40CC</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="NESSLER TUBE RACK (100) 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="측정·분석기구" data-family="NESSLER TUBE" data-search="NESSLER TUBE RACK (100) 실험실 기자재 기구 소모품 측정 분석기구">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>NESSLER TUBE RACK (100)</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="NESSLER TUBE RACK (50) 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="측정·분석기구" data-family="NESSLER TUBE" data-search="NESSLER TUBE RACK (50) 실험실 기자재 기구 소모품 측정 분석기구">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>NESSLER TUBE RACK (50)</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="FUNNEL (제작형) 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="기타" data-search="FUNNEL 실험실 기자재 기구 소모품 기타">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
-              <h3>FUNNEL (제작형)</h3>
+              <h3>FUNNEL</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="스포이드 5CC 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="채취·분주용품" data-family="스포이드" data-search="스포이드 5CC 실험실 기자재 기구 소모품 채취 분주용품">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>스포이드 5CC</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="GLASS BEAKER (50ML) 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="측정·분석기구" data-family="GLASS BEAKER" data-search="GLASS BEAKER (50ML) 실험실 기자재 기구 소모품 측정 분석기구">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>GLASS BEAKER (50ML)</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="FUNNEL (포집형) 실험실 기자재 실험실 소모품">
-              <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
-              <h3>FUNNEL (포집형)</h3>
-              <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
-            </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="메스실린더 50ML 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="측정·분석기구" data-family="메스실린더" data-search="메스실린더 50ML 실험실 기자재 기구 소모품 측정 분석기구">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>메스실린더 50ML</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="메스실린더 100ML 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="측정·분석기구" data-family="메스실린더" data-search="메스실린더 100ML 실험실 기자재 기구 소모품 측정 분석기구">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>메스실린더 100ML</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="스포이드 1CC 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="채취·분주용품" data-family="스포이드" data-search="스포이드 1CC 실험실 기자재 기구 소모품 채취 분주용품">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>스포이드 1CC</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="스포이드 2CC 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="채취·분주용품" data-family="스포이드" data-search="스포이드 2CC 실험실 기자재 기구 소모품 채취 분주용품">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>스포이드 2CC</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="스포이드 3CC 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="채취·분주용품" data-family="스포이드" data-search="스포이드 3CC 실험실 기자재 기구 소모품 채취 분주용품">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>스포이드 3CC</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
             </article>
-            <article class="product-card reveal" data-category="laboratory" data-search="스포이드 10CC 실험실 기자재 실험실 소모품">
+            <article class="product-card reveal" data-category="laboratory" data-detail="채취·분주용품" data-family="스포이드" data-search="스포이드 10CC 실험실 기자재 기구 소모품 채취 분주용품">
               <div class="product-card-top"><span>실험실 기자재</span><small>실험실 소모품</small></div>
               <h3>스포이드 10CC</h3>
               <div class="product-card-actions"><button type="button" class="sds-button" disabled>MSDS 준비 중</button><a href="contact.html">견적 문의</a></div>
@@ -538,9 +604,9 @@
             </article>
           </div>
 
-          <div class="catalog-empty" id="catalog-empty" hidden>
-            <strong>등록된 제품이 없습니다.</strong>
-            <p>해당 제품군의 공식 취급 목록을 전달받은 후 순차적으로 추가합니다.</p>
+          <div class="catalog-empty" id="catalog-empty">
+            <strong id="catalog-empty-title">제품군을 선택해 주세요.</strong>
+            <p id="catalog-empty-description">위 분류를 선택하면 해당 제품 목록을 확인할 수 있습니다.</p>
           </div>
         </div>
       </div>
@@ -550,12 +616,12 @@
   <footer class="footer">
     <div class="container footer-inner">
       <div class="footer-company">
-        <div class="footer-brand"><strong>현대케미칼(주)</strong><span>HYUNDAI CHEMICAL CO.,LTD.</span></div>
+        <div class="footer-brand"><strong>(주)현대케미칼</strong><span>HYUNDAI CHEMICAL CO.,LTD.</span></div>
         <p class="footer-meta">대표자 이상익 · 울산광역시 남구 장생포로 19번길 29<br>대표전화 <a href="tel:0527005888">052) 700-5888</a> · 팩스 052) 700-5880 · <a href="mailto:hdchem0718@naver.com">hdchem0718@naver.com</a></p>
       </div>
       <p class="footer-copy">© <span data-current-year></span> HYUNDAI CHEMICAL. All rights reserved.</p>
     </div>
   </footer>
-  <script src="script.js?v=0.5"></script>
+  <script src="script.js?v=20260914-11"></script>
 </body>
 </html>

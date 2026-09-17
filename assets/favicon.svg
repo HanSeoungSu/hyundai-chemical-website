@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">현대케미칼</title>
+  <rect width="64" height="64" rx="14" fill="#061827" />
+  <path d="M45 18.5a20 20 0 1 0 0 27" fill="none" stroke="#5a9bd5" stroke-width="7" stroke-linecap="round" />
+  <circle cx="45.2" cy="18.7" r="3.5" fill="#94ccf3" />
+</svg>

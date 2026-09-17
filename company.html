@@ -3,9 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="현대케미칼(주) 회사소개" />
+  <meta name="description" content="현대케미칼(주)의 회사소개, 연혁, 시설현황 및 안전관리 정보를 안내합니다." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#061827" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="현대케미칼(주)" />
+  <meta property="og:title" content="회사소개 | 현대케미칼(주)" />
+  <meta property="og:description" content="현대케미칼(주)의 회사소개, 연혁, 시설현황 및 안전관리 정보를 안내합니다." />
+  <meta property="og:url" content="https://www.hdchem.co.kr/company" />
+  <meta name="twitter:card" content="summary" />
   <title>회사소개 | 현대케미칼(주)</title>
-  <link rel="stylesheet" href="styles.css?v=0.6" />
+  <link rel="canonical" href="https://www.hdchem.co.kr/company" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css?v=1.14" />
 </head>
 <body class="premium-shell">
   <header class="site-header" id="top">
@@ -13,9 +24,10 @@
       <a class="brand" href="index.html" aria-label="현대케미칼 홈"><img src="assets/hyundai-chemical-logo.svg" alt="HYUNDAI CHEMICAL" /></a>
       <button class="menu-toggle" aria-label="메뉴 열기" aria-expanded="false">☰</button>
       <nav class="nav" aria-label="주요 메뉴">
+        <a href="index.html">홈</a>
         <a href="company.html" aria-current="page">회사소개</a>
-        <a href="business.html">사업분야</a>
         <a href="products.html">제품소개</a>
+        <a href="business.html">사업분야</a>
         <a href="marine.html">선용품</a>
         <a href="contact.html" class="nav-cta">견적문의</a>
       </nav>
@@ -28,10 +40,11 @@
         <div class="page-hero-copy reveal">
           <span class="eyebrow">ABOUT HYUNDAI CHEMICAL</span>
           <h1>국내 화학제품 전문<br><strong>유통·판매 기업</strong></h1>
-          <p>폭넓은 유통망을 바탕으로 국내 사업장과 해상 케미컬 선박에 필요한 제품을 공급합니다.</p>
+          <p>폭넓은 유통망을 바탕으로 국내 사업장과 해상 케미칼 선박에 필요한 제품을 공급합니다.</p>
         </div>
         <div class="page-hero-mark reveal" aria-hidden="true">
           <span>HYUNDAI CHEMICAL</span>
+          <b class="mark-since">SINCE</b>
           <strong>2012</strong>
           <small>ESTABLISHED</small>
         </div>
@@ -41,19 +54,25 @@
     <section class="page-section company-story">
       <div class="container premium-split">
         <div class="section-marker reveal">
-          <span>01</span>
-          <small>COMPANY</small>
+          <span class="eyebrow">COMPANY</span>
           <h2>신뢰받는<br>비즈니스 파트너</h2>
         </div>
         <div class="company-narrative reveal">
-          <p class="lead">주식회사 현대케미칼은 화학제품 전문 유통기업으로 각종 무기·유기 화학제품을 취급하고 있습니다.</p>
-          <p>폭넓은 유통망을 바탕으로 국내 사업장뿐만 아니라 해상 케미컬 선박에도 공급하고 있습니다. 항상 고객 요구에 따른 맞춤형 제품과 서비스를 제공하기 위해 최선을 다하며, 앞으로도 신뢰받는 비즈니스 파트너가 될 것을 약속드립니다.</p>
+          <p class="lead">주식회사 현대케미칼은 화학제품 전문 유통기업으로 각종<br><span class="keep-together">무기·유기</span> 화학제품을 취급하고 있습니다.</p>
+          <p>폭넓은 유통망을 바탕으로 국내 사업장뿐만 아니라 해상 케미칼 선박에도 공급하고 있습니다. <span class="keep-together">항&#8288;상</span> 고객 요구에 따른 맞춤형 제품과 서비스를 제공하기 위해 최선을 다하며, 앞으로도 신뢰받는 비즈니스 파트너가 될 것을 약속드립니다.</p>
           <blockquote class="company-motto">고객 만족은 우리의 최우선 과제입니다.</blockquote>
           <dl class="company-facts" aria-label="회사 기본정보">
             <div><dt>회사명</dt><dd>현대케미칼(주)</dd></div>
             <div><dt>영문명</dt><dd>HYUNDAI CHEMICAL CO.,LTD.</dd></div>
             <div><dt>대표자</dt><dd>이상익</dd></div>
-            <div><dt>영업시간</dt><dd>08:30~19:30</dd></div>
+            <div>
+              <dt>영업시간</dt>
+              <dd class="hours-schedule">
+                <span><b>평일</b><span class="hours-value">08:30~17:30</span></span>
+                <span><b>토요일</b><span class="hours-value">08:30~12:00</span></span>
+                <span class="is-closed"><b>일요일</b><span class="hours-value">휴무</span></span>
+              </dd>
+            </div>
             <div><dt>주소</dt><dd>울산광역시 남구 장생포로 19번길 29</dd></div>
           </dl>
         </div>
@@ -94,13 +113,54 @@
     </section>
 
     <section class="page-section premium-band">
-      <div class="container permit-panel reveal">
-        <span class="permit-number">04</span>
-        <div>
-          <span class="eyebrow">COMPLIANCE & SAFETY</span>
-          <h2>허가 및 안전관리</h2>
-          <p>화학제품 취급에 관한 법적 사항을 준수하고 안전한 제품 공급에 만전을 기하겠습니다.</p>
-          <p>급격히 변화하는 화학물질 관련 법적 규제에 대응해 서류 및 시설 보완에 지속적으로 투자하고 있습니다.</p>
+      <div class="container">
+        <div class="section-head-row compliance-row reveal">
+          <div>
+            <span class="eyebrow">COMPLIANCE & SAFETY</span>
+            <h2>허가 및 안전관리</h2>
+          </div>
+          <div class="compliance-copy">
+            <p>화학제품 취급에 관한 법적 사항을 준수하고 안전한 제품 공급에 만전을 기하겠습니다.</p>
+            <p>급격히 변화하는 화학물질 관련 법적 규제에 대응해 서류 및 시설 보완에 지속적으로 투자하고 있습니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section directions-section" id="location">
+      <div class="container">
+        <div class="section-head-row reveal">
+          <div><span class="eyebrow">LOCATION</span><h2>오시는 길</h2></div>
+          <p>방문 전 대표전화로 연락해 주시면 자세한 안내를 도와드리겠습니다.</p>
+        </div>
+        <div class="directions-grid">
+          <article class="directions-card reveal">
+            <span class="eyebrow">HYUNDAI CHEMICAL</span>
+            <h3>(주)현대케미칼</h3>
+            <dl class="directions-details">
+              <div><dt>주소</dt><dd>울산광역시 남구 장생포로 19번길 29</dd></div>
+              <div><dt>대표전화</dt><dd><a href="tel:0527005888">052) 700-5888</a></dd></div>
+              <div>
+                <dt>영업시간</dt>
+                <dd class="hours-schedule">
+                  <span><b>평일</b><span class="hours-value">08:30~17:30</span></span>
+                  <span><b>토요일</b><span class="hours-value">08:30~12:00</span></span>
+                  <span class="is-closed"><b>일요일</b><span class="hours-value">휴무</span></span>
+                </dd>
+              </div>
+            </dl>
+            <div class="directions-actions">
+              <a class="btn directions-primary" href="https://map.naver.com/p/search/%EC%9A%B8%EC%82%B0%EA%B4%91%EC%97%AD%EC%8B%9C%20%EB%82%A8%EA%B5%AC%20%EC%9E%A5%EC%83%9D%ED%8F%AC%EB%A1%9C19%EB%B2%88%EA%B8%B8%2029" target="_blank" rel="noopener">네이버 지도에서 보기 <b aria-hidden="true">↗</b></a>
+              <a class="btn directions-secondary" href="tel:0527005888">전화하기</a>
+            </div>
+          </article>
+          <div class="naver-map-shell reveal">
+            <div id="naver-map" class="naver-map" data-naver-map data-ncp-key-id="i1u2e1od56" data-latitude="35.5185574" data-longitude="129.3487271" aria-label="현대케미칼 위치 지도"></div>
+            <div class="map-placeholder" data-map-status role="status">
+              <strong>네이버 지도 연동 준비 중</strong>
+              <p>Client ID를 연결하면 이 영역에 회사 위치 지도가 표시됩니다.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -109,12 +169,12 @@
   <footer class="footer">
     <div class="container footer-inner">
       <div class="footer-company">
-        <div class="footer-brand"><strong>현대케미칼(주)</strong><span>HYUNDAI CHEMICAL CO.,LTD.</span></div>
+        <div class="footer-brand"><strong>(주)현대케미칼</strong><span>HYUNDAI CHEMICAL CO.,LTD.</span></div>
         <p class="footer-meta">대표자 이상익 · 울산광역시 남구 장생포로 19번길 29<br>대표전화 <a href="tel:0527005888">052) 700-5888</a> · 팩스 052) 700-5880 · <a href="mailto:hdchem0718@naver.com">hdchem0718@naver.com</a></p>
       </div>
       <p class="footer-copy">© <span data-current-year></span> HYUNDAI CHEMICAL. All rights reserved.</p>
     </div>
   </footer>
-  <script src="script.js?v=0.5"></script>
+  <script src="script.js?v=0.8"></script>
 </body>
 </html>

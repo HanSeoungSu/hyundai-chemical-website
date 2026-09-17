@@ -7,9 +7,15 @@ param(
 $ErrorActionPreference = 'Stop'
 $projectRoot = $PSScriptRoot
 $indexPath = Join-Path $projectRoot 'index.html'
+$previewServerPath = Join-Path $projectRoot 'preview-server.py'
 
 if (-not (Test-Path -LiteralPath $indexPath)) {
   Write-Error "index.html을 찾을 수 없습니다: $indexPath"
+  exit 1
+}
+
+if (-not (Test-Path -LiteralPath $previewServerPath)) {
+  Write-Error "미리보기 서버 파일을 찾을 수 없습니다: $previewServerPath"
   exit 1
 }
 
@@ -47,7 +53,8 @@ Write-Host ''
 Write-Host '같은 사내 네트워크의 사용자에게 위 사내 접속 주소를 전달하세요.'
 Write-Host '이 창을 닫거나 Ctrl+C를 누르면 미리보기가 종료됩니다.'
 Write-Host 'Windows 방화벽 요청이 나타나면 회사 IT 정책을 확인한 뒤 개인 네트워크만 허용하세요.' -ForegroundColor Yellow
+Write-Host '수정 내용이 즉시 보이도록 브라우저 캐시는 사용하지 않습니다.' -ForegroundColor DarkGray
 Write-Host ''
 
-& $pythonCommand.Source -m http.server $Port --bind 0.0.0.0 --directory $projectRoot
+& $pythonCommand.Source $previewServerPath --port $Port --directory $projectRoot
 
