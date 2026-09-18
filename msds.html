@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="현대케미칼(주) 공급 제품 및 납품 내역에 맞는 물질안전보건자료(MSDS)를 요청합니다." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#061827" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="현대케미칼(주)" />
+  <meta property="og:title" content="MSDS 요청 | 현대케미칼(주)" />
+  <meta property="og:description" content="현대케미칼 공급 제품과 납품 내역에 맞는 MSDS를 요청하세요." />
+  <meta property="og:url" content="https://www.hdchem.co.kr/msds" />
+  <meta name="twitter:card" content="summary" />
+  <title>MSDS 요청 | 현대케미칼(주)</title>
+  <link rel="canonical" href="https://www.hdchem.co.kr/msds" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css?v=20260918-msds" />
+</head>
+<body class="premium-shell">
+  <header class="site-header" id="top">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html" aria-label="현대케미칼 홈"><img src="assets/hyundai-chemical-logo.svg" alt="HYUNDAI CHEMICAL" /></a>
+      <button class="menu-toggle" aria-label="메뉴 열기" aria-expanded="false">☰</button>
+      <nav class="nav" aria-label="주요 메뉴">
+        <a href="index.html">홈</a>
+        <a href="company.html">회사소개</a>
+        <a href="products.html">제품소개</a>
+        <a href="business.html">사업분야</a>
+        <a href="marine.html">선용품</a>
+        <a href="contact.html" class="nav-cta">견적문의</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <section class="page-hero premium-page-hero">
+      <div class="container page-hero-grid">
+        <div class="page-hero-copy reveal">
+          <span class="eyebrow">MSDS SUPPORT</span>
+          <h1>공급 제품에 맞는<br><strong>MSDS를 요청하세요</strong></h1>
+          <p>제품과 납품 내역을 확인한 후, 해당 물질안전보건자료를 이메일로 안내해 드립니다.</p>
+        </div>
+        <div class="page-hero-mark mark-compact business-hours-mark reveal" aria-hidden="true">
+          <span>BUSINESS HOURS</span>
+          <div class="business-hours-range">
+            <strong>08:30</strong>
+            <span class="hours-divider">—</span>
+            <strong>17:30</strong>
+          </div>
+          <small>MON — FRI</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section contact-section premium-band">
+      <div class="container contact-grid">
+        <div class="section-heading reveal">
+          <h2>물질안전보건자료<br>요청</h2>
+          <p>납품일이나 거래명세서 번호를 함께 알려주시면 정확한 자료 확인에 도움이 됩니다. 구매 검토 중인 제품도 요청하실 수 있습니다.</p>
+          <dl class="contact-details">
+            <div><dt>대표전화</dt><dd><a href="tel:0527005888">052) 700-5888</a></dd></div>
+            <div><dt>팩스</dt><dd>052) 700-5880</dd></div>
+            <div><dt>이메일</dt><dd><a href="mailto:hdchem0718@naver.com">hdchem0718@naver.com</a></dd></div>
+            <div><dt>주소</dt><dd>울산광역시 남구 장생포로 19번길 29</dd></div>
+            <div>
+              <dt>영업시간</dt>
+              <dd class="hours-schedule">
+                <span><b>평일</b><span class="hours-value">08:30~17:30</span></span>
+                <span><b>토요일</b><span class="hours-value">08:30~12:00</span></span>
+                <span class="is-closed"><b>일요일</b><span class="hours-value">휴무</span></span>
+              </dd>
+            </div>
+          </dl>
+        </div>
+
+        <form class="quote-form reveal" id="msds-form" action="/api/msds" method="post">
+          <div class="form-row">
+            <label>회사명<input type="text" name="company" placeholder="회사명" autocomplete="organization" maxlength="100" required /></label>
+            <label>담당자<input type="text" name="contactName" placeholder="담당자명" autocomplete="name" maxlength="50" required /></label>
+          </div>
+          <div class="form-row">
+            <label>연락처<input type="tel" name="phone" placeholder="010-0000-0000" autocomplete="tel" maxlength="30" required /></label>
+            <label>이메일<input type="email" name="email" placeholder="name@company.com" autocomplete="email" maxlength="254" required /></label>
+          </div>
+          <label>요청 제품<input type="text" name="product" placeholder="예: 톨루엔, HC-2700" maxlength="200" required /></label>
+          <div class="form-row">
+            <label>납품일 (선택)<input type="date" name="deliveryDate" /></label>
+            <label>거래명세서·로트번호 (선택)<input name="reference" maxlength="150" placeholder="모르면 비워두셔도 됩니다" /></label>
+          </div>
+          <label>추가 요청 (선택)<textarea name="message" rows="4" maxlength="2000" placeholder="제품 규격, 납품 장소 또는 구매 검토 중인 제품 등을 알려 주세요."></textarea></label>
+          <div class="form-honeypot" aria-hidden="true"><label>웹사이트<input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+          <label class="form-consent"><input type="checkbox" name="privacyConsent" value="true" required /><span>입력한 개인정보가 MSDS 요청 확인 및 회신 목적으로 이용되는 것에 동의합니다.</span></label>
+          <button class="btn hero-primary wide" type="submit" data-msds-submit>MSDS 요청 보내기</button>
+          <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+          <small>입력하신 정보는 MSDS 요청 확인과 회신을 위해서만 사용됩니다.</small>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-company">
+        <div class="footer-brand"><strong>(주)현대케미칼</strong><span>HYUNDAI CHEMICAL CO.,LTD.</span></div>
+        <p class="footer-meta">대표자 이상익 · 울산광역시 남구 장생포로 19번길 29<br>대표전화 <a href="tel:0527005888">052) 700-5888</a> · 팩스 052) 700-5880 · <a href="mailto:hdchem0718@naver.com">hdchem0718@naver.com</a></p>
+      </div>
+      <p class="footer-copy">© <span data-current-year></span> HYUNDAI CHEMICAL. All rights reserved.</p>
+    </div>
+  </footer>
+  <script src="script.js?v=20260918-msds"></script>
+  <script src="msds.js?v=20260918-msds"></script>
+</body>
+</html>
