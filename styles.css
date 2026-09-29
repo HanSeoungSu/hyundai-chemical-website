@@ -769,6 +769,12 @@ html[lang="en"] .naver-map-label span{white-space:normal;max-width:300px}
    Do not hide page overflow: that conceals broken grids without fixing them. */
 @media (max-width:900px){
   html{scroll-padding-top:102px}
+  .site-header{background:#061827;border-bottom-color:rgba(255,255,255,.16)}
+  .site-header.is-scrolled{background:#061827;border-bottom-color:rgba(255,255,255,.22)}
+  .menu-toggle{color:#f5f9fc}
+  .language-switch{border-color:rgba(143,199,242,.5);background:#0a2034}
+  .language-switch a{color:#b9d5eb}
+  .language-switch a[aria-current="true"]{background:#f5f9fc;color:#102a43}
   .nav-wrap{gap:7px}
   .nav-wrap .brand{flex:0 1 176px;min-width:0}
   .brand picture{width:100%}
