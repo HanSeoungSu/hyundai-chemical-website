@@ -69,6 +69,13 @@ async function clippedText(page) {
     const clipped = await clippedText(page);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1);
     if (clipped.length || overflow) results.push({ label, overflow, clipped });
+    const brand = await page.locator('.brand img').evaluate(img => {
+      const rect = img.getBoundingClientRect();
+      const languages = document.querySelector('.language-switch').getBoundingClientRect();
+      return { correctAsset: img.currentSrc.includes(`hyundai-chemical-mobile-${document.documentElement.lang}.svg`),
+        width: rect.width, clearOfControls: rect.right + 7 <= languages.left };
+    });
+    if (!brand.correctAsset || !brand.clearOfControls || (!label.includes('130%') && brand.width < 135)) results.push({ label, brand });
     if (await page.locator('.home-hero').count()) {
       const hero = await page.evaluate(() => {
         const container = document.querySelector('.hero-grid').getBoundingClientRect();
@@ -129,6 +136,21 @@ async function clippedText(page) {
       }
     }
     if (!auditOnly) {
+      // Test actual automatic darkening as well as the OS dark preference.
+      const cdp = await context.newCDPSession(page);
+      for (const width of [320, 390]) for (const lang of ['ko', 'en']) {
+        await page.setViewportSize({ width, height: 844 });
+        await page.goto(`${origin}/${lang === 'en' ? 'en/' : ''}`);
+        const header = page.locator('.site-header');
+        const light = await header.screenshot({ path: path.join(directory, `${lang}-header-${width}-light.png`) });
+        await page.emulateMedia({ colorScheme: 'dark' });
+        await cdp.send('Emulation.setAutoDarkModeOverride', { enabled: true });
+        const dark = await header.screenshot({ path: path.join(directory, `${lang}-header-${width}-dark.png`) });
+        assert.ok(light.equals(dark), `Auto dark mode must preserve the ${lang} header at ${width}px`);
+        await page.emulateMedia({ colorScheme: 'light' });
+        await cdp.send('Emulation.setAutoDarkModeOverride', { enabled: false });
+      }
+      await cdp.detach();
       // Simulate larger user text without reducing the viewport or disabling zoom.
       await page.setViewportSize({ width: 390, height: 844 });
       for (const lang of ['ko', 'en']) for (const name of pages) {
@@ -151,6 +173,6 @@ async function clippedText(page) {
     await fs.writeFile(path.join(directory, 'audit.json'), JSON.stringify(results, null, 2));
     if (auditOnly) console.log(JSON.stringify(results, null, 2));
     else assert.deepEqual(results, [], 'Visible mobile content must not be clipped');
-    console.log(auditOnly ? 'Mobile baseline saved.' : 'PASS: 16 pages and catalog/gallery states at 7 mobile/tablet widths, 130% text and landscape navigation; no clipped content.');
+    console.log(auditOnly ? 'Mobile baseline saved.' : 'PASS: 16 pages and catalog/gallery states at 7 mobile/tablet widths, sharp mobile logos, auto dark mode, 130% text and landscape navigation; no clipped content.');
   } finally { await browser.close(); await new Promise(resolve => server.close(resolve)); }
 })().catch(error => { console.error(error); server.close(); process.exitCode = 1; });

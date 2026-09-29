@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="196" height="56" viewBox="0 0 196 56" role="img" aria-labelledby="title">
+  <title id="title">HYUNDAI CHEMICAL</title>
+  <rect width="196" height="56" rx="6" fill="#ffffff"/>
+  <path d="M48.7 23.9 A22 22 0 1 0 48.7 32.1" fill="none" stroke="#4f8dce" stroke-width="5"/>
+  <text x="61" y="25" fill="#112b43" font-family="Arial,sans-serif" font-size="20" font-weight="800" letter-spacing=".2">HYUNDAI</text>
+  <text x="62" y="43" fill="#365f81" font-family="Arial,sans-serif" font-size="17" font-weight="700" letter-spacing="1.3">CHEMICAL</text>
+</svg>

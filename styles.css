@@ -1,4 +1,5 @@
 :root {
+  color-scheme:only light;
   --blue:#4f8dce;
   --blue-deep:#1d4f82;
   --navy:#071a2c;
@@ -18,11 +19,13 @@ a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
 .container{width:min(var(--max),calc(100% - 40px));margin:0 auto}
 
-.site-header{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(18px);border-bottom:1px solid rgba(17,32,51,.07);transition:background-color .25s ease,border-color .25s ease,box-shadow .25s ease}
-.site-header.is-scrolled{background:rgba(255,255,255,.98);border-bottom-color:rgba(17,32,51,.1);box-shadow:0 8px 28px rgba(7,26,44,.08)}
+.site-header{position:fixed;inset:0 0 auto 0;z-index:50;background:#fff;border-bottom:1px solid rgba(17,32,51,.07);transition:border-color .25s ease,box-shadow .25s ease}
+.site-header.is-scrolled{border-bottom-color:rgba(17,32,51,.1);box-shadow:0 8px 28px rgba(7,26,44,.08)}
 .nav-wrap{height:82px;display:flex;align-items:center;justify-content:space-between;gap:30px}
 .brand{height:100%;display:flex;align-items:center;flex:0 0 auto}
+.brand picture{display:block}
 .brand img{width:auto;height:60px}
+.brand:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:6px}
 .nav{display:flex;align-items:center;gap:31px;font-size:14px;font-weight:700}
 .nav a{position:relative;padding:30px 0}
 .nav a:not(.nav-cta){color:var(--ink)}
@@ -766,6 +769,11 @@ html[lang="en"] .naver-map-label span{white-space:normal;max-width:300px}
    Do not hide page overflow: that conceals broken grids without fixing them. */
 @media (max-width:900px){
   html{scroll-padding-top:102px}
+  .nav-wrap{gap:7px}
+  .nav-wrap .brand{flex:0 1 176px;min-width:0}
+  .brand picture{width:100%}
+  .brand img{width:100%;height:auto;max-width:176px}
+  .language-switch a{padding-inline:4px}
   body{overflow-wrap:anywhere}
   html[lang="ko"] body{word-break:keep-all}
   h1,h2,h3{text-wrap:balance}
