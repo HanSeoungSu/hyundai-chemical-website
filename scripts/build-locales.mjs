@@ -6,7 +6,7 @@ import path from 'node:path';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const pages = ['index', 'company', 'products', 'business', 'marine', 'contact', 'msds', '404'];
-const version = '20260929-5';
+const version = '20260929-6';
 const dictionary = JSON.parse(await readFile(path.join(root, 'locales/en.json'), 'utf8'));
 const missing = new Set();
 const normalize = value => value.replace(/\s+/g, ' ').trim();

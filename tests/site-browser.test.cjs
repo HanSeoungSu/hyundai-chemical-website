@@ -59,6 +59,18 @@ const server = http.createServer(async (req, res) => {
         }
         const brokenImages = await page.locator('img').evaluateAll(images => images.filter(image => image.complete && image.naturalWidth === 0).map(image => image.src));
         assert.deepEqual(brokenImages, [], `Broken images on ${url}`);
+        if (name === 'products') {
+          assert.equal(await page.locator('#product-list .sds-button').count(), 61);
+          await page.locator('#product-search').fill('TEST PAPER');
+          const actions = page.locator('#product-list .product-card:visible .product-card-actions');
+          assert.equal(await actions.locator('a').count(), 1);
+          assert.equal(await actions.innerText(), lang === 'en' ? 'Product Enquiry' : '제품 문의');
+          const row = await actions.boundingBox(), button = await actions.locator('a').boundingBox();
+          assert.ok(Math.abs(row.width - button.width) <= 1, `Inquiry button must fill the card at ${width}px`);
+          if (width === 390) await page.screenshot({ path: path.join(screenshots, `${lang}-product-inquiry-only.png`), fullPage: true });
+          await actions.locator('a').click();
+          assert.equal(new URL(page.url()).pathname, `/${lang === 'en' ? 'en/' : ''}contact`);
+        }
         if (lang === 'en' && ['', 'company', 'msds'].includes(name)) await page.screenshot({ path: path.join(screenshots, `en-${name || 'home'}-${width}.png`), fullPage: true });
       }
     }
@@ -81,6 +93,8 @@ const server = http.createServer(async (req, res) => {
       await page.locator('#subcategory-list [data-subcategory="기구·소모품"]').click();
       await page.locator('#detail-list [data-detail="측정·분석기구"]').click();
       assert.ok(await page.locator('#family-single-list .product-card:visible').count() > 0);
+      assert.equal(await page.locator('#family-single-list .sds-button').count(), 0, 'Cloned equipment cards must remain inquiry-only');
+      assert.ok((await page.locator('#family-single-list .product-card-actions').allTextContents()).every(text => text.trim() === (lang === 'en' ? 'Product Enquiry' : '제품 문의')));
       await page.locator('#family-list [data-family="GLASS BEAKER"]').click();
       assert.ok(await page.locator('#product-list .product-card:visible').count() > 1);
     }

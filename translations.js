@@ -15,6 +15,7 @@ window.HDChemEnglish = {
   "사업분야": "Business",
   "선용품": "Marine Supply",
   "견적문의": "Get a Quote",
+  "제품 문의": "Product Enquiry",
   "산업과 선박 현장을 잇는": "Connecting industry and marine operations",
   "신뢰의 공급 파트너": "Your trusted supply partner",
   "현대케미칼(주)은 선박 선용품 납품과 신나·용제 소분 판매를 비롯해 다양한 유기·무기 화합물을 안정적으로 공급합니다.": "Hyundai Chemical supplies marine stores and a wide range of organic and inorganic chemicals, including thinners and solvents repacked for your needs.",
