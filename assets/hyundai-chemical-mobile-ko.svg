@@ -1,12 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="260" height="88" viewBox="0 0 260 88" role="img" aria-labelledby="title">
   <title id="title">HYUNDAI CHEMICAL</title>
-  <!-- Original layering: the ring crosses HYU/DAI; its right opening is a level, word-height cut. -->
-  <rect width="260" height="88" fill="#061827"/>
+  <!-- Transparent artwork: cut the ring itself, never paint a background over it. -->
+  <defs>
+    <clipPath id="ring-gap"><path clip-rule="evenodd" d="M0 0H260V88H0Z M132 36H160V50H132Z"/></clipPath>
+  </defs>
   <text x="18" y="50" fill="#ffffff" font-family="Arial,sans-serif" font-size="19" font-weight="800" letter-spacing=".35">HYU</text>
   <text x="65" y="50" fill="#ffffff" font-family="Arial,sans-serif" font-size="19" font-weight="800" letter-spacing=".35">N</text>
   <text x="82" y="50" fill="#ffffff" font-family="Arial,sans-serif" font-size="19" font-weight="800" letter-spacing=".35">DAI</text>
-  <circle cx="103" cy="44" r="35" fill="none" stroke="#6fa9df" stroke-width="7"/>
+  <circle cx="103" cy="44" r="35" fill="none" stroke="#6fa9df" stroke-width="7" clip-path="url(#ring-gap)"/>
   <text x="65" y="50" fill="#14283e" stroke="#ffffff" stroke-width="1.1" paint-order="stroke" font-family="Arial,sans-serif" font-size="19" font-weight="800" letter-spacing=".35">N</text>
-  <rect x="132" y="36" width="28" height="14" fill="#061827"/>
   <text x="122" y="50" fill="#ffffff" font-family="Arial,sans-serif" font-size="19" font-weight="800" letter-spacing=".35">CHEMICAL</text>
 </svg>

@@ -72,7 +72,7 @@ async function clippedText(page) {
     const brand = await page.locator('.brand img').evaluate(img => {
       const rect = img.getBoundingClientRect();
       const languages = document.querySelector('.language-switch').getBoundingClientRect();
-      return { correctAsset: img.currentSrc.includes(`hyundai-chemical-mobile-${document.documentElement.lang}.svg`),
+      return { correctAsset: img.currentSrc.includes('hyundai-chemical-mobile.png'),
         width: rect.width, clearOfControls: rect.right + 7 <= languages.left };
     });
     if (!brand.correctAsset || !brand.clearOfControls || (!label.includes('130%') && brand.width < 135)) results.push({ label, brand });

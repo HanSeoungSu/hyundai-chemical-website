@@ -6,7 +6,7 @@ import path from 'node:path';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const pages = ['index', 'company', 'products', 'business', 'marine', 'contact', 'msds', '404'];
-const version = '20260929-4';
+const version = '20260929-5';
 const dictionary = JSON.parse(await readFile(path.join(root, 'locales/en.json'), 'utf8'));
 const missing = new Set();
 const normalize = value => value.replace(/\s+/g, ' ').trim();
@@ -26,8 +26,8 @@ for (const page of pages) {
   let ko = await readFile(path.join(root, `${page}.html`), 'utf8');
   ko = ko.replace(/\s*<meta name="color-scheme"[^>]*>/g, '');
   ko = ko.replace(/(<meta name="viewport"[^>]*>)/, '$1\n  <meta name="color-scheme" content="only light" />');
-  // Keep the original full logo on desktop; a sharp, readable lockup on mobile.
-  ko = ko.replace(/(<a class="brand"[^>]*>)[\s\S]*?(<\/a>)/, `$1<picture><source media="(max-width: 900px)" srcset="/assets/hyundai-chemical-mobile-ko.svg?v=${version}" /><img src="/assets/hyundai-chemical-logo.svg" alt="HYUNDAI CHEMICAL" width="540" height="230" /></picture>$2`);
+  // The same transparent, pre-rendered wordmark is used in both mobile languages.
+  ko = ko.replace(/(<a class="brand"[^>]*>)[\s\S]*?(<\/a>)/, `$1<picture><source media="(max-width: 900px)" srcset="/assets/hyundai-chemical-mobile.png?v=${version}" /><img src="/assets/hyundai-chemical-logo.svg" alt="HYUNDAI CHEMICAL" width="540" height="230" /></picture>$2`);
   ko = ko.replace(/\s*<div class="language-switch"[^\n]*<\/div>/g, '');
   ko = ko.replace(/<button class="menu-toggle"/, `${switches(page)}\n      <button class="menu-toggle"`);
   ko = ko.replace(/\s*<link rel="alternate" hreflang="[^"]+" href="[^"]+"\s*\/>/g, '');
@@ -48,7 +48,6 @@ for (const page of pages) {
   ko = ko.replace(/"availableLanguage": "ko"/g, '"availableLanguage": ["ko", "en"]');
   outputs.set(`${page}.html`, ko);
   let en = ko.replace('lang="ko"', 'lang="en"');
-  en = en.replace('/assets/hyundai-chemical-mobile-ko.svg', '/assets/hyundai-chemical-mobile-en.svg');
   en = en.replace(switches(page), switches(page, true));
   en = en.replace(/<script\b[\s\S]*?<\/script>|<!--[\s\S]*?-->|<[^>]*>|[^<]+/g, token => {
     if (/^<script/.test(token)) {
