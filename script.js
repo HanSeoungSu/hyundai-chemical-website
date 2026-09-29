@@ -1,3 +1,4 @@
+const { t, english, language } = window.HDChemI18n;
 const toggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('.nav');
 const header = document.querySelector('.site-header');
@@ -97,21 +98,24 @@ const productCategoryLabels = new Map(filterButtons.map((button) => [
 
 productCards.forEach((card) => {
   const subcategoryLabel = card.querySelector('.product-card-top small');
-  const rawSubcategory = subcategoryLabel?.textContent.trim() || '기타 품목';
+  const rawSubcategory = card.dataset.subcategory || subcategoryLabel?.textContent.trim() || '기타 품목';
   const subcategory = card.dataset.category === 'laboratory'
     && (rawSubcategory === '실험실 소모품' || rawSubcategory === '실험실 기자재')
     ? '기구·소모품'
     : rawSubcategory;
 
   card.dataset.subcategory = subcategory;
-  if (subcategoryLabel) subcategoryLabel.textContent = subcategory;
+  if (subcategoryLabel) subcategoryLabel.textContent = t(subcategory);
+  const name = card.querySelector('h3')?.textContent.trim() || '';
+  // Search both languages while keeping category identifiers stable.
+  card.dataset.search += ` ${name} ${english(name)} ${english(subcategory)}`;
 });
 
 const normalizeSearchText = (value) => value
   .toLocaleLowerCase('ko-KR')
   .replace(/[\s\-·()]/g, '');
 
-const productNameCollator = new Intl.Collator(['ko-KR', 'en-US'], {
+const productNameCollator = new Intl.Collator(language === 'en' ? ['en-US', 'ko-KR'] : ['ko-KR', 'en-US'], {
   numeric: true,
   sensitivity: 'base',
 });
@@ -226,8 +230,8 @@ const createCatalogTierButton = ({ name, count, index, isActive, onClick }) => {
   step.className = 'subcategory-index';
   step.textContent = String(index + 1).padStart(2, '0');
   copy.className = 'subcategory-copy';
-  title.textContent = name;
-  meta.textContent = `${count}개 제품`;
+  title.textContent = t(name);
+  meta.textContent = t('{count}개 제품', { count });
   arrow.className = 'subcategory-arrow';
   arrow.textContent = '↘';
   copy.append(title, meta);
@@ -425,34 +429,34 @@ const updateProductCatalog = () => {
 
   if (catalogResultsTitle) {
     catalogResultsTitle.textContent = hasQuery
-      ? '제품 검색 결과'
+      ? t('제품 검색 결과')
       : hasFamily
-        ? `${activeProductFamily} 제품`
-        : `${activeProductDetail || activeProductSubcategory} 제품`;
+        ? t('{name} 제품', { name: t(activeProductFamily) })
+        : t('{name} 제품', { name: t(activeProductDetail || activeProductSubcategory) });
   }
 
   if (productCount) {
     const categoryLabel = productCategoryLabels.get(activeProductFilter) ?? '';
 
     if (hasQuery) {
-      productCount.textContent = `${visibleCount}개 검색 결과${categoryLabel ? ` · ${categoryLabel}` : ''}`;
+      productCount.textContent = t('{count}개 검색 결과{category}', { count: visibleCount, category: categoryLabel ? ` · ${categoryLabel}` : '' });
     } else if (hasFamily) {
-      productCount.textContent = `${activeProductFamily} · ${visibleCount}개 제품`;
+      productCount.textContent = t('{name} · {count}개 제품', { name: t(activeProductFamily), count: visibleCount });
     } else if (hasDetail && hasFamilyChoices) {
-      productCount.textContent = `${activeProductDetail} · 단일 제품 ${inlineFamilyNames.size}개 · 제품군 ${selectableFamilyOptions.length}개`;
+      productCount.textContent = t('{name} · 단일 제품 {singles}개 · 제품군 {groups}개', { name: t(activeProductDetail), singles: inlineFamilyNames.size, groups: selectableFamilyOptions.length });
     } else if (hasDetail) {
       const detailProductCount = productCards.filter((card) => card.dataset.category === activeProductFilter
         && card.dataset.subcategory === activeProductSubcategory
         && card.dataset.detail === activeProductDetail).length;
-      productCount.textContent = `${activeProductDetail} · ${detailProductCount}개 제품`;
+      productCount.textContent = t('{name} · {count}개 제품', { name: t(activeProductDetail), count: detailProductCount });
     } else if (requiresDetail) {
-      productCount.textContent = `${activeProductSubcategory} · 소분류 ${detailOptions.length}개`;
+      productCount.textContent = t('{name} · 소분류 {count}개', { name: t(activeProductSubcategory), count: detailOptions.length });
     } else if (hasSubcategory) {
-      productCount.textContent = `${activeProductSubcategory} · ${visibleCount}개 제품`;
+      productCount.textContent = t('{name} · {count}개 제품', { name: t(activeProductSubcategory), count: visibleCount });
     } else if (hasCategory) {
-      productCount.textContent = `${categoryLabel} · 중분류 ${subcategoryOptions.length}개`;
+      productCount.textContent = t('{name} · 중분류 {count}개', { name: categoryLabel, count: subcategoryOptions.length });
     } else {
-      productCount.textContent = '대분류를 선택해 주세요';
+      productCount.textContent = t('대분류를 선택해 주세요');
     }
   }
 
@@ -468,7 +472,7 @@ const updateProductCatalog = () => {
       || hasNoResults);
 
     if (catalogEmptyTitle) {
-      catalogEmptyTitle.textContent = isAwaitingCategory
+      catalogEmptyTitle.textContent = t(isAwaitingCategory
         ? '대분류를 선택해 주세요.'
         : isAwaitingSubcategory
           ? '중분류를 선택해 주세요.'
@@ -476,11 +480,11 @@ const updateProductCatalog = () => {
             ? '소분류를 선택해 주세요.'
             : isAwaitingFamily
               ? '제품 종류를 선택해 주세요.'
-              : '검색 결과가 없습니다.';
+              : '검색 결과가 없습니다.');
     }
 
     if (catalogEmptyDescription) {
-      catalogEmptyDescription.textContent = isAwaitingCategory
+      catalogEmptyDescription.textContent = t(isAwaitingCategory
         ? '위 대분류를 선택하면 관련 중분류가 단계별로 표시됩니다.'
         : isAwaitingSubcategory
           ? '중분류를 선택하면 해당 제품을 간결한 카드 목록으로 확인할 수 있습니다.'
@@ -488,7 +492,7 @@ const updateProductCatalog = () => {
             ? '소분류를 선택하면 관련 제품군과 단일 제품을 확인할 수 있습니다.'
             : isAwaitingFamily
               ? '규격별 제품군을 선택하면 해당 제품이 표시됩니다.'
-              : '검색어나 제품군을 변경해 다시 확인해 주세요.';
+              : '검색어나 제품군을 변경해 다시 확인해 주세요.');
     }
   }
 };
@@ -527,7 +531,7 @@ const setMarineGalleryState = (trigger, isOpen) => {
   }
 
   if (cueLabel) {
-    cueLabel.textContent = isOpen ? '작업사진 닫기' : '작업사진 보기';
+    cueLabel.textContent = t(isOpen ? '작업사진 닫기' : '작업사진 보기');
   }
 };
 
@@ -547,21 +551,23 @@ const quoteStatus = quoteForm?.querySelector('[data-form-status]');
 
 quoteForm?.addEventListener('submit', async (event) => {
   event.preventDefault();
+  if (quoteForm.getAttribute('aria-busy') === 'true') return;
 
   if (!quoteForm.checkValidity()) {
     quoteForm.reportValidity();
     return;
   }
 
-  const originalButtonText = quoteSubmit?.textContent ?? '견적문의 보내기';
+  const originalButtonText = quoteSubmit?.textContent ?? t('견적문의 보내기');
   const formData = new FormData(quoteForm);
   const payload = Object.fromEntries(formData.entries());
   payload.privacyConsent = formData.has('privacyConsent');
+  payload.language = language;
 
   quoteForm.setAttribute('aria-busy', 'true');
   if (quoteSubmit) {
     quoteSubmit.disabled = true;
-    quoteSubmit.textContent = '전송 중...';
+    quoteSubmit.textContent = t('전송 중...');
   }
   if (quoteStatus) {
     quoteStatus.textContent = '';
@@ -580,17 +586,17 @@ quoteForm?.addEventListener('submit', async (event) => {
       const fallbackMessage = window.location.protocol === 'http:'
         ? '로컬 미리보기에서는 메일이 발송되지 않습니다. 배포 설정 후 사용할 수 있습니다.'
         : '견적문의를 전송하지 못했습니다.';
-      throw new Error(result.message || fallbackMessage);
+      throw new Error(t(result.message || fallbackMessage));
     }
 
     quoteForm.reset();
     if (quoteStatus) {
-      quoteStatus.textContent = result.message;
+      quoteStatus.textContent = t(result.message);
       quoteStatus.classList.add('is-success');
     }
   } catch (error) {
     if (quoteStatus) {
-      quoteStatus.textContent = error.message || '전송 중 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.';
+      quoteStatus.textContent = t(error.message || '전송 중 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.');
       quoteStatus.classList.add('is-error');
     }
   } finally {
@@ -616,8 +622,8 @@ if (naverMapElement) {
     mapStatus.hidden = false;
     const heading = mapStatus.querySelector('strong');
     const copy = mapStatus.querySelector('p');
-    if (heading) heading.textContent = title;
-    if (copy) copy.textContent = message;
+    if (heading) heading.textContent = t(title);
+    if (copy) copy.textContent = t(message);
   };
 
   if (ncpKeyId && Number.isFinite(latitude) && Number.isFinite(longitude)) {
@@ -657,7 +663,7 @@ if (naverMapElement) {
             map,
           });
           const infoWindow = new window.naver.maps.InfoWindow({
-            content: '<div class="naver-map-label"><strong>(주)현대케미칼</strong><span>울산광역시 남구 장생포로 19번길 29</span></div>',
+            content: `<div class="naver-map-label"><strong>${t('(주)현대케미칼')}</strong><span>${t('울산광역시 남구 장생포로 19번길 29')}</span></div>`,
           });
 
           infoWindow.open(map, marker);

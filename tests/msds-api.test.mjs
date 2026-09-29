@@ -20,25 +20,26 @@ test('rejects cross-origin, large body and unsupported methods', async () => {
   assert.equal((await onRequestPost({ request: request({ ...payload(), message: 'a'.repeat(20000) }), env })).status, 413);
   assert.equal(onRequest().status, 405);
 });
-test('sends only a request JSON attachment to company and retries with stable body', async () => {
+test('emails a readable notification without attachments or inventory integration; retries are stable', async () => {
   const old = globalThis.fetch;
   const calls = [];
   globalThis.fetch = async (url, options) => { calls.push({ url, ...options }); return new Response('{"id":"test"}', { status: 200 }); };
   try {
     const data = payload();
+    data.language = 'en';
     data.message = '<script>test</script>';
     for (let i = 0; i < 2; i++) assert.equal((await onRequestPost({ request: request(data), env })).status, 200);
     assert.equal(calls[0].body, calls[1].body);
     assert.equal(calls[0].headers['Idempotency-Key'], calls[1].headers['Idempotency-Key']);
     const mail = JSON.parse(calls[0].body);
     assert.deepEqual(mail.to, ['hdchem0718@naver.com']);
-    assert.equal(mail.attachments.length, 1);
-    const attachment = JSON.parse(Buffer.from(mail.attachments[0].content, 'base64').toString('utf8'));
-    assert.equal(attachment.product, '톨루엔');
-    assert.equal(attachment.schema, 'hdchem.msds.request.v1');
-    assert.equal(attachment.privacyConsent, true);
+    assert.equal(mail.attachments, undefined);
+    assert.equal(mail.reply_to, data.email);
+    assert.ok(mail.text.includes('요청 언어: English'));
+    assert.ok(mail.text.includes(data.product));
+    assert.ok(mail.html.includes('<table'));
     assert.ok(!mail.html.includes('<script>'));
-    assert.ok(!Object.keys(attachment).some(k => /manufacturer|inventory|price/i.test(k)));
+    assert.ok(!/재고프로그램|hdchem-msds-request.json/.test(calls[0].body));
   } finally { globalThis.fetch = old; }
 });
 test('provider errors do not claim successful receipt', async () => {

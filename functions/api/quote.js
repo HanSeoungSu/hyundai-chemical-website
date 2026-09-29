@@ -89,6 +89,7 @@ export async function onRequestPost({ request, env }) {
   }).format(new Date());
   const rows = [
     ['접수 시간', receivedAt],
+    ['요청 언어', payload.language === 'en' ? 'English' : '한국어'],
     ['회사명', inquiry.company],
     ['담당자', inquiry.contactName],
     ['연락처', inquiry.phone],

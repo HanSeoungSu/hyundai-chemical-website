@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Request the material safety data sheet (MSDS) for products supplied by Hyundai Chemical." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#061827" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="HYUNDAI CHEMICAL CO., LTD." />
+  <meta property="og:title" content="Request an MSDS | HYUNDAI CHEMICAL" />
+  <meta property="og:description" content="Request an MSDS matching your product and delivery from Hyundai Chemical." />
+  <meta property="og:url" content="https://www.hdchem.co.kr/en/msds" />
+  <meta name="twitter:card" content="summary" />
+  <title>Request an MSDS | HYUNDAI CHEMICAL</title>
+  <link rel="canonical" href="https://www.hdchem.co.kr/en/msds" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/styles.css?v=20260929-1" />
+  <link rel="alternate" hreflang="ko" href="https://www.hdchem.co.kr/msds" />
+  <link rel="alternate" hreflang="en" href="https://www.hdchem.co.kr/en/msds" />
+  <link rel="alternate" hreflang="x-default" href="https://www.hdchem.co.kr/msds" />
+</head>
+<body class="premium-shell">
+  <header class="site-header" id="top">
+    <div class="container nav-wrap">
+      <a class="brand" href="/en/" aria-label="Hyundai Chemical home"><img src="/assets/hyundai-chemical-logo.svg" alt="HYUNDAI CHEMICAL" /></a>
+      <div class="language-switch" role="group" aria-label="Language"><a data-lang-switch="ko" href="/msds" lang="ko" hreflang="ko">한국어</a><a data-lang-switch="en" href="/en/msds" lang="en" hreflang="en" aria-current="true">EN</a></div>
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/en/">Home</a>
+        <a href="/en/company">About Us</a>
+        <a href="/en/products">Products</a>
+        <a href="/en/business">Business</a>
+        <a href="/en/marine">Marine Supply</a>
+        <a href="/en/contact" class="nav-cta">Get a Quote</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <section class="page-hero premium-page-hero">
+      <div class="container page-hero-grid">
+        <div class="page-hero-copy reveal">
+          <span class="eyebrow">MSDS SUPPORT</span>
+          <h1>The right safety data sheet<br><strong>for your product</strong></h1>
+          <p>Our team will review your product and delivery details and respond with the relevant MSDS by email.</p>
+        </div>
+        <div class="page-hero-mark mark-compact business-hours-mark reveal" aria-hidden="true">
+          <span>BUSINESS HOURS</span>
+          <div class="business-hours-range">
+            <strong>08:30</strong>
+            <span class="hours-divider">—</span>
+            <strong>17:30</strong>
+          </div>
+          <small>MON — FRI · KST</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section contact-section premium-band">
+      <div class="container contact-grid">
+        <div class="section-heading reveal">
+          <h2>Material Safety Data Sheet<br>Request</h2>
+          <p>A delivery date or delivery note number helps us find the correct document. You may also enquire about a product you are considering purchasing.</p>
+          <dl class="contact-details">
+            <div><dt>Tel</dt><dd><a href="tel:+82527005888">+82-52-700-5888</a></dd></div>
+            <div><dt>Fax</dt><dd>+82-52-700-5880</dd></div>
+            <div><dt>Email</dt><dd><a href="mailto:hdchem0718@naver.com">hdchem0718@naver.com</a></dd></div>
+            <div><dt>Address</dt><dd>29, Jangsaengpo-ro 19beon-gil, Nam-gu, Ulsan, Korea</dd></div>
+            <div>
+              <dt>Hours (KST)</dt>
+              <dd class="hours-schedule">
+                <span><b>Mon–Fri</b><span class="hours-value">08:30~17:30</span></span>
+                <span><b>Saturday</b><span class="hours-value">08:30~12:00</span></span>
+                <span class="is-closed"><b>Sunday</b><span class="hours-value">Closed</span></span>
+              </dd>
+            </div>
+          </dl>
+        </div>
+
+        <form class="quote-form reveal" id="msds-form" action="/api/msds" method="post">
+          <div class="form-row">
+            <label>Company<input type="text" name="company" placeholder="Company" autocomplete="organization" maxlength="100" required /></label>
+            <label>Contact Name<input type="text" name="contactName" placeholder="Your name" autocomplete="name" maxlength="50" required /></label>
+          </div>
+          <div class="form-row">
+            <label>Phone<input type="tel" name="phone" placeholder="+82 10 0000 0000" autocomplete="tel" maxlength="30" required /></label>
+            <label>Email<input type="email" name="email" placeholder="name@company.com" autocomplete="email" maxlength="254" required /></label>
+          </div>
+          <label>Requested Product<input type="text" name="product" placeholder="e.g. Toluene, HC-2700" maxlength="200" required /></label>
+          <div class="form-row">
+            <label>Delivery Date (optional)<input type="date" name="deliveryDate" /></label>
+            <label>Delivery Note / Lot Number (optional)<input name="reference" maxlength="150" placeholder="Leave blank if unknown" /></label>
+          </div>
+          <label>Additional Details (optional)<textarea name="message" rows="4" maxlength="2000" placeholder="Please include the product specification, delivery location or product you are considering."></textarea></label>
+          <div class="form-honeypot" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+          <label class="form-consent"><input type="checkbox" name="privacyConsent" value="true" required /><span>I agree to the use of my information to review and respond to this MSDS request.</span></label>
+          <button class="btn hero-primary wide" type="submit" data-msds-submit>Send MSDS Request</button>
+          <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+          <small>Your information will be used only to review and respond to your MSDS request.</small>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-company">
+        <div class="footer-brand"><strong>HYUNDAI CHEMICAL</strong><span>HYUNDAI CHEMICAL CO.,LTD.</span></div>
+        <p class="footer-meta">Representative: Lee Sang-ik · 29, Jangsaengpo-ro 19beon-gil, Nam-gu, Ulsan, Korea<br>Tel <a href="tel:+82527005888">+82-52-700-5888</a> · Fax +82-52-700-5880 · <a href="mailto:hdchem0718@naver.com">hdchem0718@naver.com</a></p>
+      </div>
+      <p class="footer-copy">© <span data-current-year></span> HYUNDAI CHEMICAL. All rights reserved.</p>
+    </div>
+  </footer>
+  <script src="/translations.js?v=20260929-1"></script>
+  <script src="/i18n.js?v=20260929-1"></script>
+  <script src="/script.js?v=20260929-1"></script>
+  <script src="/msds.js?v=20260929-1"></script>
+</body>
+</html>

@@ -32,7 +32,22 @@ img{display:block;max-width:100%}
 .nav a[aria-current="page"]::after{right:0}
 .nav-cta{padding:12px 19px!important;border-radius:999px;background:var(--navy);color:#fff}
 .nav-cta[aria-current="page"]{background:var(--blue-deep)}
-.menu-toggle{display:none;border:0;background:none;color:var(--ink);font-size:26px}
+.menu-toggle{display:none;border:0;background:none;color:var(--ink);font-size:26px;order:3}
+.nav-wrap{gap:22px}
+.nav-wrap .brand{margin-right:auto;flex-shrink:0}
+.nav{order:1;gap:24px}
+.language-switch{order:2;display:flex;align-items:center;flex-shrink:0;border:1px solid #c5d8e7;border-radius:999px;padding:3px;gap:2px;font-size:12px;font-weight:750;background:#f3f8fc}
+.language-switch a{min-height:34px;min-width:42px;display:flex;align-items:center;justify-content:center;padding:6px 10px;border-radius:999px;color:#3b5871;white-space:nowrap}
+.language-switch a[aria-current="true"]{background:var(--navy);color:#fff}
+.language-switch a:focus-visible{outline:3px solid #4a9be1;outline-offset:2px}
+html[lang="en"] .home-hero h1{font-size:clamp(34px,4.2vw,54px);line-height:1.12;letter-spacing:-.035em}
+html[lang="en"] .page-hero-copy h1{font-size:clamp(32px,3.7vw,49px);letter-spacing:-.035em}
+html[lang="en"] .nav{gap:20px;font-size:13px}
+html[lang="en"] .product-card-actions{flex-wrap:wrap}
+html[lang="en"] .product-card-actions a{white-space:normal;text-align:center}
+html[lang="en"] .contact-details dt,html[lang="en"] .company-facts dt{min-width:100px}
+html[lang="en"] .facility-card strong{font-size:16px;line-height:1.4}
+html[lang="en"] .naver-map-label span{white-space:normal;max-width:300px}
 
 .hero{min-height:760px;padding-top:82px;background:linear-gradient(135deg,#f7fbff 0%,#eef5fb 46%,#e4eef7 100%);overflow:hidden;position:relative}
 .hero::before{content:"";position:absolute;width:580px;height:580px;border:100px solid rgba(79,141,206,.09);border-radius:50%;right:-230px;top:90px}
@@ -731,6 +746,9 @@ img{display:block;max-width:100%}
 .naver-map-label span{color:#5f7485;font-size:12px;white-space:nowrap}
 
 @media (max-width:900px){
+  .nav-wrap{gap:12px}
+  .language-switch{margin-left:auto}
+  html[lang="en"] .nav{gap:0;font-size:14px}
   .directions-grid{grid-template-columns:1fr}
   .directions-card{min-height:auto}
   .naver-map-shell{min-height:420px}

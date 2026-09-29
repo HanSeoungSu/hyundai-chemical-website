@@ -3,9 +3,23 @@
 from argparse import ArgumentParser
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+from urllib.parse import urlsplit, urlunsplit
 
 
 class NoCacheRequestHandler(SimpleHTTPRequestHandler):
+    def send_head(self):
+        # Match Cloudflare Pages' extensionless Korean and English page URLs.
+        original = self.path
+        url = urlsplit(original)
+        local = Path(self.translate_path(url.path))
+        if not local.suffix and not url.path.endswith('/') and local.with_suffix('.html').is_file():
+            self.path = urlunsplit(url._replace(path=url.path + '.html'))
+        try:
+            return super().send_head()
+        finally:
+            self.path = original
+
     def end_headers(self):
         self.send_header("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0")
         self.send_header("Pragma", "no-cache")

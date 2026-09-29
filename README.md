@@ -30,7 +30,7 @@
 ## 다음 작업
 1. 사업자등록번호 공개 시점 확정 후 반영
 2. 현재 반영된 제품명과 제품군 검수 및 공개 대상 확정
-3. 제조사별 MSDS를 재고프로그램에 등록하고 입고·출고 로트 연결 검수
+3. 회사 메일로 받은 MSDS 요청을 담당자가 확인하고 개별 회신
 4. 제품 및 현장 실제 사진 추가
 5. Cloudflare Pages 배포 후 견적문의 메일 발송환경 연결 및 실발송 확인
 6. 네이버/카카오 지도 연동
@@ -90,16 +90,17 @@
 - 공급 제품 확인 전에는 MSDS를 공개하지 않고 요청 폼으로 접수
 - 제품 가격 비노출 및 견적문의 연결
 
-## MSDS 요청·내부 연계
+## MSDS 요청 이메일 알림 (2026-09-28)
 - 제품 카드의 공개 PDF 링크 대신 `msds.html` 요청 폼으로 접수
 - 요청 메일에는 제품·납품일·거래명세서·회신처만 전달하고, 제조사·매입단가·내부 재고 정보는 노출하지 않음
-- 재고프로그램의 MSDS 요청함에서 실제 납품 로트와 제조사별 문서를 확인한 뒤 고객 이메일로 개별 회신
-- 동일 품목을 여러 제조사에서 공급할 수 있도록 입고 로트·제조사·문서 개정일·파일 해시를 내부 저장소에서 관리
+- 회사 메일에 요청 내용이 표 형태로 도착하며, 메일의 답장 주소는 요청 고객의 이메일로 지정
+- 재고프로그램과는 연결하지 않음. 담당자가 제품과 공급 내역을 확인한 뒤 개별 회신
+- 추후 견적·단가 프로그램 연계는 별도 작업으로 진행
 - 기존 웹 공개 PDF는 배포 대상에서 제외하고 내부 보관용 원본만 유지
 
 ## 견적문의·MSDS 요청 이메일 전송
 - `functions/api/quote.js`의 Cloudflare Pages Function이 견적문의 내용을 회사 이메일로 전달
-- `functions/api/msds.js`의 Cloudflare Pages Function은 MSDS 요청 JSON만 회사 메일로 전달하고 PDF·제조사·재고 정보는 전달하지 않음
+- `functions/api/msds.js`의 Cloudflare Pages Function은 MSDS 요청 알림 메일만 전달하며 별도 첨부파일은 생성하지 않음
 - 필수 입력값 검증, 개인정보 이용 동의, 봇 입력 방지용 숨김 필드 적용
 - 이메일 발송은 Resend API를 사용하며 API 키는 저장소가 아닌 Cloudflare의 암호화된 비밀값으로 설정
 - 필요한 배포 환경값: `RESEND_API_KEY`, `QUOTE_FROM_EMAIL`, `QUOTE_TO_EMAIL` (MSDS 전용 수신 주소가 필요하면 선택적으로 `MSDS_TO_EMAIL`)
@@ -112,6 +113,16 @@
 - 사이트 디자인과 동일한 `404.html` 오류 안내 페이지 추가
 - 대표 도메인 `https://www.hdchem.co.kr` 기준 canonical URL과 Open Graph URL 적용
 - `sitemap.xml`, `robots.txt` 및 Cloudflare Pages용 기본 보안 응답 헤더 적용
+
+## 한국어·영어 지원 (2026-09-29)
+- 한국어는 기존 주소, 영어는 `/en/` 이하에서 제공하며 모든 페이지 상단의 `한국어 / EN`으로 전환
+- 홈·회사소개·제품·사업분야·선용품·견적문의·MSDS 요청·404 안내를 두 언어로 제공
+- 제품명 한글/영문 검색, 단계별 제품 분류, 메일 폼과 결과 메시지를 선택한 언어로 표시
+- 제품 카드에서 MSDS를 요청한 뒤 언어를 바꾸어도 선택한 제품을 유지
+- 회사 알림 메일에는 요청 언어를 표시하며 고객 연락처를 답장 주소로 연결
+- 번역 원본은 `locales/en.json`; 한국어 HTML 또는 번역 수정 후 `node scripts/build-locales.mjs` 실행
+- 생성된 `en/*.html`, `translations.js`, `sitemap.xml`은 함께 커밋. 운영 서버는 정적 파일을 제공하며 외부 번역 API를 사용하지 않음
+- `node scripts/build-locales.mjs --check`로 번역 누락과 생성 파일 일치 여부 확인
 
 ## 네이버 지도 연동
 - 회사소개 하단에 오시는 길, 주소, 대표전화, 영업시간 및 네이버 지도 연결 영역 적용
@@ -126,18 +137,20 @@
 - `products.html`: 제품 검색 및 MSDS
 - `marine.html`: 선용품
 - `contact.html`: 견적문의 및 회사 연락처
+- `msds.html`: 회사 메일로 MSDS 요청 접수
+- `en/`: 각 페이지의 영문판
 - `404.html`: 존재하지 않는 주소 안내
 
 ## 로컬 실행
-가장 간단하게 `index.html`을 브라우저에서 열어도 됩니다.
-
-로컬 서버를 사용한다면 프로젝트 폴더에서:
+언어별 주소와 공통 파일을 함께 확인하려면 프로젝트 폴더에서 미리보기 서버를 실행합니다:
 
 ```bash
-python -m http.server 8080
+python preview-server.py --port 8080
 ```
 
-그 다음 브라우저에서 `http://localhost:8080` 접속.
+브라우저에서 `http://localhost:8080/` 또는 `http://localhost:8080/en/` 접속. 로컬 정적 미리보기에서는 메일이 발송되지 않습니다.
+
+검증: `node --test tests/msds-api.test.mjs`, Playwright 설치 환경에서 `node tests/site-browser.test.cjs`. 브라우저 검증은 요청을 가로채어 테스트하므로 실제 메일을 발송하지 않습니다.
 
 ## 사내 네트워크 공유 미리보기
 

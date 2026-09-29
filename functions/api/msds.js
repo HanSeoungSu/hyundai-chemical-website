@@ -1,4 +1,4 @@
-// Only a request is emailed. Inventory, suppliers and documents never leave the internal store here.
+// Email notification only. No inventory connection or automatic document delivery.
 const MAX_BYTES = 16000;
 const reply = (body, status = 200) => new Response(JSON.stringify(body), {
   status, headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' },
@@ -46,19 +46,19 @@ export async function onRequestPost({ request, env }) {
       || !/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(inquiry.email)) return reply({ ok: false, message: '필수 항목과 개인정보 이용 동의를 확인해 주세요.' }, 400);
   if (inquiry.deliveryDate && (!/^\d{4}-\d{2}-\d{2}$/.test(inquiry.deliveryDate) || Number.isNaN(Date.parse(inquiry.deliveryDate)) || new Date(inquiry.deliveryDate).toISOString().slice(0, 10) !== inquiry.deliveryDate)) return reply({ ok: false, message: '납품일을 확인해 주세요.' }, 400);
   if (!env.RESEND_API_KEY || !env.QUOTE_FROM_EMAIL) return reply({ ok: false, message: '온라인 접수가 준비 중입니다. 052) 700-5888로 연락해 주세요.' }, 503);
-  // Stable attachment across retries: Resend requires an identical body for the idempotency key.
-  const document = { schema: 'hdchem.msds.request.v1', requestId, ...inquiry, privacyConsent: true };
+  // Keep retries identical so a network timeout does not create duplicate notifications.
+  const language = data.language === 'en' ? 'English' : '한국어';
   const labels = { company: '회사명', contactName: '담당자', phone: '연락처', email: '수신 이메일', product: '제품', deliveryDate: '납품일', reference: '명세서·로트번호', message: '추가 요청' };
-  const text = `MSDS 요청\n접수번호: ${requestId}\n` + Object.entries(labels).map(([key, label]) => `${label}: ${inquiry[key] || '-'}`).join('\n');
-  const attachment = btoa(String.fromCharCode(...new TextEncoder().encode(JSON.stringify(document))));
+  const text = `홈페이지 MSDS 요청\n접수번호: ${requestId}\n요청 언어: ${language}\n` + Object.entries(labels).map(([key, label]) => `${label}: ${inquiry[key] || '-'}`).join('\n')
+    + '\n\n담당자가 요청 제품과 공급 내역을 확인한 뒤 회신해 주세요. 이 메일에 답장하면 요청 고객에게 전달됩니다.';
+  const rows = Object.entries(labels).map(([key, label]) => `<tr><th style="padding:12px;border:1px solid #d7e0e7;text-align:left;background:#eef4f8;width:125px">${label}</th><td style="padding:12px;border:1px solid #d7e0e7;white-space:pre-wrap">${escape(inquiry[key] || '-')}</td></tr>`).join('');
   try {
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST', signal: AbortSignal.timeout(20000),
       headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json', 'Idempotency-Key': `msds-${requestId}` },
       body: JSON.stringify({ from: env.QUOTE_FROM_EMAIL, to: [env.MSDS_TO_EMAIL || env.QUOTE_TO_EMAIL || 'hdchem0718@naver.com'],
         reply_to: inquiry.email, subject: `[MSDS 요청] ${inquiry.company} · ${inquiry.product}`, text,
-        html: `<div style="font-family:Arial,'Malgun Gothic',sans-serif;white-space:pre-wrap">${escape(text)}</div><p>재고프로그램 MSDS 요청함에서 납품 내역과 수신자를 확인해 주세요.</p>`,
-        attachments: [{ filename: 'hdchem-msds-request.json', content: attachment, content_type: 'application/json' }],
+        html: `<div style="max-width:720px;font-family:Arial,'Malgun Gothic',sans-serif;color:#172d40;line-height:1.6"><h1>홈페이지 MSDS 요청</h1><p>접수번호: ${requestId}<br>요청 언어: ${language}</p><table style="width:100%;border-collapse:collapse">${rows}</table><p>담당자가 요청 제품과 공급 내역을 확인한 뒤 회신해 주세요.<br>이 메일에 답장하면 요청 고객에게 전달됩니다.</p></div>`,
       }),
     });
     if (!response.ok) return reply({ ok: false, message: '접수 결과를 확인하지 못했습니다. 다시 시도하거나 대표전화로 연락해 주세요.' }, 502);

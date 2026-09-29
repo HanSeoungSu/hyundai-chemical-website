@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Contact Hyundai Chemical for product and delivery quotations. Find our phone number, email and business hours." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#061827" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="HYUNDAI CHEMICAL CO., LTD." />
+  <meta property="og:title" content="Get a Quote | HYUNDAI CHEMICAL" />
+  <meta property="og:description" content="Request a product or delivery quotation and find our contact details and business hours." />
+  <meta property="og:url" content="https://www.hdchem.co.kr/en/contact" />
+  <meta name="twitter:card" content="summary" />
+  <title>Get a Quote | HYUNDAI CHEMICAL</title>
+  <link rel="canonical" href="https://www.hdchem.co.kr/en/contact" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/styles.css?v=20260929-1" />
+  <link rel="alternate" hreflang="ko" href="https://www.hdchem.co.kr/contact" />
+  <link rel="alternate" hreflang="en" href="https://www.hdchem.co.kr/en/contact" />
+  <link rel="alternate" hreflang="x-default" href="https://www.hdchem.co.kr/contact" />
+</head>
+<body class="premium-shell">
+  <header class="site-header" id="top">
+    <div class="container nav-wrap">
+      <a class="brand" href="/en/" aria-label="Hyundai Chemical home"><img src="/assets/hyundai-chemical-logo.svg" alt="HYUNDAI CHEMICAL" /></a>
+      <div class="language-switch" role="group" aria-label="Language"><a data-lang-switch="ko" href="/contact" lang="ko" hreflang="ko">한국어</a><a data-lang-switch="en" href="/en/contact" lang="en" hreflang="en" aria-current="true">EN</a></div>
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/en/">Home</a>
+        <a href="/en/company">About Us</a>
+        <a href="/en/products">Products</a>
+        <a href="/en/business">Business</a>
+        <a href="/en/marine">Marine Supply</a>
+        <a href="/en/contact" class="nav-cta" aria-current="page">Get a Quote</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <section class="page-hero premium-page-hero">
+      <div class="container page-hero-grid">
+        <div class="page-hero-copy reveal">
+          <span class="eyebrow">CONTACT US</span>
+          <h1>Products or deliveries?<br><strong>Let's talk.</strong></h1>
+          <p>Get in touch by phone or email, or send an enquiry below.</p>
+        </div>
+        <div class="page-hero-mark mark-compact business-hours-mark reveal" aria-hidden="true">
+          <span>BUSINESS HOURS</span>
+          <div class="business-hours-range">
+            <strong>08:30</strong>
+            <span class="hours-divider">—</span>
+            <strong>17:30</strong>
+          </div>
+          <small>MON — FRI · KST</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section contact-section premium-band">
+      <div class="container contact-grid">
+        <div class="section-heading reveal">
+          <h2>Product &amp; Delivery<br>Get a Quote</h2>
+          <p>Tell us the products and quantities you need. Our team will review your enquiry and get back to you.</p>
+          <dl class="contact-details">
+            <div><dt>Tel</dt><dd><a href="tel:+82527005888">+82-52-700-5888</a></dd></div>
+            <div><dt>Fax</dt><dd>+82-52-700-5880</dd></div>
+            <div><dt>Email</dt><dd><a href="mailto:hdchem0718@naver.com">hdchem0718@naver.com</a></dd></div>
+            <div><dt>Address</dt><dd>29, Jangsaengpo-ro 19beon-gil, Nam-gu, Ulsan, Korea</dd></div>
+            <div>
+              <dt>Hours (KST)</dt>
+              <dd class="hours-schedule">
+                <span><b>Mon–Fri</b><span class="hours-value">08:30~17:30</span></span>
+                <span><b>Saturday</b><span class="hours-value">08:30~12:00</span></span>
+                <span class="is-closed"><b>Sunday</b><span class="hours-value">Closed</span></span>
+              </dd>
+            </div>
+          </dl>
+        </div>
+
+        <form class="quote-form reveal" id="quote-form" action="/api/quote" method="post">
+          <div class="form-row">
+            <label>Company<input type="text" name="company" placeholder="Company" autocomplete="organization" maxlength="100" required /></label>
+            <label>Contact Name<input type="text" name="contactName" placeholder="Your name" autocomplete="name" maxlength="50" required /></label>
+          </div>
+          <div class="form-row">
+            <label>Phone<input type="tel" name="phone" placeholder="+82 10 0000 0000" autocomplete="tel" maxlength="30" required /></label>
+            <label>Email<input type="email" name="email" placeholder="name@company.com" autocomplete="email" maxlength="254" required /></label>
+          </div>
+          <label>Products Required<input type="text" name="product" placeholder="e.g. Toluene, HC-2700" maxlength="200" required /></label>
+          <label>Enquiry Details<textarea name="message" rows="5" placeholder="Please include quantities, preferred delivery dates and any other details." maxlength="3000" required></textarea></label>
+          <div class="form-honeypot" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+          <label class="form-consent"><input type="checkbox" name="privacyConsent" value="true" required /><span>I agree to the use of my information to review and respond to this enquiry.</span></label>
+          <button class="btn hero-primary wide" type="submit" data-quote-submit>Send Enquiry</button>
+          <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+          <small>Your information will be used only to review and respond to your enquiry.</small>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-company">
+        <div class="footer-brand"><strong>HYUNDAI CHEMICAL</strong><span>HYUNDAI CHEMICAL CO.,LTD.</span></div>
+        <p class="footer-meta">Representative: Lee Sang-ik · 29, Jangsaengpo-ro 19beon-gil, Nam-gu, Ulsan, Korea<br>Tel <a href="tel:+82527005888">+82-52-700-5888</a> · Fax +82-52-700-5880 · <a href="mailto:hdchem0718@naver.com">hdchem0718@naver.com</a></p>
+      </div>
+      <p class="footer-copy">© <span data-current-year></span> HYUNDAI CHEMICAL. All rights reserved.</p>
+    </div>
+  </footer>
+  <script src="/translations.js?v=20260929-1"></script>
+  <script src="/i18n.js?v=20260929-1"></script>
+  <script src="/script.js?v=20260929-1"></script>
+</body>
+</html>
