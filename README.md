@@ -135,8 +135,8 @@
 - 문서 전체 폭뿐 아니라 `overflow:hidden` 내부의 실제 텍스트 잘림 및 홈 구성요소 배치도 검사. 테스트는 로컬 정적 서버를 사용하며 메일을 발송하지 않음
 
 ## 모바일 로고 가독성 보완 (2026-09-29)
-- 900px 이하에서는 파란 C 모티프와 크게 표시한 회사명을 나란히 배치하는 벡터 SVG 사용. 한글/영문 전용 표시를 제공하며 데스크톱 원본 로고 파일은 보존
-- 상단 배경을 불투명 흰색으로 고정하고 `color-scheme: only light` 및 동일 meta 태그로 브라우저 자동 다크 변환에 의한 색상 왜곡 방지 ([Chrome 공식 안내](https://developer.chrome.com/blog/auto-dark-theme#how_to_opt-out_of_auto_dark_theme)). 강제 색상 변경 기능은 브라우저별 차이가 있을 수 있음
+- 900px 이하에서는 원본처럼 파란 원을 가로지르는 `HYUNDAI CHEMICAL` 벡터 SVG 사용. 왼쪽 원은 이어지고, 오른쪽은 실제 글자 높이(14 SVG 단위)만큼 수평으로 절개. 흰 글자와 어두운 `N`을 유지하며 데스크톱 원본 로고 파일은 보존
+- 모바일 상단 배경을 불투명 남색으로 고정하고 `color-scheme: only light` 및 동일 meta 태그로 브라우저 자동 다크 변환에 의한 색상 왜곡 방지 ([Chrome 공식 안내](https://developer.chrome.com/blog/auto-dark-theme#how_to_opt-out_of_auto_dark_theme)). 강제 색상 변경 기능은 브라우저별 차이가 있을 수 있음
 - 모바일 검증에 320/390px 한글·영문 로고의 메뉴 간격 및 자동 다크 모드 전후 상단 스크린샷 동일성 검사 추가
 
 ## 네이버 지도 연동

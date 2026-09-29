@@ -7,6 +7,6 @@
   <text x="82" y="50" fill="#ffffff" font-family="Arial,sans-serif" font-size="19" font-weight="800" letter-spacing=".35">DAI</text>
   <circle cx="103" cy="44" r="35" fill="none" stroke="#6fa9df" stroke-width="7"/>
   <text x="65" y="50" fill="#14283e" stroke="#ffffff" stroke-width="1.1" paint-order="stroke" font-family="Arial,sans-serif" font-size="19" font-weight="800" letter-spacing=".35">N</text>
-  <rect x="132" y="31" width="28" height="26" fill="#061827"/>
+  <rect x="132" y="36" width="28" height="14" fill="#061827"/>
   <text x="122" y="50" fill="#ffffff" font-family="Arial,sans-serif" font-size="19" font-weight="800" letter-spacing=".35">CHEMICAL</text>
 </svg>
