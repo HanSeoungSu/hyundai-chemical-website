@@ -1,0 +1,44 @@
+# CAS catalog verification
+
+Reviewed: 2026-09-30. The site displays CAS numbers for 27 catalog cards, representing 18 identified substances plus the three component numbers on the SM210 mixed-resin card. Search accepts the formatted number, digits without hyphens, and a `CAS No.` prefix in Korean and English.
+
+## Scope and source
+
+`data/cas-catalog.json` is the editable source of catalog identifiers. The static locale builder renders the numbers into both HTML catalogs and the SM210 detail page. The public pages remain legible and indexable without JavaScript. The build validates CAS check digits and that every mapped card exists.
+
+The following identifiers were checked on 2026-09-30 against the corresponding US National Library of Medicine PubChem records using the [official PUG REST property API](https://pubchem.ncbi.nlm.nih.gov/docs/pug-rest) (`/rest/pug/compound/name/{CAS}/property/IUPACName,MolecularFormula/JSON`). The returned compound identities matched the listed substance names. This confirms *substance identity*, not the composition of every supplier batch or a supplied product's SDS.
+
+| Catalog description | CAS No. | PubChem CID |
+| --- | --- | ---: |
+| IPA / isopropanol | 67-63-0 | [3776](https://pubchem.ncbi.nlm.nih.gov/compound/3776) |
+| MEK / butanone | 78-93-3 | [6569](https://pubchem.ncbi.nlm.nih.gov/compound/6569) |
+| Chloroform | 67-66-3 | [6212](https://pubchem.ncbi.nlm.nih.gov/compound/6212) |
+| Acetone | 67-64-1 | [180](https://pubchem.ncbi.nlm.nih.gov/compound/180) |
+| Glycerol | 56-81-5 | [753](https://pubchem.ncbi.nlm.nih.gov/compound/753) |
+| MEG / ethylene glycol | 107-21-1 | [174](https://pubchem.ncbi.nlm.nih.gov/compound/174) |
+| Hydrogen chloride (hydrochloric acid main ingredient) | 7647-01-0 | [313](https://pubchem.ncbi.nlm.nih.gov/compound/313) |
+| Water / distilled water | 7732-18-5 | [962](https://pubchem.ncbi.nlm.nih.gov/compound/962) |
+| Sodium hypochlorite (main ingredient) | 7681-52-9 | [23665760](https://pubchem.ncbi.nlm.nih.gov/compound/23665760) |
+| Sodium hydroxide (main ingredient, including aqueous variants) | 1310-73-2 | [14798](https://pubchem.ncbi.nlm.nih.gov/compound/14798) |
+| Methanol | 67-56-1 | [887](https://pubchem.ncbi.nlm.nih.gov/compound/887) |
+| Toluene | 108-88-3 | [1140](https://pubchem.ncbi.nlm.nih.gov/compound/1140) |
+| Phosphoric acid (main ingredient) | 7664-38-2 | [1004](https://pubchem.ncbi.nlm.nih.gov/compound/1004) |
+| Sodium carbonate / soda ash | 497-19-8 | [10340](https://pubchem.ncbi.nlm.nih.gov/compound/10340) |
+| Potassium hydroxide / KOH (main ingredient) | 1310-58-3 | [14797](https://pubchem.ncbi.nlm.nih.gov/compound/14797) |
+| Silver nitrate (2% AgNO3 solution main ingredient) | 7761-88-8 | [24470](https://pubchem.ncbi.nlm.nih.gov/compound/24470) |
+| Potassium permanganate / KMnO4 | 7722-64-7 | [516875](https://pubchem.ncbi.nlm.nih.gov/compound/516875) |
+| Nitric acid (20% solution main ingredient) | 7697-37-2 | [944](https://pubchem.ncbi.nlm.nih.gov/compound/944) |
+
+For mixtures and solutions, the page explicitly says **main ingredient CAS**, rather than assigning that identifier to the complete solution. Commercial codes, different hydrate/salt forms, and formulations remain unnumbered until the exact supplied product is confirmed against a manufacturer document or container label. In particular: MC, BDG, 141B, DINP, HC-2750, ammonia solution, EA, DOP, BC, YK-D40, NEO-T, xylene, TCS products, Starclon, METABISULPHITE, citric acid, oxalic acid, EDTA, sodium thiosulfate, CL, detergents and thinners. Laboratory tools and other articles are not assigned chemical CAS numbers.
+
+## TRILITE SM210
+
+Source: [Samyang's official library](https://www.samyangtrilite.com/kr/support/library), Korean MSDS `KR_MSDS_TRILITE SM210.pdf`, management number `AA04566-0000000007`, revision 4.0 dated 2023-02-10; official [manufacturer-hosted file](https://syapi.samyang.com/apis/kr/downloadFileNolog?parent_table=trilitelibrary&parent_lang=KR&parent_idx=10271). Section 3 spans pages 1–2:
+
+| MSDS ingredient | CAS No. |
+| --- | --- |
+| Sulfonated cation exchange resin component | 69011-20-7 |
+| Quaternized hydroxide anion exchange resin component | 69011-18-3 |
+| Water | 7732-18-5 |
+
+SM210 is labeled as a mixture in Section 1. It has **no single product CAS asserted** on the site. The three component numbers appear as such in visible HTML and Product `additionalProperty`, not as a single Product `identifier`. The MSDS remains request-only on this distributor website; the PDF is used as an internal verification source and is not copied into the public site.

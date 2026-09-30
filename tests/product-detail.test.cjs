@@ -55,6 +55,8 @@ const server = http.createServer(async (req, res) => {
         assert.equal(product.brand.name, 'TRILITE');
         assert.equal(product.model, 'SM210');
         assert.equal(product.manufacturer.name, lang === 'en' ? 'Samyang Corporation' : '삼양사');
+        assert.deepEqual(product.additionalProperty.map(item => item.value), ['69011-20-7', '69011-18-3', '7732-18-5']);
+        assert.equal(product.identifier, undefined, 'SM210 is a mixture without a verified single product CAS');
         for (const field of ['offers', 'review', 'aggregateRating', 'gtin']) assert.equal(product[field], undefined, `Do not invent ${field}`);
         const crumbs = data['@graph'].find(item => item['@type'] === 'BreadcrumbList').itemListElement;
         assert.equal(crumbs.at(-1).item, publicUrl);
@@ -65,6 +67,7 @@ const server = http.createServer(async (req, res) => {
         assert.ok(values.includes('≤ 1.6'));
         assert.ok(values.includes('≤ 60 °C'));
         assert.ok(values.includes('0–14'));
+        for (const cas of ['69011-20-7', '69011-18-3', '7732-18-5']) assert.ok(values.includes(cas), cas);
         if ([390, 1440].includes(width)) {
           await page.screenshot({ path: path.join(shots, `${lang}-${width}-full.png`), fullPage: true });
           await page.screenshot({ path: path.join(shots, `${lang}-${width}-hero.png`) });
@@ -92,6 +95,17 @@ const server = http.createServer(async (req, res) => {
         await page.locator('#product-list .product-card:visible .product-detail-link').click();
         assert.equal(new URL(page.url()).pathname, `${prefix}/${slug}`);
       }
+      for (const keyword of ['69011-20-7', 'CAS No. 69011-18-3', '69011183']) {
+        await page.goto(`${origin}${prefix}/products`);
+        await page.locator('#product-search').fill(keyword);
+        assert.equal(await page.locator('#product-list .product-card:visible').count(), 1, keyword);
+        await page.locator('#product-list .product-card:visible .product-detail-link').click();
+        assert.equal(new URL(page.url()).pathname, `${prefix}/${slug}`);
+      }
+      await page.goto(`${origin}${prefix}/products`);
+      await page.locator('#product-search').fill('108883');
+      assert.equal(await page.locator('#product-list .product-card:visible').count(), 1);
+      assert.match(await page.locator('#product-list .product-card:visible').innerText(), /108-88-3/);
       // Navigation works without JavaScript; the product content is static HTML.
       const plain = await browser.newContext({ javaScriptEnabled: false });
       const plainPage = await plain.newPage();
@@ -99,7 +113,7 @@ const server = http.createServer(async (req, res) => {
       await plainPage.locator('.featured-product').click();
       assert.equal(new URL(plainPage.url()).pathname, `${prefix}/${slug}`);
       assert.ok(await plainPage.locator('#product-title').isVisible());
-      assert.ok(await plainPage.locator('.detail-spec-table').isVisible());
+      assert.ok(await plainPage.locator('.detail-spec-table').first().isVisible());
       await plain.close();
     }
     await page.goto(`${origin}/contact?product=${encodeURIComponent('<img src=x onerror=alert(1)>')}`);

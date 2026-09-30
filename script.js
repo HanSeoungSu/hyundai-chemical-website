@@ -108,12 +108,13 @@ productCards.forEach((card) => {
   if (subcategoryLabel) subcategoryLabel.textContent = t(subcategory);
   const name = card.querySelector('h3')?.textContent.trim() || '';
   // Search both languages while keeping category identifiers stable.
-  card.dataset.search += ` ${name} ${english(name)} ${english(subcategory)}`;
+  card.dataset.search += ` ${name} ${english(name)} ${english(subcategory)} ${card.dataset.cas ?? ''}`;
 });
 
 const normalizeSearchText = (value) => value
   .toLocaleLowerCase('ko-KR')
-  .replace(/[\s\-·()]/g, '');
+  .replace(/^(?:cas\s*(?:no\.?|number)?\s*[:：]?\s*)/i, '')
+  .replace(/[^\p{L}\p{N}]/gu, '');
 
 const productNameCollator = new Intl.Collator(language === 'en' ? ['en-US', 'ko-KR'] : ['ko-KR', 'en-US'], {
   numeric: true,

@@ -6,12 +6,38 @@ import path from 'node:path';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const pages = ['index', 'company', 'products', 'products/trilite-sm210', 'business', 'marine', 'contact', 'msds', '404'];
-const version = '20260930-1';
+const version = '20260930-2';
 const dictionary = JSON.parse(await readFile(path.join(root, 'locales/en.json'), 'utf8'));
+const casCatalog = JSON.parse(await readFile(path.join(root, 'data/cas-catalog.json'), 'utf8'));
 const missing = new Set();
 const normalize = value => value.replace(/\s+/g, ' ').trim();
 const decode = value => value.replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n))).replaceAll('&amp;', '&').replaceAll('&quot;', '"').replaceAll('&nbsp;', ' ');
 const escape = value => value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+function validCas(value) {
+  if (!/^\d{2,7}-\d{2}-\d$/.test(value)) return false;
+  const digits = value.replaceAll('-', '');
+  return [...digits.slice(0, -1)].reverse().reduce((sum, digit, index) => sum + Number(digit) * (index + 1), 0) % 10 === Number(digits.at(-1));
+}
+for (const item of Object.values(casCatalog.substances)) if (!validCas(item.cas) || !item.cid) throw new Error(`Invalid substance CAS: ${item.cas}`);
+for (const item of Object.values(casCatalog.details)) for (const component of item.components) if (!validCas(component.cas)) throw new Error(`Invalid component CAS: ${component.cas}`);
+function renderCatalogCas(card) {
+  let rendered = card.replace(/\sdata-cas="[^"]*"/, '').replace(/\s*<p class="product-cas">[\s\S]*?<\/p>/, '');
+  const name = rendered.match(/<h3>([^<]+)<\/h3>/)?.[1];
+  const entry = casCatalog.catalog[name];
+  if (!entry) return rendered;
+  const numbers = entry.scope === 'components'
+    ? casCatalog.details[entry.detail]?.components.map(item => item.cas)
+    : [casCatalog.substances[entry.substance]?.cas];
+  if (!numbers?.length || numbers.some(number => !validCas(number))) throw new Error(`Incomplete CAS mapping for ${name}`);
+  const label = entry.scope === 'components' ? 'SM210 구성성분 CAS No.' : entry.scope === 'ingredient' ? '주성분 CAS No.' : '물질 CAS No.';
+  rendered = rendered.replace('<article ', `<article data-cas="${numbers.join(' ')}" `);
+  return rendered.replace(/(<h3>[^<]+<\/h3>)/, `$1\n              <p class="product-cas"><span>${label}</span> <strong>${numbers.join(' · ')}</strong></p>`);
+}
+function renderSm210Cas() {
+  const detail = casCatalog.details['trilite-sm210'];
+  const rows = detail.components.map(item => `<tr><th scope="row">${escape(item.labelKo)}</th><td>${item.cas}</td></tr>`).join('\n                ');
+  return `<div class="detail-cas-block" id="cas-numbers"><h3>SM210 구성성분 CAS No.</h3><p>SM210은 혼합제품이며, 아래 번호는 제품 전체가 아닌 각 구성성분의 CAS 번호입니다.</p><table class="detail-spec-table detail-cas-table"><caption>삼양 공식 MSDS 3항의 구성성분</caption><tbody>\n                ${rows}\n              </tbody></table><p class="detail-note">삼양 공식 MSDS 개정일: ${detail.sourceRevision}. 실제 공급 제품의 자료는 MSDS 요청으로 확인해 주세요.</p></div>`;
+}
 function translate(value) {
   const key = normalize(decode(value));
   if (!(key in dictionary)) { if (/[가-힣]/.test(key)) missing.add(key); return value; }
@@ -55,6 +81,22 @@ for (const page of pages) {
     const label = card.match(/<small>([^<]+)<\/small>/)?.[1];
     return label ? card.replace('<article ', `<article data-subcategory="${label}" `) : card;
   });
+  if (page === 'products') {
+    const names = [...ko.matchAll(/<article[^>]*class="product-card[^>]*>[\s\S]*?<h3>([^<]+)<\/h3>/g)].map(match => match[1]);
+    for (const name of Object.keys(casCatalog.catalog)) if (!names.includes(name)) throw new Error(`CAS catalog item missing from products page: ${name}`);
+    ko = ko.replace(/<article[^>]*class="product-card[^>]*>[\s\S]*?<\/article>/g, renderCatalogCas);
+  }
+  if (page === 'products/trilite-sm210') {
+    ko = ko.replace(/(<!-- CAS_DETAILS_START -->)[\s\S]*?(<!-- CAS_DETAILS_END -->)/, `$1\n          ${renderSm210Cas()}\n          $2`);
+    ko = ko.replace(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/, (_, content) => {
+      const data = JSON.parse(content);
+      const product = data['@graph'].find(item => item['@type'] === 'Product');
+      product.additionalProperty = casCatalog.details['trilite-sm210'].components.map(item => ({
+        '@type': 'PropertyValue', name: '구성성분 CAS No.', description: item.labelKo, value: item.cas,
+      }));
+      return `<script type="application/ld+json">\n${JSON.stringify(data, null, 2)}\n  </script>`;
+    });
+  }
   ko = ko.replace(/"availableLanguage": "ko"/g, '"availableLanguage": ["ko", "en"]');
   outputs.set(`${page}.html`, ko);
   let en = ko.replace('lang="ko"', 'lang="en"');

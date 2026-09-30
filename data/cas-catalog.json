@@ -1,0 +1,59 @@
+{
+  "substances": {
+    "isopropanol": { "cas": "67-63-0", "cid": 3776 },
+    "butanone": { "cas": "78-93-3", "cid": 6569 },
+    "chloroform": { "cas": "67-66-3", "cid": 6212 },
+    "acetone": { "cas": "67-64-1", "cid": 180 },
+    "glycerol": { "cas": "56-81-5", "cid": 753 },
+    "ethylene-glycol": { "cas": "107-21-1", "cid": 174 },
+    "hydrogen-chloride": { "cas": "7647-01-0", "cid": 313 },
+    "water": { "cas": "7732-18-5", "cid": 962 },
+    "sodium-hypochlorite": { "cas": "7681-52-9", "cid": 23665760 },
+    "sodium-hydroxide": { "cas": "1310-73-2", "cid": 14798 },
+    "methanol": { "cas": "67-56-1", "cid": 887 },
+    "toluene": { "cas": "108-88-3", "cid": 1140 },
+    "phosphoric-acid": { "cas": "7664-38-2", "cid": 1004 },
+    "sodium-carbonate": { "cas": "497-19-8", "cid": 10340 },
+    "potassium-hydroxide": { "cas": "1310-58-3", "cid": 14797 },
+    "silver-nitrate": { "cas": "7761-88-8", "cid": 24470 },
+    "potassium-permanganate": { "cas": "7722-64-7", "cid": 516875 },
+    "nitric-acid": { "cas": "7697-37-2", "cid": 944 }
+  },
+  "catalog": {
+    "IPA": { "substance": "isopropanol", "scope": "substance" },
+    "MEK": { "substance": "butanone", "scope": "substance" },
+    "클로로포롬": { "substance": "chloroform", "scope": "substance" },
+    "아세톤": { "substance": "acetone", "scope": "substance" },
+    "글리세린": { "substance": "glycerol", "scope": "substance" },
+    "MEG": { "substance": "ethylene-glycol", "scope": "substance" },
+    "염산": { "substance": "hydrogen-chloride", "scope": "ingredient" },
+    "증류수": { "substance": "water", "scope": "substance" },
+    "차아염소산나트륨": { "substance": "sodium-hypochlorite", "scope": "ingredient" },
+    "가성소다": { "substance": "sodium-hydroxide", "scope": "ingredient" },
+    "메탄올": { "substance": "methanol", "scope": "substance" },
+    "톨루엔": { "substance": "toluene", "scope": "substance" },
+    "인산": { "substance": "phosphoric-acid", "scope": "ingredient" },
+    "소다회": { "substance": "sodium-carbonate", "scope": "substance" },
+    "KOH": { "substance": "potassium-hydroxide", "scope": "ingredient" },
+    "증류수4L(덕산)": { "substance": "water", "scope": "substance" },
+    "메탄올500ML(Matsunoen)": { "substance": "methanol", "scope": "substance" },
+    "메탄올4L(덕산)": { "substance": "methanol", "scope": "substance" },
+    "메탄올500ML(덕산)": { "substance": "methanol", "scope": "substance" },
+    "메탄올1L(JUNSEI)": { "substance": "methanol", "scope": "substance" },
+    "2% AGNO3": { "substance": "silver-nitrate", "scope": "ingredient" },
+    "KMNO4": { "substance": "potassium-permanganate", "scope": "substance" },
+    "질산 20%": { "substance": "nitric-acid", "scope": "ingredient" },
+    "이온교환수지": { "detail": "trilite-sm210", "scope": "components" }
+  },
+  "details": {
+    "trilite-sm210": {
+      "source": "https://syapi.samyang.com/apis/kr/downloadFileNolog?parent_table=trilitelibrary&parent_lang=KR&parent_idx=10271",
+      "sourceRevision": "2023-02-10",
+      "components": [
+        { "labelKo": "양이온교환수지 성분", "labelEn": "Cation exchange resin component", "cas": "69011-20-7" },
+        { "labelKo": "음이온교환수지 성분", "labelEn": "Anion exchange resin component", "cas": "69011-18-3" },
+        { "labelKo": "물", "labelEn": "Water", "cas": "7732-18-5" }
+      ]
+    }
+  }
+}
