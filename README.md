@@ -139,7 +139,7 @@
 - 한글·영문 제목/설명, canonical, hreflang, 제품/탐색 경로 구조화 데이터, 사이트맵 추가. 가격·리뷰·평점은 생성하지 않으며 검색 노출/리치 결과를 보장하지 않음
 - `product-detail.css`는 상세 페이지와 제품 목록에만 연결. 로고·일반 페이지 디자인 유지
 - `docs/trilite-sm210-sources.md`에 근거와 제외한 조건부 수치 기록. 제조사 PDF는 공개 배포하지 않고 공식 원문으로 연결
-- CAS 번호는 `data/cas-catalog.json`에서 관리하며 확인된 28개 제품 카드와 상세페이지에 한영 병기. 제품명과 CAS 번호 검색을 지원하고, 혼합제품 SM210은 성분별 번호로 명시. 출처와 추가 확인이 필요한 품목은 `docs/cas-catalog-sources.md` 참조. MSDS 제공은 기존 요청 방식 유지
+- CAS 번호는 `data/cas-catalog.json`에서 관리하며 확인된 단일 물질·주성분·형태별 제품 카드에 한영 병기. 혼합제품 SM210의 성분별 CAS 번호는 목록·상세페이지·검색 데이터·구조화 데이터에 공개하지 않음. 출처와 추가 확인이 필요한 품목은 `docs/cas-catalog-sources.md` 참조. MSDS 제공은 기존 요청 방식 유지
 - `node tests/product-detail.test.cjs`: 모바일/PC, 한영 전환, 검색 연결, 무자바스크립트 접근, 견적·MSDS 입력 연결 및 SEO 검증. 실제 메일 발송 없음
 - SM210 상세페이지는 공개 배포됨. 검색엔진 제출은 추후 진행
 

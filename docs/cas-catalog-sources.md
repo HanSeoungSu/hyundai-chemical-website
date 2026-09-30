@@ -51,4 +51,4 @@ Source: [Samyang's official library](https://www.samyangtrilite.com/kr/support/l
 | Quaternized hydroxide anion exchange resin component | 69011-18-3 |
 | Water | 7732-18-5 |
 
-SM210 is labeled as a mixture in Section 1. It has **no single product CAS asserted** on the site. The three component numbers appear as such in visible HTML and Product `additionalProperty`, not as a single Product `identifier`. The MSDS remains request-only on this distributor website; the PDF is used as an internal verification source and is not copied into the public site.
+SM210 is labeled as a mixture in Section 1. Its component CAS numbers are retained here as source-verification notes only; they are not displayed in the public catalog or detail page, included in search metadata, or emitted as Product structured data. The MSDS remains request-only on this distributor website; the PDF is used as an internal verification source and is not copied into the public site.

@@ -25,24 +25,19 @@ function renderCatalogCas(card) {
   const name = rendered.match(/<h3>([^<]+)<\/h3>/)?.[1];
   const entry = casCatalog.catalog[name];
   if (!entry) return rendered;
-  const numbers = entry.scope === 'components'
-    ? casCatalog.details[entry.detail]?.components.map(item => item.cas)
-    : entry.scope === 'variants'
+  // A mixture has no single product CAS; do not publish its component numbers in the catalog.
+  if (entry.scope === 'components') return rendered;
+  const numbers = entry.scope === 'variants'
       ? entry.substances?.map(key => casCatalog.substances[key]?.cas)
     : [casCatalog.substances[entry.substance]?.cas];
   if (!numbers?.length || numbers.some(number => !validCas(number))) throw new Error(`Incomplete CAS mapping for ${name}`);
-  const label = entry.scope === 'components' ? 'SM210 구성성분 CAS No.' : entry.scope === 'variants' ? '형태별 CAS No.' : entry.scope === 'ingredient' ? '주성분 CAS No.' : '물질 CAS No.';
+  const label = entry.scope === 'variants' ? '형태별 CAS No.' : entry.scope === 'ingredient' ? '주성분 CAS No.' : '물질 CAS No.';
   rendered = rendered.replace('<article ', `<article data-cas="${numbers.join(' ')}" `);
   if (name === '구연산') {
     if (numbers.length !== 2) throw new Error('Citric acid must have anhydrous and monohydrate CAS numbers');
     return rendered.replace(/(<h3>[^<]+<\/h3>)/, `$1\n              <p class="product-cas"><span>무수구연산 CAS No.</span> <strong>${numbers[0]}</strong><br><span>함수구연산 CAS No.</span> <strong>${numbers[1]}</strong></p>`);
   }
   return rendered.replace(/(<h3>[^<]+<\/h3>)/, `$1\n              <p class="product-cas"><span>${label}</span> <strong>${numbers.join(' · ')}</strong></p>`);
-}
-function renderSm210Cas() {
-  const detail = casCatalog.details['trilite-sm210'];
-  const rows = detail.components.map(item => `<tr><th scope="row">${escape(item.labelKo)}</th><td>${item.cas}</td></tr>`).join('\n                ');
-  return `<div class="detail-cas-block" id="cas-numbers"><h3>SM210 구성성분 CAS No.</h3><p>SM210은 혼합제품이며, 아래 번호는 제품 전체가 아닌 각 구성성분의 CAS 번호입니다.</p><table class="detail-spec-table detail-cas-table"><caption>삼양 공식 MSDS 3항의 구성성분</caption><tbody>\n                ${rows}\n              </tbody></table><p class="detail-note">삼양 공식 MSDS 개정일: ${detail.sourceRevision}. 실제 공급 제품의 자료는 MSDS 요청으로 확인해 주세요.</p></div>`;
 }
 function translate(value) {
   const key = normalize(decode(value));
@@ -92,17 +87,6 @@ for (const page of pages) {
     const names = [...ko.matchAll(/<article[^>]*class="product-card[^>]*>[\s\S]*?<h3>([^<]+)<\/h3>/g)].map(match => match[1]);
     for (const name of Object.keys(casCatalog.catalog)) if (!names.includes(name)) throw new Error(`CAS catalog item missing from products page: ${name}`);
     ko = ko.replace(/<article[^>]*class="product-card[^>]*>[\s\S]*?<\/article>/g, renderCatalogCas);
-  }
-  if (page === 'products/trilite-sm210') {
-    ko = ko.replace(/(<!-- CAS_DETAILS_START -->)[\s\S]*?(<!-- CAS_DETAILS_END -->)/, `$1\n          ${renderSm210Cas()}\n          $2`);
-    ko = ko.replace(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/, (_, content) => {
-      const data = JSON.parse(content);
-      const product = data['@graph'].find(item => item['@type'] === 'Product');
-      product.additionalProperty = casCatalog.details['trilite-sm210'].components.map(item => ({
-        '@type': 'PropertyValue', name: '구성성분 CAS No.', description: item.labelKo, value: item.cas,
-      }));
-      return `<script type="application/ld+json">\n${JSON.stringify(data, null, 2)}\n  </script>`;
-    });
   }
   ko = ko.replace(/"availableLanguage": "ko"/g, '"availableLanguage": ["ko", "en"]');
   outputs.set(`${page}.html`, ko);
