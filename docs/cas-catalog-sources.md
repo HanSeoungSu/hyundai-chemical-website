@@ -42,6 +42,10 @@ Both Korean and English detail pages directly link to the corresponding [PubChem
 
 The two generated solid-state photographs are explicitly labeled as illustrative, not as pictures of supplied stock. One neutral alkali-flake illustration is shared by the sodium hydroxide and potassium hydroxide pages; the citric acid page uses the white-crystal illustration. No supplier identity or supplier-owned MSDS is published on these pages. MSDS requests remain subject to actual supplied-product confirmation.
 
+## Laboratory reagent detail pages
+
+The distilled-water and methanol reagent pages group the five catalog entries under their substance identities. [PubChem water, CID 962](https://pubchem.ncbi.nlm.nih.gov/compound/962) supports CAS 7732-18-5 and [PubChem methanol, CID 887](https://pubchem.ncbi.nlm.nih.gov/compound/887) supports CAS 67-56-1. The CAS number identifies the substance, not a listed manufacturer's grade, purity, stock level, packaging specification, or supplied-product MSDS. The pages link each catalog entry separately to quote and MSDS requests.
+
 ## TRILITE SM210
 
 Source: [Samyang's official library](https://www.samyangtrilite.com/kr/support/library), Korean MSDS `KR_MSDS_TRILITE SM210.pdf`, management number `AA04566-0000000007`, revision 4.0 dated 2023-02-10; official [manufacturer-hosted file](https://syapi.samyang.com/apis/kr/downloadFileNolog?parent_table=trilitelibrary&parent_lang=KR&parent_idx=10271). Section 3 spans pages 1–2:
