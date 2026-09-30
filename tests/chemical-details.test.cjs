@@ -9,7 +9,7 @@ const root = path.resolve(__dirname, '..');
 const contentTypes = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.png': 'image/png', '.svg': 'image/svg+xml' };
 const details = [
   { slug: 'sodium-hydroxide', cas: ['1310-73-2'], search: ['가성소다', '수산화나트륨', '1310732'], product: '가성소다', image: 'solid-alkali-flakes-illustration.png' },
-  { slug: 'citric-acid', cas: ['77-92-9', '5949-29-1'], search: ['구연산', '77929', '5949291'], product: '구연산', image: 'solid-citric-acid-illustration.png' },
+  { slug: 'citric-acid', cas: ['77-92-9', '5949-29-1'], search: ['구연산', '무수구연산', '함수구연산', '77929', '5949291'], product: '구연산', image: 'solid-citric-acid-illustration.png' },
   { slug: 'potassium-hydroxide', cas: ['1310-58-3'], search: ['KOH', '수산화칼륨', '1310583'], product: 'KOH', image: 'solid-alkali-flakes-illustration.png' },
 ];
 const pubchemByCas = {
@@ -58,10 +58,11 @@ const server = http.createServer(async (req, res) => {
           assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `${pathname}: overflow at ${width}px`);
           const visible = (await page.locator('body').innerText()).replaceAll('한국어', '');
           if (lang === 'en') assert.ok(!/[가-힣]/.test(visible), `${pathname}: untranslated Korean`);
-          const marineUse = page.locator('.detail-marine-use');
-          assert.equal(await marineUse.count(), 1, `${pathname}: marine-use block`);
-          assert.match(await marineUse.innerText(), lang === 'ko' ? /선박에서의 일반적인 사용 예/ : /General marine use example/);
-          assert.equal(await marineUse.locator('a[href^="https://"]').count(), 1);
+          assert.equal(await page.locator('.detail-marine-use').count(), 0, `${pathname}: removed marine-use block`);
+          if (item.slug === 'citric-acid') {
+            const names = await page.locator('.detail-spec-table th').allTextContents();
+            assert.deepEqual(names.slice(0, 2), lang === 'ko' ? ['무수구연산', '함수구연산(일수화물)'] : ['Anhydrous citric acid', 'Citric acid monohydrate']);
+          }
           for (const cas of item.cas) assert.ok(visible.includes(cas), `${pathname}: missing ${cas}`);
           const references = page.locator('.detail-reference .detail-source-link');
           assert.equal(await references.count(), item.cas.length);

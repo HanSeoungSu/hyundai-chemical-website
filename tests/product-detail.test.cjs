@@ -49,11 +49,7 @@ const server = http.createServer(async (req, res) => {
         const visible = (await page.locator('body').innerText()).replaceAll('한국어', '');
         if (lang === 'en') assert.ok(!/[가-힣]/.test(visible), visible);
         assert.match(visible, /SM210/);
-        const marineUse = page.locator('.detail-marine-use');
-        assert.equal(await marineUse.count(), 1);
-        assert.match(await marineUse.innerText(), lang === 'ko' ? /선박에서의 일반적인 사용 예/ : /General marine use example/);
-        assert.match(await marineUse.innerText(), lang === 'ko' ? /바로 적합하다는 뜻은 아닙니다/ : /not mean SM210 is automatically suitable/);
-        assert.equal(await marineUse.locator('a[href^="https://"]').count(), 1);
+        assert.equal(await page.locator('.detail-marine-use').count(), 0);
         const data = JSON.parse(await page.locator('script[type="application/ld+json"]').textContent());
         const product = data['@graph'].find(item => item['@type'] === 'Product');
         assert.equal(product.url, publicUrl);
