@@ -6,7 +6,7 @@ import path from 'node:path';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const pages = ['index', 'company', 'products', 'products/trilite-sm210', 'products/sodium-hydroxide', 'products/citric-acid', 'products/potassium-hydroxide', 'products/distilled-water', 'products/methanol-reagent', 'business', 'marine', 'contact', 'msds', '404'];
-const version = '20260930-3';
+const version = '20260930-4';
 const dictionary = JSON.parse(await readFile(path.join(root, 'locales/en.json'), 'utf8'));
 const casCatalog = JSON.parse(await readFile(path.join(root, 'data/cas-catalog.json'), 'utf8'));
 const missing = new Set();

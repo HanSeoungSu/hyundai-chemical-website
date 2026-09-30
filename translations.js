@@ -567,5 +567,22 @@ window.HDChemEnglish = {
   "당사 취급 덕산 메탄올 4L는 HPLC, 500mL는 EP (Extra Pure) 등급입니다. 덕산약품 공식 제품검색에서 CAS No. 67-56-1의 해당 등급 제품을 확인할 수 있으며, 정확한 제품번호와 세부 사양은 별도 확인이 필요합니다.": "Our Duksan methanol 4L entry is HPLC grade, while the 500mL entry is EP (Extra Pure) grade. Duksan's official catalog lists these grades under CAS No. 67-56-1; exact product numbers and detailed specifications still need confirmation.",
   "메탄올 CAS 번호와 덕산 제품의 등급 정보는 제조사 제품검색에서 확인할 수 있습니다. 정확한 제품번호와 세부 사양은 실제 제품 자료로 확인합니다.": "Check the methanol CAS number and Duksan grades in the manufacturer's catalog. Confirm exact product numbers and detailed specifications from the actual product documents.",
   "4L · HPLC 등급": "4L · HPLC grade",
-  "덕산 메탄올 등록 제품 등급": "Duksan methanol listed product grades"
+  "덕산 메탄올 등록 제품 등급": "Duksan methanol listed product grades",
+  "현대케미칼(주)은 유·무기 화학제품, 실험실 기자재 및 선용품을 국내 사업장과 케미컬 선박에 공급하는 전문 유통기업입니다. 신속한 납품과 정확한 납기일 준수를 중요하게 생각합니다.": "Hyundai Chemical supplies organic and inorganic chemicals, laboratory equipment and marine stores to industrial sites and chemical vessels in Korea. We value prompt delivery and meeting agreed delivery dates.",
+  "유·무기 화학제품, 실험실 기자재 및 선용품을 공급하며 약속한 납기일을 정확히 준수하는 화학제품 전문 유통기업입니다.": "A specialist supplier of chemicals, laboratory equipment and marine stores, committed to meeting agreed delivery dates.",
+  "현대케미칼(주)은 선박 선용품 납품과 신나·용제 소분 판매를 비롯해 다양한 유기·무기 화합물을 안정적으로 공급합니다. 고객과 약속한 납기일을 정확히 준수하며 신속한 납품에 최선을 다합니다.": "Hyundai Chemical reliably supplies marine stores and a wide range of organic and inorganic chemicals, including repacked thinners and solvents. We work to deliver promptly and meet the delivery dates agreed with our customers.",
+  "울산에 위치한 당사는 울산항·온산항·부산항을 중심으로 선박 현장에 필요한 화학제품과 선용품을 공급하고 있습니다.": "Based in Ulsan, we primarily supply chemicals and marine stores to vessels at Ulsan, Onsan and Busan ports.",
+  "폭넓은 유통망을 바탕으로 국내 사업장에도 다양한 제품을 공급하고 있습니다.": "Our distribution network also supplies a wide range of products to industrial sites across Korea.",
+  "제품명 또는 CAS No.로 검색하고, 필요한 제품의 견적과 MSDS를 문의하세요.": "Search by product name or CAS No., then enquire about a quote or MSDS for the product you need.",
+  "제품명을 입력하면 모든 분류에서 검색합니다.": "Product searches cover all categories.",
+  "분류 선택 해제": "Clear category",
+  "찾는 제품 문의하기 →": "Ask about this product →",
+  "필요한 제품을 찾고 계신가요? 취급 품목을 확인하거나 견적을 문의해 주세요.": "Looking for a product? Browse our catalog or send us a quote enquiry.",
+  "취급 제품 보기": "Browse products",
+  "필요 수량": "Quantity needed",
+  "예: 20L 5통": "e.g. five 20L containers",
+  "납품 항만·지역": "Delivery port or area",
+  "예: 납품 항만 또는 지역명": "e.g. delivery port or area",
+  "납품 희망일": "Requested delivery date",
+  "제품 사양, 납품 장소·시각 등 필요한 내용을 입력해주세요.": "Enter specifications, delivery location and requested time."
 };

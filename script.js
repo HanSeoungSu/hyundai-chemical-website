@@ -70,6 +70,7 @@ if (businessAreasSection && businessAreaCards.length) {
 
 const productSearch = document.querySelector('#product-search');
 const filterButtons = [...document.querySelectorAll('.filter-button')];
+const clearProductFilter = document.querySelector('#clear-product-filter');
 const productCards = [...document.querySelectorAll('.product-card[data-category]')];
 const productCount = document.querySelector('#product-count');
 const productList = document.querySelector('#product-list');
@@ -86,6 +87,7 @@ const catalogResultsTitle = document.querySelector('#catalog-results-title');
 const catalogEmpty = document.querySelector('#catalog-empty');
 const catalogEmptyTitle = document.querySelector('#catalog-empty-title');
 const catalogEmptyDescription = document.querySelector('#catalog-empty-description');
+const catalogEmptyLink = document.querySelector('#catalog-empty-link');
 let activeProductFilter = '';
 let activeProductSubcategory = '';
 let activeProductDetail = '';
@@ -109,6 +111,11 @@ productCards.forEach((card) => {
   const name = card.querySelector('h3')?.textContent.trim() || '';
   // Search both languages while keeping category identifiers stable.
   card.dataset.search += ` ${name} ${english(name)} ${english(subcategory)} ${card.dataset.cas ?? ''}`;
+  // Preserve the selected product when any catalog card opens the enquiry form.
+  const enquiryLink = card.querySelector('.product-card-actions a[href$="/contact"]');
+  if (enquiryLink && name) {
+    enquiryLink.href = `${enquiryLink.getAttribute('href')}?product=${encodeURIComponent(name)}#quote-form`;
+  }
 });
 
 const normalizeSearchText = (value) => value
@@ -375,9 +382,7 @@ const updateProductCatalog = () => {
   let visibleCount = 0;
 
   productCards.forEach((card) => {
-    const matchesCategory = hasCategory
-      ? card.dataset.category === activeProductFilter
-      : hasQuery;
+    const matchesCategory = hasQuery || (hasCategory && card.dataset.category === activeProductFilter);
     const matchesSubcategory = hasQuery
       ? true
       : hasSubcategory && card.dataset.subcategory === activeProductSubcategory;
@@ -440,7 +445,7 @@ const updateProductCatalog = () => {
     const categoryLabel = productCategoryLabels.get(activeProductFilter) ?? '';
 
     if (hasQuery) {
-      productCount.textContent = t('{count}개 검색 결과{category}', { count: visibleCount, category: categoryLabel ? ` · ${categoryLabel}` : '' });
+      productCount.textContent = t('{count}개 검색 결과{category}', { count: visibleCount, category: '' });
     } else if (hasFamily) {
       productCount.textContent = t('{name} · {count}개 제품', { name: t(activeProductFamily), count: visibleCount });
     } else if (hasDetail && hasFamilyChoices) {
@@ -495,25 +500,43 @@ const updateProductCatalog = () => {
               ? '규격별 제품군을 선택하면 해당 제품이 표시됩니다.'
               : '검색어나 제품군을 변경해 다시 확인해 주세요.');
     }
+    if (catalogEmptyLink) {
+      catalogEmptyLink.hidden = !hasNoResults;
+      catalogEmptyLink.href = query && productSearch?.value.trim()
+        ? `${language === 'en' ? '/en' : ''}/contact?product=${encodeURIComponent(productSearch.value.trim())}#quote-form`
+        : `${language === 'en' ? '/en' : ''}/contact#quote-form`;
+    }
   }
 };
 
-productSearch?.addEventListener('input', updateProductCatalog);
-
-filterButtons.forEach((button) => button.addEventListener('click', () => {
-  activeProductFilter = button.dataset.filter ?? '';
+const setActiveProductFilter = (filter) => {
+  activeProductFilter = filter;
   activeProductSubcategory = '';
   activeProductDetail = '';
   activeProductFamily = '';
-
   filterButtons.forEach((item) => {
-    const isActive = item === button;
+    const isActive = item.dataset.filter === filter;
     item.classList.toggle('is-active', isActive);
     item.setAttribute('aria-pressed', String(isActive));
   });
+  if (clearProductFilter) clearProductFilter.hidden = !filter;
+};
 
+productSearch?.addEventListener('input', () => {
+  if (productSearch.value.trim() && activeProductFilter) setActiveProductFilter('');
+  updateProductCatalog();
+});
+
+filterButtons.forEach((button) => button.addEventListener('click', () => {
+  if (productSearch) productSearch.value = '';
+  setActiveProductFilter(activeProductFilter === button.dataset.filter ? '' : button.dataset.filter ?? '');
   updateProductCatalog();
 }));
+
+clearProductFilter?.addEventListener('click', () => {
+  setActiveProductFilter('');
+  updateProductCatalog();
+});
 
 updateProductCatalog();
 

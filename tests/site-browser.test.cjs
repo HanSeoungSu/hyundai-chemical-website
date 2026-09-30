@@ -91,6 +91,14 @@ const server = http.createServer(async (req, res) => {
       assert.equal(await page.locator('#product-list .product-card:visible').count(), 1);
       await page.locator('#product-search').fill('nothing-found-here');
       assert.equal(await page.locator('#product-list .product-card:visible').count(), 0);
+      assert.ok((await page.locator('#catalog-empty-link').getAttribute('href')).includes('product=nothing-found-here'));
+      await page.locator('#product-search').fill('');
+      await page.locator('[data-filter="thinner"]').click();
+      assert.equal(await page.locator('#clear-product-filter').isVisible(), true);
+      await page.locator('#product-search').fill('톨루엔');
+      assert.equal(await page.locator('#product-list .product-card:visible').count(), 1, 'Search must cover every category');
+      assert.equal(await page.locator('[data-filter="thinner"]').getAttribute('aria-pressed'), 'false');
+      assert.equal(await page.locator('#clear-product-filter').isVisible(), false);
       await page.locator('#product-search').fill('');
       await page.locator('[data-filter="chemical"]').click();
       await page.locator('#subcategory-list [data-subcategory="탱크 용제"]').click();
@@ -133,6 +141,8 @@ const server = http.createServer(async (req, res) => {
     await page.locator('[data-quote-submit]').click();
     await page.locator('.form-status.is-success').waitFor();
     assert.ok(!/[가-힣]/.test(await page.locator('.form-status').innerText()));
+    await page.goto(`${origin}/en/contact?product=Toluene#quote-form`);
+    assert.equal(await page.locator('[name="product"]').inputValue(), 'Toluene');
     await page.goto(`${origin}/en/marine`);
     await page.locator('[aria-controls="wwt-gallery"]').click();
     assert.equal(await page.locator('[aria-controls="wwt-gallery"] .marine-photo-cue span').innerText(), 'Close Photos');

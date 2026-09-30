@@ -17,8 +17,8 @@
   <title>제품소개 | 현대케미칼(주)</title>
   <link rel="canonical" href="https://www.hdchem.co.kr/products" />
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="/styles.css?v=20260930-3" />
-  <link rel="stylesheet" href="/product-detail.css?v=20260930-3" />
+  <link rel="stylesheet" href="/styles.css?v=20260930-4" />
+  <link rel="stylesheet" href="/product-detail.css?v=20260930-4" />
   <noscript><style>#product-list.is-awaiting-filter{display:grid}.reveal{opacity:1;transform:none}</style></noscript>
   <link rel="alternate" hreflang="ko" href="https://www.hdchem.co.kr/products" />
   <link rel="alternate" hreflang="en" href="https://www.hdchem.co.kr/en/products" />
@@ -27,7 +27,7 @@
 <body class="premium-shell">
   <header class="site-header" id="top">
     <div class="container nav-wrap">
-      <a class="brand" href="/" aria-label="현대케미칼 홈"><picture><source media="(max-width: 900px)" srcset="/assets/hyundai-chemical-mobile.png?v=20260930-3" /><img src="/assets/hyundai-chemical-logo.svg" alt="HYUNDAI CHEMICAL" width="540" height="230" /></picture></a>
+      <a class="brand" href="/" aria-label="현대케미칼 홈"><picture><source media="(max-width: 900px)" srcset="/assets/hyundai-chemical-mobile.png?v=20260930-4" /><img src="/assets/hyundai-chemical-logo.svg" alt="HYUNDAI CHEMICAL" width="540" height="230" /></picture></a>
       <div class="language-switch" role="group" aria-label="언어 선택"><a data-lang-switch="ko" href="/products" lang="ko" hreflang="ko" aria-current="true">한국어</a><a data-lang-switch="en" href="/en/products" lang="en" hreflang="en">EN</a></div>
       <button class="menu-toggle" aria-label="메뉴 열기" aria-expanded="false">☰</button>
       <nav class="nav" aria-label="주요 메뉴">
@@ -42,12 +42,12 @@
   </header>
 
   <main class="page-main">
-    <section class="page-hero premium-page-hero">
+    <section class="page-hero premium-page-hero catalog-page-hero">
       <div class="container page-hero-grid">
         <div class="page-hero-copy reveal">
           <span class="eyebrow">PRODUCT CATALOG</span>
           <h1>취급 제품 검색과<br><strong>MSDS 요청</strong></h1>
-          <p>필요한 제품을 찾고 MSDS를 요청하세요. 공급 제품과 납품 내역을 확인한 후 이메일로 안내해 드립니다.</p>
+          <p>제품명 또는 CAS No.로 검색하고, 필요한 제품의 견적과 MSDS를 문의하세요.</p>
         </div>
         <div class="page-hero-mark mark-compact reveal" aria-hidden="true">
           <span>PRODUCT DATA</span>
@@ -57,7 +57,7 @@
       </div>
     </section>
 
-    <section class="page-section catalog-page-section">
+    <section class="page-section catalog-page-section" id="catalog-search-section">
       <div class="container">
         <div class="section-head-row reveal">
           <div><span class="eyebrow">PRODUCTS</span><h2>취급품목</h2></div>
@@ -70,9 +70,11 @@
               <span>제품명 또는 CAS No. 검색</span>
               <input id="product-search" type="search" placeholder="예: 톨루엔, 108-88-3, GLASS BEAKER" autocomplete="off" />
             </label>
+            <p class="catalog-search-help">제품명을 입력하면 모든 분류에서 검색합니다.</p>
             <div class="catalog-stage-heading">
               <span>STEP 01</span>
               <div><strong>대분류 선택</strong><small>찾으시는 제품군을 먼저 선택해 주세요.</small></div>
+              <button class="catalog-clear-filter" id="clear-product-filter" type="button" hidden>분류 선택 해제</button>
             </div>
             <div class="catalog-filters" role="group" aria-label="제품군 선택">
               <button class="filter-button" type="button" data-filter="laboratory" aria-pressed="false">실험실 기자재</button>
@@ -656,6 +658,7 @@
           <div class="catalog-empty" id="catalog-empty">
             <strong id="catalog-empty-title">제품군을 선택해 주세요.</strong>
             <p id="catalog-empty-description">위 분류를 선택하면 해당 제품 목록을 확인할 수 있습니다.</p>
+            <a class="catalog-empty-link" id="catalog-empty-link" href="/contact#quote-form" hidden>찾는 제품 문의하기 →</a>
           </div>
         </div>
       </div>
@@ -671,8 +674,8 @@
       <p class="footer-copy">© <span data-current-year></span> HYUNDAI CHEMICAL. All rights reserved.</p>
     </div>
   </footer>
-  <script src="/translations.js?v=20260930-3"></script>
-  <script src="/i18n.js?v=20260930-3"></script>
-  <script src="/script.js?v=20260930-3"></script>
+  <script src="/translations.js?v=20260930-4"></script>
+  <script src="/i18n.js?v=20260930-4"></script>
+  <script src="/script.js?v=20260930-4"></script>
 </body>
 </html>

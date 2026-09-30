@@ -64,18 +64,26 @@ export async function onRequestPost({ request, env }) {
     phone: cleanText(payload.phone, 30),
     email: cleanText(payload.email, 254),
     product: cleanText(payload.product, 200),
+    quantity: cleanText(payload.quantity, 80),
+    destination: cleanText(payload.destination, 120),
+    deliveryDate: cleanText(payload.deliveryDate, 10),
     message: cleanText(payload.message, 3000),
   };
   const privacyConsent = ['true', '1', 'on', 'yes'].includes(
     String(payload.privacyConsent ?? '').toLowerCase(),
   );
 
-  if (Object.values(inquiry).some((value) => !value) || !privacyConsent) {
+  if (['company', 'contactName', 'phone', 'email', 'product', 'message'].some((key) => !inquiry[key]) || !privacyConsent) {
     return jsonResponse({ ok: false, message: '모든 항목을 입력하고 개인정보 이용에 동의해 주세요.' }, 400);
   }
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inquiry.email)) {
     return jsonResponse({ ok: false, message: '이메일 주소를 정확히 입력해 주세요.' }, 400);
+  }
+  if (inquiry.deliveryDate && (!/^\d{4}-\d{2}-\d{2}$/.test(inquiry.deliveryDate)
+    || Number.isNaN(Date.parse(inquiry.deliveryDate))
+    || new Date(inquiry.deliveryDate).toISOString().slice(0, 10) !== inquiry.deliveryDate)) {
+    return jsonResponse({ ok: false, message: '납품 희망일을 확인해 주세요.' }, 400);
   }
 
   if (!env.RESEND_API_KEY || !env.QUOTE_FROM_EMAIL) {
@@ -95,6 +103,9 @@ export async function onRequestPost({ request, env }) {
     ['연락처', inquiry.phone],
     ['이메일', inquiry.email],
     ['필요 제품', inquiry.product],
+    ['필요 수량', inquiry.quantity || '미기재'],
+    ['납품 항만·지역', inquiry.destination || '미기재'],
+    ['납품 희망일', inquiry.deliveryDate || '미기재'],
   ];
   const htmlRows = rows.map(([label, value]) => `
     <tr>
@@ -104,8 +115,11 @@ export async function onRequestPost({ request, env }) {
   const textRows = rows.map(([label, value]) => `${label}: ${value}`).join('\n');
   const subject = `[홈페이지 견적문의] ${oneLine(inquiry.company)} · ${oneLine(inquiry.product)}`;
 
-  const emailResponse = await fetch('https://api.resend.com/emails', {
+  let emailResponse;
+  try {
+    emailResponse = await fetch('https://api.resend.com/emails', {
     method: 'POST',
+    signal: AbortSignal.timeout(20_000),
     headers: {
       Authorization: `Bearer ${env.RESEND_API_KEY}`,
       'Content-Type': 'application/json',
@@ -126,7 +140,11 @@ export async function onRequestPost({ request, env }) {
         </div>`,
       text: `홈페이지 견적문의\n\n${textRows}\n\n문의 내용\n${inquiry.message}`,
     }),
-  });
+    });
+  } catch (error) {
+    console.error('Quote email provider request failed:', error?.name || 'network error');
+    return jsonResponse({ ok: false, message: '메일 전송 중 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.' }, 502);
+  }
 
   if (!emailResponse.ok) {
     console.error('Quote email provider error:', emailResponse.status);

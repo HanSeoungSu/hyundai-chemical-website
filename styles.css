@@ -846,3 +846,39 @@ html[lang="en"] .naver-map-label span{white-space:normal;max-width:300px}
   .contact-details dd{font-size:15px}
   .home-hero .hero-actions{flex-wrap:wrap}
 }
+
+/* Put product discovery and enquiry ahead of decorative catalog content. */
+.catalog-page-hero{padding:58px 0 54px}
+.catalog-page-hero .page-hero-mark{width:180px;height:180px;padding:22px}
+.catalog-page-hero .page-hero-mark strong{font-size:34px}
+.catalog-page-section .section-head-row{margin-bottom:22px}
+.catalog-page-section .product-layout{margin-top:0}
+.catalog-search-help{margin:9px 0 0;color:#637d90;font-size:12px}
+.catalog-stage-heading{flex-wrap:wrap}
+.catalog-clear-filter{margin-left:auto;padding:7px 11px;border:1px solid #8fb8d8;border-radius:6px;background:#f2f8fc;color:#245f8e;font:inherit;font-size:12px;font-weight:750;cursor:pointer}
+.catalog-clear-filter[hidden],.catalog-empty-link[hidden]{display:none}
+.catalog-clear-filter:hover,.catalog-clear-filter:focus-visible{background:#deedf8}
+.catalog-empty-link{display:inline-flex;margin-top:20px;padding:11px 18px;border-radius:6px;background:#1d5688;color:#fff;font-size:13px;font-weight:800;text-decoration:none}
+.catalog-empty-link:hover,.catalog-empty-link:focus-visible{background:#17466c;color:#fff}
+@media (max-width:600px){
+  .catalog-page-hero{padding:32px 0}
+  .catalog-page-hero .page-hero-mark{display:none}
+  .catalog-page-section .section-head-row{gap:12px;margin-bottom:22px}
+  .catalog-page-section .section-head-row>p{display:none}
+  .catalog-page-section{padding-top:30px}
+}
+
+/* Direct paths from business areas to the catalog and enquiry form. */
+.business-enquiry{display:flex;align-items:center;justify-content:space-between;gap:28px;margin-top:20px;padding:24px 28px;border-radius:12px;background:#123f65;color:#fff}
+.business-enquiry p{max-width:640px;margin:0;font-size:15px;line-height:1.7}
+.business-enquiry>div{display:flex;flex-wrap:wrap;gap:10px;flex-shrink:0}
+.business-enquiry .btn{min-height:46px;padding:11px 17px}
+.business-products-link{border:1px solid #8fc7f2;color:#fff;background:transparent}
+.business-products-link:hover{background:rgba(255,255,255,.1);color:#fff}
+@media (max-width:900px){
+  .business-enquiry{align-items:flex-start;flex-direction:column}
+}
+@media (max-width:600px){
+  .business-enquiry{padding:22px}
+  .business-enquiry>div,.business-enquiry .btn{width:100%}
+}
