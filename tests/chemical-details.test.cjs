@@ -12,6 +12,12 @@ const details = [
   { slug: 'citric-acid', cas: ['77-92-9', '5949-29-1'], search: ['구연산', '77929', '5949291'], product: '구연산', image: 'solid-citric-acid-illustration.png' },
   { slug: 'potassium-hydroxide', cas: ['1310-58-3'], search: ['KOH', '수산화칼륨', '1310583'], product: 'KOH', image: 'solid-alkali-flakes-illustration.png' },
 ];
+const pubchemByCas = {
+  '1310-73-2': 'https://pubchem.ncbi.nlm.nih.gov/compound/Sodium-Hydroxide',
+  '77-92-9': 'https://pubchem.ncbi.nlm.nih.gov/compound/Citric-Acid',
+  '5949-29-1': 'https://pubchem.ncbi.nlm.nih.gov/compound/Citric-acid-monohydrate',
+  '1310-58-3': 'https://pubchem.ncbi.nlm.nih.gov/compound/Potassium-Hydroxide',
+};
 const server = http.createServer(async (req, res) => {
   try {
     let name = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
@@ -53,6 +59,20 @@ const server = http.createServer(async (req, res) => {
           const visible = (await page.locator('body').innerText()).replaceAll('한국어', '');
           if (lang === 'en') assert.ok(!/[가-힣]/.test(visible), `${pathname}: untranslated Korean`);
           for (const cas of item.cas) assert.ok(visible.includes(cas), `${pathname}: missing ${cas}`);
+          const references = page.locator('.detail-reference .detail-source-link');
+          assert.equal(await references.count(), item.cas.length);
+          for (const [index, cas] of item.cas.entries()) {
+            const reference = references.nth(index);
+            assert.equal(await reference.getAttribute('data-reference-cas'), cas);
+            assert.equal(await reference.getAttribute('href'), lang === 'ko'
+              ? 'https://msds.kosha.or.kr/MSDSInfo/kcic/msdssearchMsds.do'
+              : pubchemByCas[cas]);
+            assert.ok((await reference.innerText()).includes(cas));
+          }
+          const referenceText = await page.locator('.detail-reference').innerText();
+          assert.match(referenceText, lang === 'ko' ? /안전보건공단/ : /PubChem/);
+          assert.ok(!referenceText.includes(lang === 'ko' ? 'PubChem' : 'KOSHA'));
+          assert.match(referenceText, lang === 'ko' ? /실제 납품 제품의 MSDS/ : /not the MSDS/);
           const photo = page.locator('.chemical-photo img');
           assert.ok((await photo.getAttribute('src')).endsWith(item.image));
           assert.ok(await photo.evaluate(image => image.complete && image.naturalWidth > 0), `${pathname}: broken photo`);
