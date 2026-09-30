@@ -9,12 +9,6 @@ const pages = ['index', 'company', 'products', 'products/trilite-sm210', 'produc
 const version = '20260930-3';
 const dictionary = JSON.parse(await readFile(path.join(root, 'locales/en.json'), 'utf8'));
 const casCatalog = JSON.parse(await readFile(path.join(root, 'data/cas-catalog.json'), 'utf8'));
-const englishChemicalReferences = {
-  '1310-73-2': 'https://pubchem.ncbi.nlm.nih.gov/compound/Sodium-Hydroxide',
-  '77-92-9': 'https://pubchem.ncbi.nlm.nih.gov/compound/Citric-Acid',
-  '5949-29-1': 'https://pubchem.ncbi.nlm.nih.gov/compound/Citric-acid-monohydrate',
-  '1310-58-3': 'https://pubchem.ncbi.nlm.nih.gov/compound/Potassium-Hydroxide',
-};
 const missing = new Set();
 const normalize = value => value.replace(/\s+/g, ' ').trim();
 const decode = value => value.replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n))).replaceAll('&amp;', '&').replaceAll('&quot;', '"').replaceAll('&nbsp;', ' ');
@@ -127,12 +121,6 @@ for (const page of pages) {
     if (token.startsWith('<!--')) return token;
     if (!token.startsWith('<')) return translate(token);
     let tag = token.replace(/\b(alt|placeholder|aria-label|title|content)="([^\"]*)"/g, (_, attr, value) => `${attr}="${translate(value)}"`);
-    const referenceCas = tag.match(/data-reference-cas="([^"]+)"/)?.[1];
-    if (referenceCas) {
-      const sourceUrl = englishChemicalReferences[referenceCas];
-      if (!sourceUrl) throw new Error('Missing English reference for CAS ' + referenceCas);
-      tag = tag.replace(/href="[^"]+"/, 'href="' + sourceUrl + '"');
-    }
     // Switch URLs and hreflang tags deliberately retain their destination languages.
     if (!tag.includes('data-lang-switch') && !tag.includes('hreflang=')) {
       tag = tag.replace(/href="\/(company|products|business|marine|contact|msds)([/?"#])/g, 'href="/en/$1$2').replace('href="/"', 'href="/en/"');

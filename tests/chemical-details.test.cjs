@@ -64,14 +64,12 @@ const server = http.createServer(async (req, res) => {
           for (const [index, cas] of item.cas.entries()) {
             const reference = references.nth(index);
             assert.equal(await reference.getAttribute('data-reference-cas'), cas);
-            assert.equal(await reference.getAttribute('href'), lang === 'ko'
-              ? 'https://msds.kosha.or.kr/MSDSInfo/kcic/msdssearchMsds.do'
-              : pubchemByCas[cas]);
+            assert.equal(await reference.getAttribute('href'), pubchemByCas[cas]);
             assert.ok((await reference.innerText()).includes(cas));
           }
           const referenceText = await page.locator('.detail-reference').innerText();
-          assert.match(referenceText, lang === 'ko' ? /안전보건공단/ : /PubChem/);
-          assert.ok(!referenceText.includes(lang === 'ko' ? 'PubChem' : 'KOSHA'));
+          assert.match(referenceText, /PubChem/);
+          assert.ok(!referenceText.includes('안전보건공단'));
           assert.match(referenceText, lang === 'ko' ? /실제 납품 제품의 MSDS/ : /not the MSDS/);
           const photo = page.locator('.chemical-photo img');
           assert.ok((await photo.getAttribute('src')).endsWith(item.image));
