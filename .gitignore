@@ -6,5 +6,6 @@ Thumbs.db
 .dev.vars.*
 !.dev.vars.example
 node_modules/
+__pycache__/
 .wrangler/
 test-results/

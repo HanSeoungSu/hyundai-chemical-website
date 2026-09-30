@@ -38,7 +38,7 @@ test('N keeps its dark fill while the surrounding wordmark remains white', () =>
 });
 
 test('all Korean and English pages use the same font-independent mobile asset', () => {
-  for (const prefix of ['', 'en/']) for (const page of ['index', 'company', 'products', 'business', 'marine', 'contact', 'msds', '404']) {
+  for (const prefix of ['', 'en/']) for (const page of ['index', 'company', 'products', 'products/trilite-sm210', 'business', 'marine', 'contact', 'msds', '404']) {
     const html = fs.readFileSync(path.join(root, `${prefix}${page}.html`), 'utf8');
     assert.match(html, /<source media="\(max-width: 900px\)" srcset="\/assets\/hyundai-chemical-mobile\.png\?v=[^"]+"/);
   }

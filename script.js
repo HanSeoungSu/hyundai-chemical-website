@@ -548,6 +548,12 @@ marineGalleryTriggers.forEach((trigger) => {
 const quoteForm = document.querySelector('#quote-form');
 const quoteSubmit = quoteForm?.querySelector('[data-quote-submit]');
 const quoteStatus = quoteForm?.querySelector('[data-form-status]');
+const requestedProduct = new URLSearchParams(location.search).get('product');
+const quoteProduct = quoteForm?.querySelector('[name="product"]');
+if (quoteProduct && requestedProduct && !quoteProduct.value) {
+  // Assign as a value, never HTML. Match the form and API length limit.
+  quoteProduct.value = t(requestedProduct).slice(0, quoteProduct.maxLength > 0 ? quoteProduct.maxLength : 200);
+}
 
 quoteForm?.addEventListener('submit', async (event) => {
   event.preventDefault();

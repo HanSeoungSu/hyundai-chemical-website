@@ -7,7 +7,7 @@ const { chromium } = require('playwright');
 const root = path.resolve(__dirname, '..');
 const screenshots = path.join(root, 'test-results');
 const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css', '.svg': 'image/svg+xml', '.jpg': 'image/jpeg', '.png': 'image/png' };
-const pages = ['', 'company', 'products', 'business', 'marine', 'contact', 'msds', '404'];
+const pages = ['', 'company', 'products', 'products/trilite-sm210', 'business', 'marine', 'contact', 'msds', '404'];
 
 const server = http.createServer(async (req, res) => {
   try {
@@ -74,7 +74,7 @@ const server = http.createServer(async (req, res) => {
         if (lang === 'en' && ['', 'company', 'msds'].includes(name)) await page.screenshot({ path: path.join(screenshots, `en-${name || 'home'}-${width}.png`), fullPage: true });
       }
     }
-    console.log('PASS: 16 pages at 4 desktop/tablet/mobile widths; language metadata, images and no untranslated visible text.');
+    console.log(`PASS: ${pages.length * 2} pages at 4 desktop/tablet/mobile widths; language metadata, images and no untranslated visible text.`);
     await page.setViewportSize({ width: 1440, height: 1000 });
     for (const lang of ['ko', 'en']) {
       await page.goto(`${origin}/${lang === 'en' ? 'en/' : ''}products`);

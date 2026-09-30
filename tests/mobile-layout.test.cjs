@@ -8,7 +8,7 @@ const { chromium } = require('playwright');
 const root = path.resolve(__dirname, '..');
 const auditOnly = process.env.MOBILE_AUDIT_ONLY === '1';
 const directory = path.join(root, 'test-results', auditOnly ? 'mobile-before' : 'mobile-after');
-const pages = ['', 'company', 'products', 'business', 'marine', 'contact', 'msds', '404'];
+const pages = ['', 'company', 'products', 'products/trilite-sm210', 'business', 'marine', 'contact', 'msds', '404'];
 const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.jpg': 'image/jpeg', '.png': 'image/png' };
 const server = http.createServer(async (req, res) => {
   try {
@@ -173,6 +173,6 @@ async function clippedText(page) {
     await fs.writeFile(path.join(directory, 'audit.json'), JSON.stringify(results, null, 2));
     if (auditOnly) console.log(JSON.stringify(results, null, 2));
     else assert.deepEqual(results, [], 'Visible mobile content must not be clipped');
-    console.log(auditOnly ? 'Mobile baseline saved.' : 'PASS: 16 pages and catalog/gallery states at 7 mobile/tablet widths, sharp mobile logos, auto dark mode, 130% text and landscape navigation; no clipped content.');
+    console.log(auditOnly ? 'Mobile baseline saved.' : `PASS: ${pages.length * 2} pages and catalog/gallery states at 7 mobile/tablet widths, sharp mobile logos, auto dark mode, 130% text and landscape navigation; no clipped content.`);
   } finally { await browser.close(); await new Promise(resolve => server.close(resolve)); }
 })().catch(error => { console.error(error); server.close(); process.exitCode = 1; });
