@@ -58,6 +58,10 @@ const server = http.createServer(async (req, res) => {
           assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `${pathname}: overflow at ${width}px`);
           const visible = (await page.locator('body').innerText()).replaceAll('한국어', '');
           if (lang === 'en') assert.ok(!/[가-힣]/.test(visible), `${pathname}: untranslated Korean`);
+          const marineUse = page.locator('.detail-marine-use');
+          assert.equal(await marineUse.count(), 1, `${pathname}: marine-use block`);
+          assert.match(await marineUse.innerText(), lang === 'ko' ? /선박에서의 일반적인 사용 예/ : /General marine use example/);
+          assert.equal(await marineUse.locator('a[href^="https://"]').count(), 1);
           for (const cas of item.cas) assert.ok(visible.includes(cas), `${pathname}: missing ${cas}`);
           const references = page.locator('.detail-reference .detail-source-link');
           assert.equal(await references.count(), item.cas.length);

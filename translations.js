@@ -515,5 +515,14 @@ window.HDChemEnglish = {
   "요청 형태: 플레이크·입상 등": "Requested form: flakes or granules",
   "KOH MSDS 요청": "Request a KOH MSDS",
   "사진은 고체 상태의 공통 설명용 이미지입니다. 실제 공급 제품의 사양은 개별 확인합니다.": "The image is a shared illustration of a solid form. Specifications of the supplied product are confirmed individually.",
-  "NIOSH 수산화칼륨 자료 (새 창) ↗": "NIOSH potassium hydroxide data (new tab) ↗"
+  "NIOSH 수산화칼륨 자료 (새 창) ↗": "NIOSH potassium hydroxide data (new tab) ↗",
+  "선박에서의 일반적인 사용 예": "General marine use example",
+  "선박에서 순수·탈이온수가 필요한 수처리 설비에는 혼합 이온교환수지를 사용하는 사례가 있습니다. 다만 SM210이 해당 선박 설비에 바로 적합하다는 뜻은 아닙니다. 원수의 성상, 요구 수질, 장치 구성과 제조사 권장 모델을 확인해야 합니다.": "Mixed-bed ion-exchange resins are used in some onboard water-treatment systems that require purified or deionized water. This does not mean SM210 is automatically suitable for a particular vessel. Check the feed-water properties, required water quality, system configuration and the manufacturer's recommended model.",
+  "선박 수처리 적용 사례 참고 (새 창) ↗": "Marine water-treatment example (new tab) ↗",
+  "선박의 폐회로식 배기가스 세정장치에서는 수산화나트륨을 수용액 형태로 사용하여 순환 세정수의 pH를 조절하는 사례가 있습니다. 고체 제품을 그대로 투입한다는 뜻은 아니며, 실제 농도·형태와 투입 방식은 해당 설비의 요구 사양에 따라 확인해야 합니다.": "Some closed-loop marine exhaust-gas cleaning systems use sodium hydroxide in solution to adjust the pH of circulating wash water. This does not imply direct dosing of a solid product; confirm the required concentration, form and dosing method against the equipment specifications.",
+  "선박 배기가스 세정 적용 사례 참고 (PDF, 새 창) ↗": "Marine exhaust-gas cleaning example (PDF, new tab) ↗",
+  "선박 담수발생기 열전달 면에 생긴 스케일을 제거할 때, 구연산을 포함한 세정액을 순환시키는 사례가 있습니다. 원료 구연산이 장비 제조사가 지정한 세정제와 동일한 것은 아니므로, 제품 형태·재질 적합성·세정 절차를 확인해야 합니다.": "Some marine freshwater generators are cleaned by circulating a citric-acid-containing solution to remove scale from heat-transfer surfaces. Raw citric acid is not necessarily equivalent to the cleaner specified by the equipment maker; check the product form, material compatibility and cleaning procedure.",
+  "선박 담수발생기 세정 적용 사례 참고 (PDF, 새 창) ↗": "Marine freshwater-generator cleaning example (PDF, new tab) ↗",
+  "화학제품 운반선의 화물탱크 세정에서는 수산화칼륨을 알칼리 세정 성분으로 사용하는 사례가 있습니다. 실제 세정 방법과 사용 가능 여부는 이전 적재 화물, 탱크 재질, 선박의 작업 절차 및 공급 제품의 사양에 따라 확인해야 합니다.": "Potassium hydroxide is used as an alkaline cleaning ingredient in some chemical-tanker cargo-tank cleaning applications. Confirm the method and suitability against the previous cargo, tank materials, vessel procedures and specifications of the product supplied.",
+  "선박 화물탱크 세정 적용 사례 참고 (새 창) ↗": "Marine cargo-tank cleaning example (new tab) ↗"
 };
