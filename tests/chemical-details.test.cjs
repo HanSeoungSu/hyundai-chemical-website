@@ -99,6 +99,11 @@ const server = http.createServer(async (req, res) => {
         assert.equal(await page.locator('[name="product"]').inputValue(), new URL(page.url()).searchParams.get('product'));
         for (const keyword of item.search) {
           await page.goto(`${origin}${prefix}/products`);
+          if (item.slug === 'citric-acid') {
+            const casLabel = await page.locator('.product-card[data-cas="77-92-9 5949-29-1"] .product-cas').innerText();
+            assert.match(casLabel, lang === 'ko' ? /무수구연산 CAS No\.\s*77-92-9/ : /Anhydrous citric acid CAS No\.\s*77-92-9/);
+            assert.match(casLabel, lang === 'ko' ? /함수구연산 CAS No\.\s*5949-29-1/ : /Citric acid monohydrate CAS No\.\s*5949-29-1/);
+          }
           await page.locator('#product-search').fill(keyword);
           const link = page.locator(`#product-list .product-card:visible .product-detail-link[href$="${item.slug}"]`).first();
           assert.ok(await link.isVisible(), `${lang}: search ${keyword} → ${item.slug}`);

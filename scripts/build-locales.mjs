@@ -33,6 +33,10 @@ function renderCatalogCas(card) {
   if (!numbers?.length || numbers.some(number => !validCas(number))) throw new Error(`Incomplete CAS mapping for ${name}`);
   const label = entry.scope === 'components' ? 'SM210 구성성분 CAS No.' : entry.scope === 'variants' ? '형태별 CAS No.' : entry.scope === 'ingredient' ? '주성분 CAS No.' : '물질 CAS No.';
   rendered = rendered.replace('<article ', `<article data-cas="${numbers.join(' ')}" `);
+  if (name === '구연산') {
+    if (numbers.length !== 2) throw new Error('Citric acid must have anhydrous and monohydrate CAS numbers');
+    return rendered.replace(/(<h3>[^<]+<\/h3>)/, `$1\n              <p class="product-cas"><span>무수구연산 CAS No.</span> <strong>${numbers[0]}</strong><br><span>함수구연산 CAS No.</span> <strong>${numbers[1]}</strong></p>`);
+  }
   return rendered.replace(/(<h3>[^<]+<\/h3>)/, `$1\n              <p class="product-cas"><span>${label}</span> <strong>${numbers.join(' · ')}</strong></p>`);
 }
 function renderSm210Cas() {
