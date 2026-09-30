@@ -5,8 +5,8 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const pages = ['index', 'company', 'products', 'products/trilite-sm210', 'business', 'marine', 'contact', 'msds', '404'];
-const version = '20260930-2';
+const pages = ['index', 'company', 'products', 'products/trilite-sm210', 'products/sodium-hydroxide', 'products/citric-acid', 'products/potassium-hydroxide', 'business', 'marine', 'contact', 'msds', '404'];
+const version = '20260930-3';
 const dictionary = JSON.parse(await readFile(path.join(root, 'locales/en.json'), 'utf8'));
 const casCatalog = JSON.parse(await readFile(path.join(root, 'data/cas-catalog.json'), 'utf8'));
 const missing = new Set();
@@ -27,9 +27,11 @@ function renderCatalogCas(card) {
   if (!entry) return rendered;
   const numbers = entry.scope === 'components'
     ? casCatalog.details[entry.detail]?.components.map(item => item.cas)
+    : entry.scope === 'variants'
+      ? entry.substances?.map(key => casCatalog.substances[key]?.cas)
     : [casCatalog.substances[entry.substance]?.cas];
   if (!numbers?.length || numbers.some(number => !validCas(number))) throw new Error(`Incomplete CAS mapping for ${name}`);
-  const label = entry.scope === 'components' ? 'SM210 구성성분 CAS No.' : entry.scope === 'ingredient' ? '주성분 CAS No.' : '물질 CAS No.';
+  const label = entry.scope === 'components' ? 'SM210 구성성분 CAS No.' : entry.scope === 'variants' ? '형태별 CAS No.' : entry.scope === 'ingredient' ? '주성분 CAS No.' : '물질 CAS No.';
   rendered = rendered.replace('<article ', `<article data-cas="${numbers.join(' ')}" `);
   return rendered.replace(/(<h3>[^<]+<\/h3>)/, `$1\n              <p class="product-cas"><span>${label}</span> <strong>${numbers.join(' · ')}</strong></p>`);
 }
@@ -64,7 +66,8 @@ for (const page of pages) {
   ko = ko.replace(/(<meta name="viewport"[^>]*>)/, '$1\n  <meta name="color-scheme" content="only light" />');
   // The same transparent, pre-rendered wordmark is used in both mobile languages.
   ko = ko.replace(/(<a class="brand"[^>]*>)[\s\S]*?(<\/a>)/, `$1<picture><source media="(max-width: 900px)" srcset="/assets/hyundai-chemical-mobile.png?v=${version}" /><img src="/assets/hyundai-chemical-logo.svg" alt="HYUNDAI CHEMICAL" width="540" height="230" /></picture>$2`);
-  ko = ko.replace(/\s*<div class="language-switch"[^\n]*<\/div>/g, '');
+  ko = ko.replace(/\s*<div class="language-switch"[^>]*>[\s\S]*?<\/div>\s*/g, '\n      ');
+  ko = ko.replace(/(<\/picture><\/a>)\s*(?=<button class="menu-toggle")/g, '$1\n      ');
   ko = ko.replace(/<button class="menu-toggle"/, `${switches(page)}\n      <button class="menu-toggle"`);
   ko = ko.replace(/\s*<link rel="alternate" hreflang="[^"]+" href="[^"]+"\s*\/>/g, '');
   ko = ko.replace('</head>', `  <link rel="alternate" hreflang="ko" href="https://www.hdchem.co.kr${localPath(page)}" />\n  <link rel="alternate" hreflang="en" href="https://www.hdchem.co.kr${localPath(page, true)}" />\n  <link rel="alternate" hreflang="x-default" href="https://www.hdchem.co.kr${localPath(page)}" />\n</head>`);

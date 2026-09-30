@@ -1,6 +1,6 @@
 # CAS catalog verification
 
-Reviewed: 2026-09-30. The site displays CAS numbers for 27 catalog cards, representing 18 identified substances plus the three component numbers on the SM210 mixed-resin card. Search accepts the formatted number, digits without hyphens, and a `CAS No.` prefix in Korean and English.
+Reviewed: 2026-09-30. The site displays CAS numbers for 28 catalog cards, representing 20 identified substances plus the three component numbers on the SM210 mixed-resin card. Search accepts the formatted number, digits without hyphens, and a `CAS No.` prefix in Korean and English. Citric acid lists two possible hydration forms; neither is asserted to be the form of a particular stocked batch.
 
 ## Scope and source
 
@@ -25,11 +25,19 @@ The following identifiers were checked on 2026-09-30 against the corresponding U
 | Phosphoric acid (main ingredient) | 7664-38-2 | [1004](https://pubchem.ncbi.nlm.nih.gov/compound/1004) |
 | Sodium carbonate / soda ash | 497-19-8 | [10340](https://pubchem.ncbi.nlm.nih.gov/compound/10340) |
 | Potassium hydroxide / KOH (main ingredient) | 1310-58-3 | [14797](https://pubchem.ncbi.nlm.nih.gov/compound/14797) |
+| Citric acid, anhydrous form | 77-92-9 | [311](https://pubchem.ncbi.nlm.nih.gov/compound/311) |
+| Citric acid monohydrate form | 5949-29-1 | [22230](https://pubchem.ncbi.nlm.nih.gov/compound/22230) |
 | Silver nitrate (2% AgNO3 solution main ingredient) | 7761-88-8 | [24470](https://pubchem.ncbi.nlm.nih.gov/compound/24470) |
 | Potassium permanganate / KMnO4 | 7722-64-7 | [516875](https://pubchem.ncbi.nlm.nih.gov/compound/516875) |
 | Nitric acid (20% solution main ingredient) | 7697-37-2 | [944](https://pubchem.ncbi.nlm.nih.gov/compound/944) |
 
-For mixtures and solutions, the page explicitly says **main ingredient CAS**, rather than assigning that identifier to the complete solution. Commercial codes, different hydrate/salt forms, and formulations remain unnumbered until the exact supplied product is confirmed against a manufacturer document or container label. In particular: MC, BDG, 141B, DINP, HC-2750, ammonia solution, EA, DOP, BC, YK-D40, NEO-T, xylene, TCS products, Starclon, METABISULPHITE, citric acid, oxalic acid, EDTA, sodium thiosulfate, CL, detergents and thinners. Laboratory tools and other articles are not assigned chemical CAS numbers.
+For mixtures and solutions, the page explicitly says **main ingredient CAS**, rather than assigning that identifier to the complete solution. Commercial codes, unconfirmed hydrate/salt forms, and formulations remain unnumbered until the exact supplied product is confirmed against a manufacturer document or container label. The citric acid catalog card lists the anhydrous and monohydrate alternatives, not a confirmed stocked form. Other unresolved examples: MC, BDG, 141B, DINP, HC-2750, ammonia solution, EA, DOP, BC, YK-D40, NEO-T, xylene, TCS products, Starclon, METABISULPHITE, oxalic acid, EDTA, sodium thiosulfate, CL, detergents and thinners. Laboratory tools and other articles are not assigned chemical CAS numbers.
+
+## Supplier-neutral chemical detail pages
+
+The sodium hydroxide, citric acid, and potassium hydroxide pages give verified substance identities and general appearance/use information only. They do not claim a manufacturer, exact grade, purity, packaging, inventory, batch, or delivery specification. Sodium hydroxide (caustic soda) and potassium hydroxide are different substances, with distinct CAS numbers; caustic soda and sodium hydroxide share one detail page. For citric acid, the anhydrous and monohydrate CAS numbers are presented as alternatives pending confirmation of the supplied hydration form. General identifiers and descriptions are supported by [PubChem sodium hydroxide](https://pubchem.ncbi.nlm.nih.gov/compound/Sodium-Hydroxide), [NIOSH potassium hydroxide](https://www.cdc.gov/niosh/npg/npgd0523.html), [PubChem citric acid](https://pubchem.ncbi.nlm.nih.gov/compound/Citric-Acid), and [PubChem citric acid monohydrate](https://pubchem.ncbi.nlm.nih.gov/compound/Citric-acid-monohydrate).
+
+The two generated solid-state photographs are explicitly labeled as illustrative, not as pictures of supplied stock. One neutral alkali-flake illustration is shared by the sodium hydroxide and potassium hydroxide pages; the citric acid page uses the white-crystal illustration. No supplier identity or supplier-owned MSDS is published on these pages. MSDS requests remain subject to actual supplied-product confirmation.
 
 ## TRILITE SM210
 

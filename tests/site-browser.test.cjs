@@ -7,7 +7,7 @@ const { chromium } = require('playwright');
 const root = path.resolve(__dirname, '..');
 const screenshots = path.join(root, 'test-results');
 const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css', '.svg': 'image/svg+xml', '.jpg': 'image/jpeg', '.png': 'image/png' };
-const pages = ['', 'company', 'products', 'products/trilite-sm210', 'business', 'marine', 'contact', 'msds', '404'];
+const pages = ['', 'company', 'products', 'products/trilite-sm210', 'products/sodium-hydroxide', 'products/citric-acid', 'products/potassium-hydroxide', 'business', 'marine', 'contact', 'msds', '404'];
 
 const server = http.createServer(async (req, res) => {
   try {
