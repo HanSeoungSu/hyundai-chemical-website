@@ -1,10 +1,10 @@
 # CAS catalog verification
 
-Reviewed: 2026-09-30. The site displays CAS numbers for 28 catalog cards, representing 20 identified substances plus the three component numbers on the SM210 mixed-resin card. Search accepts the formatted number, digits without hyphens, and a `CAS No.` prefix in Korean and English. Citric acid lists two possible hydration forms; neither is asserted to be the form of a particular stocked batch.
+Reviewed: 2026-09-30. The site displays CAS numbers for identified substances and explicitly labeled main ingredients, but not the component numbers of the SM210 mixed resin. Search accepts the formatted number, digits without hyphens, and a `CAS No.` prefix in Korean and English. Citric acid lists two possible hydration forms; neither is asserted to be the form of a particular stocked batch.
 
 ## Scope and source
 
-`data/cas-catalog.json` is the editable source of catalog identifiers. The static locale builder renders the numbers into both HTML catalogs and the SM210 detail page. The public pages remain legible and indexable without JavaScript. The build validates CAS check digits and that every mapped card exists.
+`data/cas-catalog.json` is the editable source of catalog identifiers. The static locale builder renders applicable numbers into both HTML catalogs, excluding mixed-resin component identifiers. The public pages remain legible and indexable without JavaScript. The build validates CAS check digits and that every mapped card exists.
 
 The following identifiers were checked on 2026-09-30 against the corresponding US National Library of Medicine PubChem records using the [official PUG REST property API](https://pubchem.ncbi.nlm.nih.gov/docs/pug-rest) (`/rest/pug/compound/name/{CAS}/property/IUPACName,MolecularFormula/JSON`). The returned compound identities matched the listed substance names. This confirms *substance identity*, not the composition of every supplier batch or a supplied product's SDS.
 
@@ -27,11 +27,12 @@ The following identifiers were checked on 2026-09-30 against the corresponding U
 | Potassium hydroxide / KOH (main ingredient) | 1310-58-3 | [14797](https://pubchem.ncbi.nlm.nih.gov/compound/14797) |
 | Citric acid, anhydrous form | 77-92-9 | [311](https://pubchem.ncbi.nlm.nih.gov/compound/311) |
 | Citric acid monohydrate form | 5949-29-1 | [22230](https://pubchem.ncbi.nlm.nih.gov/compound/22230) |
+| Oxalic acid hydrate (`수산(함수)` in the catalog; dihydrate identity confirmed by the user) | 6153-56-6 | [61373](https://pubchem.ncbi.nlm.nih.gov/compound/61373) |
 | Silver nitrate (2% AgNO3 solution main ingredient) | 7761-88-8 | [24470](https://pubchem.ncbi.nlm.nih.gov/compound/24470) |
 | Potassium permanganate / KMnO4 | 7722-64-7 | [516875](https://pubchem.ncbi.nlm.nih.gov/compound/516875) |
 | Nitric acid (20% solution main ingredient) | 7697-37-2 | [944](https://pubchem.ncbi.nlm.nih.gov/compound/944) |
 
-For mixtures and solutions, the page explicitly says **main ingredient CAS**, rather than assigning that identifier to the complete solution. Commercial codes, unconfirmed hydrate/salt forms, and formulations remain unnumbered until the exact supplied product is confirmed against a manufacturer document or container label. The citric acid catalog card lists the anhydrous and monohydrate alternatives, not a confirmed stocked form. Other unresolved examples: MC, BDG, 141B, DINP, HC-2750, ammonia solution, EA, DOP, BC, YK-D40, NEO-T, xylene, TCS products, Starclon, METABISULPHITE, oxalic acid, EDTA, sodium thiosulfate, CL, detergents and thinners. Laboratory tools and other articles are not assigned chemical CAS numbers.
+For mixtures and solutions, the page explicitly says **main ingredient CAS**, rather than assigning that identifier to the complete solution. Commercial codes, unconfirmed hydrate/salt forms, and formulations remain unnumbered until the exact supplied product is confirmed against a manufacturer document or container label. The citric acid catalog card lists the anhydrous and monohydrate alternatives, not a confirmed stocked form. The oxalic-acid hydrate mapping uses the user's confirmation of the supplied form and the [PubChem record](https://pubchem.ncbi.nlm.nih.gov/compound/6153-56-6); the site does not assert a manufacturer or grade. Other unresolved examples: MC, BDG, 141B, DINP, HC-2750, ammonia solution, EA, DOP, BC, YK-D40, NEO-T, xylene, TCS products, Starclon, METABISULPHITE, EDTA, sodium thiosulfate, CL, detergents and thinners. Laboratory tools and other articles are not assigned chemical CAS numbers.
 
 ## Supplier-neutral chemical detail pages
 

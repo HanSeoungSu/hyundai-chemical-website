@@ -19,7 +19,8 @@
     "potassium-permanganate": { "cas": "7722-64-7", "cid": 516875 },
     "nitric-acid": { "cas": "7697-37-2", "cid": 944 },
     "citric-acid-anhydrous": { "cas": "77-92-9", "cid": 311 },
-    "citric-acid-monohydrate": { "cas": "5949-29-1", "cid": 22230 }
+    "citric-acid-monohydrate": { "cas": "5949-29-1", "cid": 22230 },
+    "oxalic-acid-dihydrate": { "cas": "6153-56-6", "cid": 61373 }
   },
   "catalog": {
     "IPA": { "substance": "isopropanol", "scope": "substance" },
@@ -46,6 +47,7 @@
     "KMNO4": { "substance": "potassium-permanganate", "scope": "substance" },
     "질산 20%": { "substance": "nitric-acid", "scope": "ingredient" },
     "구연산": { "substances": ["citric-acid-anhydrous", "citric-acid-monohydrate"], "scope": "variants" },
+    "수산(함수)": { "substance": "oxalic-acid-dihydrate", "scope": "substance" },
     "이온교환수지": { "detail": "trilite-sm210", "scope": "components" }
   },
   "details": {

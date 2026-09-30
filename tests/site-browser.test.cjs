@@ -82,6 +82,13 @@ const server = http.createServer(async (req, res) => {
       assert.equal(await page.locator('#product-list .product-card:visible').count(), 1);
       await page.locator('#product-search').fill('톨루엔');
       assert.equal(await page.locator('#product-list .product-card:visible').count(), 1);
+      await page.locator('#product-search').fill('6153-56-6');
+      const oxalicCard = page.locator('#product-list .product-card:visible');
+      assert.equal(await oxalicCard.count(), 1);
+      assert.equal(await oxalicCard.locator('h3').innerText(), lang === 'en' ? 'Oxalic Acid (Hydrated)' : '수산(함수)');
+      assert.match(await oxalicCard.locator('.product-cas').innerText(), /6153-56-6/);
+      await page.locator('#product-search').fill('옥살산');
+      assert.equal(await page.locator('#product-list .product-card:visible').count(), 1);
       await page.locator('#product-search').fill('nothing-found-here');
       assert.equal(await page.locator('#product-list .product-card:visible').count(), 0);
       await page.locator('#product-search').fill('');
