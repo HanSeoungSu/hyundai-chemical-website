@@ -25,6 +25,11 @@
 .reagent-identity>small{font-size:12px;color:#b7cedd}
 .reagent-product-table a{color:#1f6597;text-decoration:underline;text-underline-offset:3px}
 .reagent-product-table a:focus-visible{outline:3px solid #4f8dce;outline-offset:3px}
+.reagent-packaging-photo{background:#fff;border-color:#c5d9e7;box-shadow:0 16px 36px #16344d20}
+.reagent-photo-label{display:block;margin:10px 10px 0;padding:9px 12px;border-radius:7px;background:#e3eef6;color:#204a68;font-size:12px;font-weight:750;line-height:1.5}
+.reagent-packaging-photo img{aspect-ratio:4/5;object-fit:contain;background:#fff}
+.reagent-packaging-photo figcaption{color:#4e687b;padding:15px 12px 18px}
+.reagent-packaging-photo a{color:#1f6597;text-decoration:underline;text-underline-offset:3px}
 .detail-subtitle{font-size:22px;margin:14px 0 18px;font-weight:700}
 .detail-lead{max-width:560px;color:#b9ccda;line-height:1.85;font-size:16px;margin:0}
 .detail-hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
