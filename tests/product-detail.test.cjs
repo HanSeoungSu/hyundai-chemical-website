@@ -86,7 +86,10 @@ const server = http.createServer(async (req, res) => {
       assert.equal(new URL(page.url()).pathname, `${prefix}/msds`);
       assert.equal(await page.locator('[name="product"]').inputValue(), 'TRILITE SM210');
       await page.goto(`${origin}${prefix}/products`);
-      await page.locator('.featured-product').click();
+      assert.equal(await page.locator('.featured-product').count(), 0, 'SM210 should not have a standalone top banner');
+      await page.locator('[data-filter="chemical"]').click();
+      await page.locator('#subcategory-list [data-subcategory="고체"]').click();
+      await page.locator('#product-list .product-card:visible .product-detail-link[href$="trilite-sm210"]').click();
       assert.equal(new URL(page.url()).pathname, `${prefix}/${slug}`);
       for (const keyword of ['SM210', '트리라이트', '삼양', 'TRILITE']) {
         await page.goto(`${origin}${prefix}/products`);
@@ -110,7 +113,8 @@ const server = http.createServer(async (req, res) => {
       const plain = await browser.newContext({ javaScriptEnabled: false });
       const plainPage = await plain.newPage();
       await plainPage.goto(`${origin}${prefix}/products`);
-      await plainPage.locator('.featured-product').click();
+      assert.ok(await plainPage.locator('#product-list .product-card .product-detail-link[href$="trilite-sm210"]').isVisible());
+      await plainPage.locator('#product-list .product-card .product-detail-link[href$="trilite-sm210"]').click();
       assert.equal(new URL(plainPage.url()).pathname, `${prefix}/${slug}`);
       assert.ok(await plainPage.locator('#product-title').isVisible());
       assert.ok(await plainPage.locator('.detail-spec-table').first().isVisible());

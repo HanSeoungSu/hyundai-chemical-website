@@ -28,7 +28,7 @@
 .detail-outline:hover{background:#16364e}
 .detail-light{color:#174e7a;border-color:#8fb0ca;background:#fff}
 .detail-light:hover{background:#e9f3fa}
-.detail-button:focus-visible,.detail-section-nav a:focus-visible,.detail-source-link:focus-visible,.featured-product:focus-visible,.product-detail-link:focus-visible{outline:3px solid #4f8dce;outline-offset:4px}
+.detail-button:focus-visible,.detail-section-nav a:focus-visible,.detail-source-link:focus-visible,.product-detail-link:focus-visible{outline:3px solid #4f8dce;outline-offset:4px}
 .detail-seller{font-size:12px;color:#9fb8ca;margin:22px 0 0}
 .resin-profile{background:linear-gradient(145deg,#f7fbfd,#dceaf3);border:1px solid #a9c9df;border-radius:16px;color:#17354f;padding:28px;box-shadow:0 25px 65px #0003;position:relative}
 .resin-profile::before{content:"";display:block;position:absolute;top:0;left:28px;width:52px;height:3px;background:#4f8dce}
@@ -95,13 +95,6 @@
 .detail-reference .detail-source-link{display:inline-block;margin-top:10px;font-size:12px}
 .chemical-detail-page .detail-reference .detail-source-link{margin-right:22px}
 .detail-back{display:block;margin-top:24px;color:#285e85;font-size:13px;font-weight:700}
-.featured-product{display:flex;justify-content:space-between;align-items:center;gap:24px;border:1px solid #aac7dc;border-left:4px solid #367eb5;background:#f4f9fc;border-radius:12px;padding:24px 28px;margin-top:28px}
-.featured-product:hover{background:#fff;border-color:#4f8dce}
-.featured-product-label{color:#3e79a5;font-size:10px;font-weight:800;letter-spacing:.06em}
-.featured-product h3{color:#153b58;font-size:22px;line-height:1.4;margin:7px 0}
-.featured-product p{color:#5c7588;font-size:13px;margin:0}
-.featured-product-link{font-weight:750;font-size:13px;color:#225e89;display:flex;gap:20px;align-items:center}
-.featured-product-link b{font-size:22px}
 .product-detail-link{display:block;font-size:12px;color:#235e8c;text-decoration:underline;text-underline-offset:3px;margin:-3px 0 14px;line-height:1.7;min-height:32px;padding:5px 0}
 @media(max-width:900px){
   .detail-hero-grid{gap:32px;grid-template-columns:minmax(0,1fr) minmax(0,.85fr)}
@@ -145,7 +138,4 @@
   .detail-msds{align-items:stretch;flex-direction:column;padding:22px;gap:20px}
   .detail-reference{padding:28px 0}
   .detail-reference h2{font-size:15px}
-  .featured-product{align-items:stretch;flex-direction:column;padding:22px;gap:16px}
-  .featured-product h3{font-size:20px}
-  .featured-product-link{justify-content:space-between}
 }
