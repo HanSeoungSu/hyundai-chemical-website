@@ -584,10 +584,5 @@ window.HDChemEnglish = {
   "납품 항만·지역": "Delivery port or area",
   "예: 납품 항만 또는 지역명": "e.g. delivery port or area",
   "납품 희망일": "Requested delivery date",
-  "제품 사양, 납품 장소·시각 등 필요한 내용을 입력해주세요.": "Enter specifications, delivery location and requested time.",
-  "울산광역시 남구의 현대케미칼(주)은 유·무기 화학제품, 실험실 기자재와 선박 선용품을 공급합니다. 신속한 납품과 약속한 납기일 준수를 중요하게 생각합니다.": "Based in Nam-gu, Ulsan, Hyundai Chemical supplies organic and inorganic chemicals, laboratory equipment and marine stores. We value prompt delivery and meeting agreed delivery dates.",
-  "울산 현대케미칼(주) | 화학제품·선용품 공급": "Hyundai Chemical, Ulsan | Chemicals & Marine Supply",
-  "울산광역시 남구의 현대케미칼(주). 유·무기 화학제품, 실험실 기자재와 선박 선용품을 공급합니다.": "Hyundai Chemical in Nam-gu, Ulsan supplies organic and inorganic chemicals, laboratory equipment and marine stores.",
-  "울산의 산업과 선박 현장을 잇는": "Connecting Ulsan's industry and marine operations",
-  "울산광역시 남구에 위치한 현대케미칼(주)은 선박 선용품 납품과 신나·용제 소분 판매를 비롯해 다양한 유기·무기 화합물을 안정적으로 공급합니다. 고객과 약속한 납기일을 정확히 준수하며 신속한 납품에 최선을 다합니다.": "Based in Nam-gu, Ulsan, Hyundai Chemical reliably supplies marine stores and a wide range of organic and inorganic chemicals, including repacked thinners and solvents. We work to deliver promptly and meet the delivery dates agreed with our customers."
+  "제품 사양, 납품 장소·시각 등 필요한 내용을 입력해주세요.": "Enter specifications, delivery location and requested time."
 };

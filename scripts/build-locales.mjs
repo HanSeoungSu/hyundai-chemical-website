@@ -135,8 +135,7 @@ if (missing.size) {
   outputs.set('translations.js', `// Generated from locales/en.json by scripts/build-locales.mjs.\nwindow.HDChemEnglish = ${JSON.stringify(dictionary, null, 2)};\n`);
   let sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n';
   for (const page of pages.filter(p => p !== '404')) for (const en of [false, true]) {
-    const lastmod = page === 'index' ? '2026-10-01' : '2026-09-30';
-    sitemap += `  <url><loc>https://www.hdchem.co.kr${localPath(page, en)}</loc><lastmod>${lastmod}</lastmod><xhtml:link rel="alternate" hreflang="ko" href="https://www.hdchem.co.kr${localPath(page)}"/><xhtml:link rel="alternate" hreflang="en" href="https://www.hdchem.co.kr${localPath(page, true)}"/></url>\n`;
+    sitemap += `  <url><loc>https://www.hdchem.co.kr${localPath(page, en)}</loc><lastmod>2026-09-30</lastmod><xhtml:link rel="alternate" hreflang="ko" href="https://www.hdchem.co.kr${localPath(page)}"/><xhtml:link rel="alternate" hreflang="en" href="https://www.hdchem.co.kr${localPath(page, true)}"/></url>\n`;
   }
   outputs.set('sitemap.xml', sitemap + '</urlset>\n');
   for (const [file, content] of outputs) {
